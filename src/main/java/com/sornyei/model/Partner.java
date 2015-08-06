@@ -61,4 +61,16 @@ public class Partner {
 	public void setVevo(boolean vevo) {
 		this.vevo = vevo;
 	}
+
+	@Override
+	public String toString() {
+		return "Partner{" +
+				"id=" + id +
+				", nev='" + nev + '\'' +
+				", adoszam='" + adoszam + '\'' +
+				", cim='" + cim + '\'' +
+				", szallito=" + szallito +
+				", vevo=" + vevo +
+				'}';
+	}
 }

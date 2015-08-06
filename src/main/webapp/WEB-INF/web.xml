@@ -5,6 +5,14 @@
 http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
          id="WebApp_ID" version="3.0">
     <display-name>Archetype Created Web Application</display-name>
+    <filter>
+        <filter-name>corsFilter</filter-name>
+        <filter-class>com.sornyei.filter.SimpleCORSFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>corsFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
 
     <servlet>
         <servlet-name>dispatcherServlet</servlet-name>
