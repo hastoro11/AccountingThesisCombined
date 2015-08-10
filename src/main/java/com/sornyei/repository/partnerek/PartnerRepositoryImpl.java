@@ -45,7 +45,8 @@ public class PartnerRepositoryImpl implements PartnerRepository {
 	}
 
 	public Partner update(Partner partner) {
-		String sql = "UPDATE partnerek SET nev=:nev, adoszam=:adoszam, cim=:cim, szallito=:szallito, vevo=:vevo WHERE id=:id";
+		String sql = "UPDATE partnerek SET nev=:nev, adoszam=:adoszam, " +
+				"cim=:cim, szallito=:szallito, vevo=:vevo WHERE id=:id";
 		BeanPropertySqlParameterSource parameterSource = new BeanPropertySqlParameterSource(partner);
 		jdbcTemplate.update(sql, parameterSource);
 
@@ -53,7 +54,8 @@ public class PartnerRepositoryImpl implements PartnerRepository {
 	}
 
 	public Partner create(Partner partner) {
-		String sql = "INSERT INTO partnerek(nev, adoszam, cim, szallito, vevo) VALUES(:nev, :adoszam, :cim, :szallito, :vevo)";
+		String sql = "INSERT INTO partnerek(nev, adoszam, cim, szallito, vevo) " +
+				"VALUES(:nev, :adoszam, :cim, :szallito, :vevo)";
 		BeanPropertySqlParameterSource parameterSource = new BeanPropertySqlParameterSource(partner);
 		KeyHolder keyHolder = new GeneratedKeyHolder();
 		jdbcTemplate.update(sql, parameterSource, keyHolder);
