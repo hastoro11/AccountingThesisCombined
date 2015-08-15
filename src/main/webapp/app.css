@@ -1,0 +1,41 @@
+/* app css stylesheet */
+body {
+    margin-top: 70px;
+}
+
+.panel-heading {
+    font-size: x-large;
+    padding: 5px 15px;
+}
+
+.panel-footer {
+    padding: 5px 15px;
+}
+
+.form-group {
+    margin-bottom: 4px;
+}
+
+hr {
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+table {
+    font-size: small;
+}
+
+.btn-sm {
+    padding-top: 2px;
+    padding-bottom: 2px;
+}
+
+.table.table-condensed tr:first-child {
+    border-bottom: 2px solid #ddd;
+    border-top: 2px solid #ddd;
+}
+.table.table-condensed tr:last-child{
+    border-bottom: 2px solid #ddd;
+}
+
+

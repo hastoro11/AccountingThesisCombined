@@ -1,0 +1,93 @@
+<div class="modal-header">
+    <h3 class="modal-title">Főkönyvi kivonat</h3>
+</div>
+
+<div class="modal-body">
+    <form name="kivonatForm">
+        <!-- Dátumok -->
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group form-group-sm">
+                    <label class="control-label">Dátumtól</label>
+
+                    <div class="input-group input-group-sm">
+                        <input type="text" class="form-control"
+                               name="datumtol"
+                               ng-required="true"
+                               datepicker-popup
+                               is-open="tolopened"
+                               ng-model="kivonat.datumtol"
+                                >
+
+                        <div class="input-group-btn">
+                            <button type="button" class="btn btn-info"
+                                    ng-click="open($event, 'tolopened')">
+                                <i class="glyphicon glyphicon-calendar"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label class="control-label">Dátumig</label>
+
+                    <div class="input-group input-group-sm">
+                        <input type="text" class="form-control"
+                               name="datumig"
+                               ng-required="true"
+                               datepicker-popup
+                               is-open="igopened"
+                               ng-model="kivonat.datumig"
+                                >
+
+                        <div class="input-group-btn">
+                            <button type="button" class="btn btn-info"
+                                    ng-click="open($event, 'igopened')">
+                                <i class="glyphicon glyphicon-calendar"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!-- Dátumok vége -->
+        <!-- Főkönyvi számok -->
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group form-group-sm">
+                    <label class="control-label">Főkönyvi számtól</label>
+                    <select class="form-control"
+                            name="fokszamtol"
+                            ng-required="true"
+                            ng-model="kivonat.fokszamtol"
+                            ng-options="fokszam.fokszam as fokszam.fokszam + ' - '+ fokszam.megnevezes for fokszam in szamlak">
+                        <option value=""> -- Főkönyvi számok --</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group form-group-sm">
+                    <label class="control-label">Főkönyvi számig</label>
+                    <select class="form-control"
+                            name="fokszamig"
+                            ng-required="true"
+                            ng-model="kivonat.fokszamig"
+                            ng-options="fokszam.fokszam as fokszam.fokszam + ' - '+ fokszam.megnevezes for fokszam in szamlak">
+                        <option value=""> -- Főkönyvi számok --</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="modal-footer">
+    <button type="button" class="btn btn-warning" ng-click="cancel()">Mégsem</button>
+    <button type="button" class="btn btn-primary"
+            ng-click="ok()"
+            ng-disabled="kivonatForm.$invalid"
+            >Rendben</button>
+</div>

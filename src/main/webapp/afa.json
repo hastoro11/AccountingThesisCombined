@@ -1,0 +1,35 @@
+{
+  "levonando": {
+    "fokszam": "466",
+    "kulcsok": [
+      {
+        "kulcs": 0,
+        "fokszam": "4661"
+      },
+      {
+        "kulcs": 18,
+        "fokszam": "4661"
+      },
+      {
+        "kulcs": 27,
+        "fokszam": "4661"
+      }
+    ]
+  },
+  "fizetendo": {
+    "fokszam": "467",
+    "kulcsok": [
+      {
+        "kulcs": 0,
+        "fokszam": "4671"
+      },
+      {
+        "kulcs": 18,
+        "fokszam": "4671"
+      },
+      {
+        "kulcs": 27,
+        "fokszam": "4671"
+      }
+    ]
+  }

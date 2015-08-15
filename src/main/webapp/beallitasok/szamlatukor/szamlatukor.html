@@ -1,0 +1,52 @@
+<div class="row">
+    <div class="col-sm-8 col-sm-offset-2">
+        <h3>Számlatükör</h3>
+        <hr/>
+        <div class="row">
+            <div class="col-sm-6">
+                <form class="form-horizontal">
+                    <div class="form-group form-group-sm">
+                        <label class="col-sm-2 control-label"><strong>Szűrés: </strong></label>
+
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control"
+                                   placeholder="Számlaszám vagy szöveg"
+                                   ng-model="search">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <hr/>
+        <table class="table">
+            <tr>
+                <th class="col-sm-2"><h6><strong>Főkönyvi szám</strong></h6></th>
+                <th class="col-sm-6"><h6><strong>Megnevezés</strong></h6></th>
+                <th class="col-sm-2"><h6><strong>Könyvelhető</strong></h6></th>
+                <th class="col-sm-2"></th>
+            </tr>
+            <tr ng-repeat="szamla in szamlatukor | filter:search">
+                <td ng-if="szamla.osszesito===true"><h6><strong>{{szamla.fokszam}}</strong></h6></td>
+                <td ng-if="szamla.osszesito===true"><h6><strong>{{szamla.megnevezes | uppercase}}</strong></h6></td>
+                <td ng-if="szamla.osszesito===true">
+                    <h6><strong>NEM</strong></h6>
+                </td>
+                <td ng-if="szamla.osszesito===true">
+                    <button type="button" class="btn btn-success" ui-sref="szamlatukorEdit({fokszam:szamla.fokszam})">
+                        Átnevez
+                    </button>
+                </td>
+
+
+                <td ng-if="szamla.osszesito===false">{{szamla.fokszam}}</td>
+                <td ng-if="szamla.osszesito===false"><h6>{{szamla.megnevezes}}</h6></td>
+                <td ng-if="szamla.osszesito===false"><h6>IGEN</h6></td>
+                <td ng-if="szamla.osszesito===false">
+                    <button type="button" class="btn btn-success" ui-sref="szamlatukorEdit({fokszam:szamla.fokszam})">
+                        Átnevez
+                    </button>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,76 @@
+<div class="row">
+    <div class="col-sm-8 col-sm-offset-2">
+        <h3>Partnerek</h3>
+
+        <div class="row">
+            <div class="col-sm-12">
+                <button type="button" class="btn btn-primary" ui-sref="partnerekEdit({id:0})">Új Partner</button>
+                <span class="pull-right">
+                    <button type="button" class="btn btn-warning" ng-click="open('vevo');">Vevők</button>
+                    <button type="button" class="btn btn-success" ng-click="open('szallito')">Szállítók</button>
+                    <button type="button" class="btn btn-info" ng-click="close()">Mind bezár</button>
+                </span>
+            </div>
+        </div>
+        <hr/>
+        <accordion>
+            <accordion-group is-open="vevo.open">
+                <accordion-heading>
+                    <h4>Vevők
+                        <i class="pull-right glyphicon"
+                           ng-class="{'glyphicon-chevron-down':vevo.open, 'glyphicon-chevron-right':!vevo.open}"></i>
+                    </h4>
+                </accordion-heading>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <table class="table table-striped">
+                            <tr>
+                                <th class="col-sm-2">Név</th>
+                                <th class="col-sm-2">Adószám</th>
+                                <th class="col-sm-1"></th>
+                            </tr>
+                            <tr ng-repeat="vevo in vevok">
+                                <td><h5>{{vevo.nev}}</h5></td>
+                                <td><h5>{{vevo.adoszam}}</h5></td>
+                                <td>
+                                    <button type="button" class="btn btn-danger pull-right" ui-sref="partnerekEdit({id:vevo.id})">
+                                        Módosít
+                                    </button>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </accordion-group>
+            <accordion-group is-open="szallito.open">
+                <accordion-heading>
+                    <h4>Szállítók
+                        <i class="pull-right glyphicon"
+                           ng-class="{'glyphicon-chevron-down':szallito.open, 'glyphicon-chevron-right':!szallito.open}"></i>
+                    </h4>
+                </accordion-heading>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <table class="table table-striped">
+                            <tr>
+                                <th class="col-sm-2">Név</th>
+                                <th class="col-sm-2">Adószám</th>
+                                <th class="col-sm-1"></th>
+                            </tr>
+                            <tr ng-repeat="szallito in szallitok">
+                                <td><h5>{{szallito.nev}}</h5></td>
+                                <td><h5>{{szallito.adoszam}}</h5></td>
+                                <td>
+                                    <button type="button" class="btn btn-danger pull-right" ui-sref="partnerekEdit({id:szallito.id})">
+                                        Módosít
+                                    </button>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </accordion-group>
+        </accordion>
+
+    </div>
+</div>

@@ -1,0 +1,70 @@
+<div class="row">
+    <div class="col-sm-8 col-sm-offset-2">
+        <h3>ÁFA kulcsok</h3>
+        <button type="button" class="btn btn-primary" ui-sref="afakulcsokEdit({id:0})">Új ÁFA kulcs</button>
+        <hr/>
+        <accordion>
+            <accordion-group is-open="fiz.open">
+                <accordion-heading>
+                    <h4>Fizetendő ÁFA
+                        <i class="glyphicon pull-right"
+                           ng-class="{'glyphicon-chevron-right':!fiz.open,'glyphicon-chevron-down':fiz.open }"></i>
+                    </h4>
+                </accordion-heading>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <table class="table table-striped">
+                            <tr>
+                                <th>Megnevezés</th>
+                                <th>Kulcs (%)</th>
+                                <th>Főkönyvi szám</th>
+                                <th></th>
+                            </tr>
+                            <tr ng-repeat="afa in fizafak">
+                                <td>{{afa.megnevezes}}</td>
+                                <td>{{afa.kulcs}}</td>
+                                <td>{{afa.fokszam}}</td>
+                                <td>
+                                    <button type="button" class="btn btn-danger pull-right"
+                                            ui-sref="afakulcsokEdit({id:afa.id})">Módosít
+                                    </button>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </accordion-group>
+
+            <accordion-group is-open="lev.open">
+                <accordion-heading>
+                    <h4>Levonható ÁFA
+                        <i class="glyphicon pull-right"
+                           ng-class="{'glyphicon-chevron-right':!lev.open,'glyphicon-chevron-down':lev.open }"></i>
+                    </h4>
+                </accordion-heading>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <table class="table table-striped">
+                            <tr>
+                                <th>Megnevezés</th>
+                                <th>Kulcs (%)</th>
+                                <th>Főkönyvi szám</th>
+                                <th></th>
+                            </tr>
+                            <tr ng-repeat="afa in levafak">
+                                <td>{{afa.megnevezes}}</td>
+                                <td>{{afa.kulcs}}</td>
+                                <td>{{afa.fokszam}}</td>
+                                <td>
+                                    <button type="button" class="btn btn-danger pull-right"
+                                            ui-sref="afakulcsokEdit({id:afa.id})">Módosít
+                                    </button>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </accordion-group>
+        </accordion>
+    </div>
+</div>

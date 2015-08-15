@@ -1,0 +1,29 @@
+<div class="row">
+    <div class="col-sm-12">
+        <h2>Főkönyvi kivonat</h2>
+        <h4 class="row">
+            <div class="col-sm-4">
+                <span>Dátumtól: </span>
+                <span>{{data.datumtol | date : 'yyyy-MM-dd'}}</span>
+            </div>
+
+            <div class="col-sm-4">
+                <span>Dátumig: </span>
+                <span>{{data.datumig | date : 'yyyy-MM-dd'}}</span>
+            </div>
+        </h4>
+        <h4 class="row">
+            <div class="col-sm-4">
+                <span>Főkönyvi számtól: </span>
+                <span>{{data.fokszamtol}}</span>
+            </div>
+            <div class="col-sm-4">
+                <span>Főkönyvi számig: </span>
+                <span>{{data.fokszamig}}</span>
+            </div>
+
+        </h4>
+        <hr/>
+        <button type="button" class="btn btn-primary" ng-click="launch()">Új lekérdezés</button>
+    </div>
+</div>

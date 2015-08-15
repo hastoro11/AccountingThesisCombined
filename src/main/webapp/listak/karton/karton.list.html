@@ -1,0 +1,24 @@
+<div class="row">
+    <div class="col-sm-12">
+        <h2>Főkönyvi karton</h2>
+
+        <h4 class="row">
+            <div class="col-sm-4">
+                <span>Dátumtól: </span>
+                <span>{{karton.datumtol | date:'yyyy-MM-dd'}}</span>
+            </div>
+            <div class="col-sm-4">
+                <span>Dátumig: </span>
+                <span>{{karton.datumig | date : 'yyyy-MM-dd'}}</span>
+            </div>
+        </h4>
+        <h4 class="row">
+            <div class="col-sm-12">
+                <span>Főkönyvi szám: </span>
+                <span>{{karton.fokszam}}</span>
+            </div>
+        </h4>
+        <hr/>
+        <button type="button" class="btn btn-primary" ng-click="launch()">Új lekérdezés</button>
+    </div>
+</div>

@@ -1,0 +1,37 @@
+{
+  "id": 0,
+  "fokszam": "",
+  "ufelkod": 0,
+  "fizmod": 0,
+  "bizszam": "",
+  "teljdatum": "",
+  "kialldatum": "",
+  "eseddatum": "",
+  "megnevezes": "",
+  "tkjelleg": "",
+  "osszeg": 0,
+  "ellenbizszam": "",
+  "egyenleg": {
+    "tkjelleg": "",
+    "osszeg": 0
+  },
+  "kontir": [
+    {
+      "id": 0,
+      "fokszam": "",
+      "megnevezes": "",
+      "tkjelleg": "",
+      "osszeg": 0
+    },
+    {
+      "id": 0,
+      "fokszam": "",
+      "megnevezes": "",
+      "tkjelleg": "",
+      "osszeg": 0
+    }
+  ],
+  "tartosszesen": 0,
+  "kovosszesen": 0,
+  "ellenoriz": ""
+}

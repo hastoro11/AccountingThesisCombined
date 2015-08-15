@@ -1,0 +1,24 @@
+<div class="row">
+    <div class="col-sm-12">
+        <h2>Napló</h2>
+        <h4 class="row">
+            <div class="col-sm-4">
+                <span>Dátumtól: </span>
+                <span>{{naplo.datumtol | date : 'yyyy-MM-dd'}}</span>
+            </div>
+            <div class="col-sm-4">
+                <span>Dátumig: </span>
+                <span>{{naplo.datumig | date : 'yyyy-MM-dd'}}</span>
+            </div>
+        </h4>
+        <h4 class="row">
+            <div class="col-sm-4">
+                <span>Napló: </span>
+                <span>{{naplo.tipus.megnevezes}}</span>
+            </div>
+        </h4>
+        <hr/>
+        <button class="btn btn-primary" ng-click="launch()">Új lekérdezés</button>
+    </div>
+
+</div>

@@ -1,0 +1,81 @@
+<div class="row">
+    <div class="col-sm-8 col-sm-offset-2">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                Cégadatok módosítása
+            </div>
+
+            <div class="panel-body">
+                <form name="cegadatokForm" class="form-horizontal">
+                    <div class="form-group form-group-sm">
+                        <label class="col-sm-3 control-label">Cégnév </label>
+
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control"
+                                   placeholder="Cég megnevezése"
+                                   ng-model="cegadatok.cegnev">
+                        </div>
+                    </div>
+                    <div class="form-group form-group-sm">
+                        <label class="col-sm-3 control-label">Cím</label>
+
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control"
+                                   placeholder="Cím"
+                                   ng-model="cegadatok.cim">
+                        </div>
+                    </div>
+                    <div class="form-group form-group-sm">
+                        <label class="col-sm-3 control-label">Adószám</label>
+
+                        <div class="col-sm-3">
+                            <input type="text" class="form-control"
+                                   ng-model="cegadatok.adoszam"
+                                   placeholder="Adószám">
+                        </div>
+                    </div>
+                    <div class="form-group form-group-sm">
+                        <label class="col-sm-3 control-label">Cégjegyzékszám</label>
+
+                        <div class="col-sm-3">
+                            <input type="text" class="form-control"
+                                   ng-model="cegadatok.cegjegyzekszam"
+                                   placeholder="Cégjegyzékszám">
+                        </div>
+                    </div>
+                    <div class="form-group form-group-sm">
+                        <label class="col-sm-3 control-label">Bankszámlaszám</label>
+
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control"
+                                   ng-model="cegadatok.bankszamlaszam"
+                                   placeholder="Bankszámlaszám">
+                        </div>
+                    </div>
+                    <div class="form-group form-group-sm">
+                        <label class="col-sm-3 control-label">Statisztikai számjel</label>
+
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control"
+                                   ng-model="cegadatok.kshszam"
+                                   placeholder="Statisztikai szám"
+                                   >
+                        </div>
+                    </div>
+
+                </form>
+
+            </div>
+            <div class="panel-footer">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="pull-right">
+                            <button type="button" class="btn btn-warning" ui-sref="cegadatok">Mégsem</button>
+                            <button type="button" class="btn btn-success" ng-click="save()">Mentés</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

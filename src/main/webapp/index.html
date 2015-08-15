@@ -1,0 +1,145 @@
+<!DOCTYPE>
+<html ng-app="myApp">
+<head>
+    <meta charset="utf-8">
+    <title>Angular Accounting</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="bower_components/toastr/toastr.css">
+    <link rel="stylesheet" href="app.css">
+</head>
+<body>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" ui-sref="home">SörnyeiGábor</a>
+        </div>
+
+        <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <!-- Könyvelés menü -->
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        Könyvelés <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a ui-sref="szallito" href="#"> Szállítók </a></li>
+                        <li><a ui-sref="vevo" href="#"> Vevők </a></li>
+                        <li class="divider"></li>
+                        <li><a ui-sref="bank" href="#"> Bank </a></li>
+                        <li><a ui-sref="penztar" href="#"> Pénztár </a></li>
+                        <li class="divider"></li>
+                        <li><a ui-sref="vegyes" href="#"> Vegyes </a></li>
+                    </ul>
+                </li>
+                <!-- Listák menü -->
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        Listák <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a ui-sref="kivonat" href="#"> Főkönyvi kivonat </a></li>
+                        <li><a ui-sref="karton" href="#"> Főkönyvi kartonok </a></li>
+                        <li class="divider"></li>
+                        <li><a ui-sref="naplo" href="#"> Napló </a></li>
+                        <li class="divider"></li>
+                        <li><a href="#"> Vevő-szállító analitika </a></li>
+                        <li><a href="#"> ÁFA analitika </a></li>
+                    </ul>
+                </li>
+                <!-- Beállítások menü -->
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        Beállítások <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a ui-sref="cegadatok" href="#"> Cégadatok </a></li>
+                        <li><a ui-sref="partnerek" href="#"> Partnerek </a></li>
+                        <li class="divider"></li>
+                        <li><a ui-sref="afakulcsok" href="#"> ÁFA kulcsok </a></li>
+                        <li><a ui-sref="fizmodok" href="#"> Fizetési módok </a></li>
+                        <li class="divider"></li>
+                        <li><a ui-sref="szamlatukor" href="#"> Számlatükör </a></li>
+                    </ul>
+                </li>
+                <!-- Dokumentáció -->
+                <li><a ui-sref="dokumentacio" href="#"> Dokumentáció </a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<!-- Container -->
+<div class="container">
+
+    <div ui-view></div>
+
+</div>
+<!-- End of container -->
+
+
+<!-- In production use:
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
+-->
+<script src="bower_components/jquery/dist/jquery.js"></script>
+<script src="bower_components/underscore/underscore.js"></script>
+<script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+<script src="bower_components/angular/angular.js"></script>
+<script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+<script src="bower_components/angular-route/angular-route.js"></script>
+<script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+<script src="bower_components/angular-ui-mask/dist/mask.js"></script>
+<script src="bower_components/angular-i18n/angular-locale_hu-hu.js"></script>
+<script src="bower_components/angular-animate/angular-animate.js"></script>
+<script src="bower_components/toastr/toastr.js"></script>
+<!-- My libraries and script files -->
+<script src="app.js"></script>
+<script src="common/common.services.js"></script>
+<script src="home/home.js"></script>
+<!-- Szállító -->
+<script src="konyveles/szallito/szallito.js"></script>
+<script src="konyveles/szallito/szallito.ctrl.js"></script>
+<script src="konyveles/szallito/szallito.srvc.js"></script>
+<!-- Vevő -->
+<script src="konyveles/vevo/vevo.js"></script>
+<script src="konyveles/vevo/vevo.ctrl.js"></script>
+<script src="konyveles/vevo/vevo.srvc.js"></script>
+<!-- Bank -->
+<script src="konyveles/bank/bank.js"></script>
+<script src="konyveles/bank/bank.ctrl.js"></script>
+<!-- Pénztár -->
+<script src="konyveles/penztar/penztar.js"></script>
+<script src="konyveles/penztar/penztar.ctrl.js"></script>
+<!-- Vegyes -->
+<script src="konyveles/vegyes/vegyes.js"></script>
+<script src="konyveles/vegyes/vegyes.ctrl.js"></script>
+<!-- Kivonat -->
+<script src="listak/kivonat/kivonat.js"></script>
+<script src="listak/kivonat/kivonat.ctrl.js"></script>
+<!-- Karton -->
+<script src="listak/karton/karton.js"></script>
+<script src="listak/karton/karton.ctrl.js"></script>
+<!-- Naplo -->
+<script src="listak/naplo/naplo.js"></script>
+<script src="listak/naplo/naplo.ctrl.js"></script>
+<!-- Cégadatok -->
+<script src="beallitasok/cegadatok/cegadatok.js"></script>
+<script src="beallitasok/cegadatok/cegadatok.ctrl.js"></script>
+<script src="beallitasok/cegadatok/cegadatok.srvc.js"></script>
+<!-- Partnerek -->
+<script src="beallitasok/partnerek/partnerek.js"></script>
+<script src="beallitasok/partnerek/partnerek.ctrl.js"></script>
+<script src="beallitasok/partnerek/partnerek.srvc.js"></script>
+<!-- Számlatükör -->
+<script src="beallitasok/szamlatukor/szamlatukor.js"></script>
+<!-- Fizetési módok  kezelése -->
+<script src="beallitasok/fizmodok/fizmodok.js"></script>
+<script src="beallitasok/fizmodok/fizmodok.ctrl.js"></script>
+<script src="beallitasok/fizmodok/fizmodok.srvc.js"></script>
+<!-- ÁFA kulcsok -->
+<script src="beallitasok/afakulcsok/afakulcsok.js"></script>
+<script src="beallitasok/afakulcsok/afakulcsok.ctrl.js"></script>
+<script src="beallitasok/afakulcsok/afakulcsok.srvc.js"></script>
+
+</body>
+</html>

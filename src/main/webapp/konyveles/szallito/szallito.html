@@ -1,0 +1,434 @@
+<div class="row">
+    <div class="col-sm-12">
+        <div class="panel panel-primary">
+
+            <!-- Panel header -->
+            <div class="panel-heading">
+                {{naplo.megnevezes}}
+                <span class="pull-right">Sorszám: 1</span>
+            </div>
+
+            <!-- Panel Body Form -->
+            <div class="panel-body">
+
+                <form name="szallitoForm" novalidate>
+                    <!-- Főkönyvi szám -->
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <div class="form-group form-group-sm"
+                                 ng-class="{'has-error':szallitoForm.fokszam.$invalid && szallitoForm.fokszam.$touched}">
+                                <label class="control-label">Főkönyvi szám</label>
+
+                                <select class="form-control" name="fokszam"
+                                        autofocus
+                                        ng-required="true"
+                                        ng-model="tetel.fokszam"
+                                        ng-options="szallito.fokszam as szallito.fokszam + ' - ' + szallito.megnevezes for szallito in szallitok">
+                                    <option value=""> -- Főkönyvi szám --</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Partnerek -->
+                        <div class="col-sm-2">
+                            <div class="form-group form-group-sm"
+                                 ng-class="{'has-error':szallitoForm.partner.$invalid && szallitoForm.partner.$touched}">
+                                <label class="control-label">Partner</label>
+
+                                <select class="form-control" name="partner"
+                                        ng-required="true"
+                                        ng-model="tetel.partner"
+                                        ng-options="partner.id as partner.nev for partner in partnerek">
+                                    <option value=""> -- Partnerek --</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Fizetési mód -->
+                        <div class="col-sm-2">
+                            <div class="form-group form-group-sm"
+                                 ng-class="{'has-error':szallitoForm.fizmod.$invalid && szallitoForm.fizmod.$touched}">
+                                <label class="control-label">Fizetési mód</label>
+
+
+                                <select class="form-control" name="fizmod"
+                                        ng-required="true"
+                                        ng-model="tetel.fizmod"
+                                        ng-options="fizmod.megnevezes for fizmod in fizmodok">
+                                    <option value=""> -- Fizetési módok --</option>
+                                </select>
+                            </div>
+                        </div>
+
+
+                        <!-- Bizonyatszám -->
+                        <div class="col-sm-2">
+                            <div class="form-group form-group-sm"
+                                 ng-class="{'has-error':szallitoForm.bizszam.$invalid && szallitoForm.bizszam.$touched}">
+                                <label class="control-label">Bizonylatszám</label>
+
+
+                                <input type="text" class="form-control" name="bizszam"
+                                       ng-required="true"
+                                       ng-model="tetel.bizszam">
+                            </div>
+                        </div>
+
+                        <!-- Hibaüzenetek -->
+                        <div class="col-sm-4">
+                            <div ng-if="szallitoForm.fokszam.$error.required && szallitoForm.fokszam.$touched
+                            || szallitoForm.partner.$error.required && szallitoForm.partner.$touched
+                            || szallitoForm.fizmod.$error.required && szallitoForm.fizmod.$touched
+                            || szallitoForm.bizszam.$error.required && szallitoForm.bizszam.$touched
+                            || szallitoForm.teljdatum.$error.required && szallitoForm.teljdatum.$touched
+                            || szallitoForm.kialldatum.$error.required && szallitoForm.kialldatum.$touched
+                            || szallitoForm.eseddatum.$error.required && szallitoForm.eseddatum.$touched
+                            || szallitoForm.megnevezes.$error.required && szallitoForm.megnevezes.$touched
+                            || szallitoForm.osszeg.$invalid && szallitoForm.osszeg.$touched
+                            || szallitoForm.sorfokszam.$invalid && szallitoForm.sorfokszam.$touched
+                            || szallitoForm.sormegnevezes.$invalid && szallitoForm.sormegnevezes.$touched
+                            ">
+                                <div class="text-danger"><strong>Hiba</strong></div>
+                                <div class="help-block"><span
+                                        class="text-danger">Kérem, ellenőrizze a megjelölt mezőket</span>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+
+                        <!-- Teljesítés dátuma -->
+                        <div class="col-sm-2">
+                            <div class="form-group form-group-sm"
+                                 ng-class="{'has-error':szallitoForm.teljdatum.$invalid && szallitoForm.teljdatum.$touched}">
+                                <label class="control-label">Teljesítés</label>
+
+
+                                <div class="input-group input-group-sm">
+                                    <input type="text" class="form-control"
+                                           datepicker-popup
+                                           is-open="teljopened"
+                                           ng-required="true"
+                                           name="teljdatum"
+                                           ng-model="tetel.teljdatum">
+                                        <span class="input-group-btn">
+                                            <button type="button" class="btn btn-primary"
+                                                    ng-click="open($event, 'teljopened')">
+                                                <i class="glyphicon glyphicon-calendar"></i>
+                                            </button>
+                                        </span>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <!-- Kiállítás dátuma -->
+                        <div class="col-sm-2">
+                            <div class="form-group form-group-sm"
+                                 ng-class="{'has-error':szallitoForm.kialldatum.$invalid && szallitoForm.kialldatum.$touched}">
+                                <label class="control-label">Kiállítás</label>
+
+
+                                <div class="input-group input-group-sm">
+                                    <input type="text" class="form-control"
+                                           datepicker-popup
+                                           is-open="kiallopened"
+                                           ng-required="true"
+                                           name="kialldatum"
+                                           ng-model="tetel.kialldatum">
+                                        <span class="input-group-btn">
+                                            <button type="button" class="btn btn-primary"
+                                                    ng-click="open($event, 'kiallopened')">
+                                                <i class="glyphicon glyphicon-calendar"></i>
+                                            </button>
+                                        </span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Esedékesség dátuma -->
+                        <div class="col-sm-2">
+                            <div class="form-group form-group-sm"
+                                 ng-class="{'has-error':szallitoForm.eseddatum.$invalid && szallitoForm.eseddatum.$touched}">
+                                <label class="control-label">Esedékesség</label>
+
+
+                                <div class="input-group input-group-sm">
+                                    <input type="text" class="form-control"
+                                           datepicker-popup
+                                           is-open="esedopened"
+                                           ng-required="true"
+                                           name="eseddatum"
+                                           ng-model="tetel.eseddatum">
+                                        <span class="input-group-btn">
+                                            <button type="button" class="btn btn-primary"
+                                                    ng-click="open($event, 'esedopened')">
+                                                <i class="glyphicon glyphicon-calendar"></i>
+                                            </button>
+                                        </span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+
+                        <!-- Megnevezés -->
+                        <div class="col-sm-3">
+                            <div class="form-group form-group-sm"
+                                 ng-class="{'has-error':szallitoForm.megnevezes.$invalid && szallitoForm.megnevezes.$touched}">
+                                <label class="control-label">Megnevezés</label>
+                                <input type="text" class="form-control"
+                                       ng-required="true"
+                                       name="megnevezes"
+                                       ng-model="tetel.megnevezes">
+                            </div>
+                        </div>
+
+                        <!-- Összeg -->
+                        <div class="col-sm-2">
+                            <div class="form-group form-group-sm"
+                                 ng-class="{'has-error':szallitoForm.osszeg.$invalid && szallitoForm.osszeg.$touched}">
+                                <label class="control-label">Összeg</label>
+                                <input type="number" class="form-control"
+                                       min="0"
+                                       pattern="/^\d*$/"
+                                       ng-required="true"
+                                       ng-pattern="/^\d+$/"
+                                       name="osszeg"
+                                       ng-model="tetel.osszeg"
+                                       ng-blur="calculate()">
+                            </div>
+
+                        </div>
+
+                        <!-- TK Jelleg -->
+                        <div class="col-sm-2">
+
+                            <div class="row">
+                                <div class="col-sm-12"><label class="control-label">Tartozik / Követel</label></div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm-12"><label class="radio-inline">
+                                    <input name="tkjelleg"
+                                           id="T" value="T"
+                                           type="radio"
+                                           ng-model="tetel.tkjelleg"
+                                           ng-change="calculate()"> T
+                                </label>
+                                    <label class="radio-inline">
+                                        <input name="tkjelleg"
+                                               id="K" value="K"
+                                               type="radio"
+                                               ng-model="tetel.tkjelleg"
+                                               ng-checked="true"
+                                               ng-change="calculate()"> K
+                                    </label></div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <hr/>
+
+
+                    <div class="row">
+
+                        <!-- Főkönyvi szám -->
+                        <div class="col-sm-2">
+                            <div class="form-group form-group-sm"
+                                 ng-class="{'has-error':szallitoForm.sorfokszam.$invalid && szallitoForm.sorfokszam.$touched}">
+                                <label class="control-label">Főkönyvi szám</label>
+
+                                <select class="form-control" autofocus
+                                        name="sorfokszam"
+                                        ng-required="true"
+                                        ng-model="sor.fokszam"
+                                        ng-options="fok.fokszam as fok.fokszam + ' - ' + fok.megnevezes for fok in szamlatukor">
+                                    <option value=""> -- Főkönyvi szám --</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Megnevezés -->
+                        <div class="col-sm-3">
+                            <div class="form-group form-group-sm"
+                                 ng-class="{'has-error':szallitoForm.sormegnevezes.$invalid && szallitoForm.sormegnevezes.$touched}">
+                                <label class="control-label">Megnevezés</label>
+
+                                <input type="text" class="form-control"
+                                       name="sormegnevezes"
+                                       ng-required="true"
+                                       ng-model="sor.megnevezes">
+                            </div>
+                        </div>
+
+                        <!-- TK Jelleg -->
+                        <div class="col-sm-2">
+                            <div class="row">
+                                <label class="control-label">Tartozik / Követel</label>
+                            </div>
+
+                            <div class="radio-inline">
+                                <label><input name="sor.tkjelleg" id="T" value="T" type="radio"
+                                              ng-model="sor.tkjelleg"
+                                              ng-checked="sor.tkjelleg"> T </label>
+                            </div>
+                            <div class="radio-inline">
+                                <label><input name="sor.tkjelleg" id="K" value="K" type="radio"
+                                              ng-model="sor.tkjelleg"
+                                              ng-checked="sor.tkjelleg"> K </label>
+                            </div>
+                        </div>
+
+                        <!-- Bruttó Összeg -->
+                        <div class="col-sm-2">
+                            <div class="form-group form-group-sm">
+                                <label class="control-label">Bruttó Összeg</label>
+
+                                <input type="number" class="form-control"
+                                       name="sor.osszeg"
+                                       ng-model="sor.osszeg">
+                            </div>
+
+                        </div>
+
+                        <!-- ÁFA -->
+                        <div class="col-sm-2">
+                            <div class="form-group form-group-sm">
+                                <label class="control-label">ÁFA</label>
+                                <select class="form-control"
+                                        ng-model="sor.afa"
+                                        ng-options="afa.fokszam + ' - ' + afa.kulcs + '%-os ÁFA' for afa in afak">
+                                    <option value=""> -- ÁFA --</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Jóváhagyás -->
+                        <div class="col-sm-1">
+                            <div class="form-group form-group-sm">
+                                <label class="control-label">Jóváhagyás</label>
+                                <button type="button"
+                                        class="btn btn-success form-control"
+                                        ng-click="addRow()">
+                                    Mehet
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <hr/>
+                </form>
+
+                <!-- Kontír -->
+                <div class="row">
+                    <div class="col-sm-12">
+                        <table class="table table-condensed">
+                            <tr>
+                                <th class="col-sm-1">ÁFA</th>
+                                <th class="col-sm-1">Fők. szám</th>
+                                <th class="col-sm-2">Megnevezés</th>
+                                <th class="col-sm-2">Tartozik</th>
+                                <th class="col-sm-1">Fők. szám</th>
+                                <th class="col-sm-2">Megnevezés</th>
+                                <th class="col-sm-2">Követel</th>
+                                <th class="col-sm-1">ÁFA</th>
+                                <th></th>
+                            </tr>
+                            <!-- Kontir sorok -->
+                            <tr ng-if="tetel.tkjelleg=='T'">
+                                <td></td>
+                                <td>{{tetel.fokszam}}</td>
+                                <td>{{tetel.megnevezes}}</td>
+                                <td>{{tetel.osszeg | number : 0}} Ft</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr ng-if="tetel.tkjelleg=='K'">
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>{{tetel.fokszam}}</td>
+                                <td>{{tetel.megnevezes}}</td>
+                                <td>{{tetel.osszeg | number : 0}} Ft</td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr ng-repeat="kontir in tetel.kontir">
+                                <td ng-if="kontir.tkjelleg=='T'">{{kontir.afa.kulcs}}</td>
+                                <td ng-if="kontir.tkjelleg=='K'"></td>
+                                <td ng-if="kontir.tkjelleg=='T'">{{kontir.fokszam}}</td>
+                                <td ng-if="kontir.tkjelleg=='K'"></td>
+                                <td ng-if="kontir.tkjelleg=='T'">{{kontir.megnevezes}}</td>
+                                <td ng-if="kontir.tkjelleg=='K'"></td>
+                                <td ng-if="kontir.tkjelleg=='T'">{{kontir.osszeg | number : 0}} Ft</td>
+                                <td ng-if="kontir.tkjelleg=='K'"></td>
+                                <td ng-if="kontir.tkjelleg=='K'">{{kontir.fokszam}}</td>
+                                <td ng-if="kontir.tkjelleg=='T'"></td>
+                                <td ng-if="kontir.tkjelleg=='K'">{{kontir.megnevezes}}</td>
+                                <td ng-if="kontir.tkjelleg=='T'"></td>
+                                <td ng-if="kontir.tkjelleg=='K'">{{kontir.osszeg | number : 0}} Ft</td>
+                                <td ng-if="kontir.tkjelleg=='T'"></td>
+                                <td ng-if="kontir.tkjelleg=='K'">{{kontir.afa.kulcs}}</td>
+                                <td ng-if="kontir.tkjelleg=='T'"></td>
+                                <td>
+                                    <button ng-if="kontir.fokszam.toString().indexOf('466') === -1"
+                                            type="button"
+                                            class="btn btn-warning btn-sm"
+                                            ng-click="edit($index)">Töröl
+                                        <span class="glyphicon glyphicon-remove"></span>
+                                    </button>
+                                </td>
+                            </tr>
+
+
+                        </table>
+
+                        <div class="row bg-info" style="padding: 5px 0; font-weight: bold">
+                            <div class="col-sm-12">
+                                <span class="col-sm-2 col-sm-offset-2">Tartozik összesen</span>
+                                <span class="col-sm-2">{{tetel.tartosszesen | number : 0}} Ft</span>
+                                <span class="col-sm-2 col-sm-offset-1">Követel összesen</span>
+                                <span class="col-sm-2">{{tetel.kovosszesen | number : 0}} Ft</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <!-- Panel body -->
+
+
+            <!-- Panel footer -->
+            <div class="panel-footer">
+                <div class="row">
+                    <div class="col-sm-12">
+
+                        <div class="pull-right">
+                            <a class="btn btn-danger"
+                               ng-click="reset()">
+                                Töröl
+                            </a>
+                            <a class="btn btn-primary"
+                               ng-click="save()"
+                               ng-disabled="!(tetel.tartosszesen == tetel.kovosszesen && tetel.tartosszesen!=0)">
+                                Mentés
+                            </a>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
