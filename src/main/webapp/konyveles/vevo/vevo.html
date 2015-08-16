@@ -23,8 +23,8 @@
                                         name="fokszam"
                                         ng-required="true"
                                         ng-model="tetel.fokszam"
-                                        ng-options="fokszam.fokszam as fokszam.fokszam + ' - '+ fokszam.megnevezes for fokszam in vevok">
-                                    <option value=""> -- Főkönyvi szám --</option>
+                                        ng-options="vevo.fokszam as vevo.fokszam + ' - '+ vevo.megnevezes for vevo in vevok">
+                                    <option value=""> -- Főkönyvi szám -- </option>
                                 </select>
                             </div>
                         </div>

@@ -134,7 +134,7 @@ angular.module('myApp.szallito')
                     return partner.szallito === true;
                 })
             })
-        SzallitoSrvc.getAfak()
+        CommonSrvc.getAfak()
             .success(function (data) {
                 $scope.afak = _.filter(data, function (afa) {
                     return afa.fokszam.toString().indexOf('466') > -1

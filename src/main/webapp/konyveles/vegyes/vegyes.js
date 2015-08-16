@@ -10,8 +10,8 @@ angular.module('myApp.vegyes', [])
                 templateUrl: 'konyveles/vegyes/vegyes.html',
                 controller: 'VegyesCtrl',
                 resolve: {
-                    naplo: function ($http) {
-                        return $http.get('http://localhost:3000/naplo');
+                    naplo: function ($http, appConfig) {
+                        return $http.get(appConfig.baseUrl + 'naplok');
                     }
                 }
             })

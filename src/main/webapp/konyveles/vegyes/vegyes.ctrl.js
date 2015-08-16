@@ -112,7 +112,7 @@
                 .success(function (data) {
                     $scope.szamlatukor = _.filter(data, function (item) {
                         return (
-                            item.osszesito === 'N' &&
+                            item.osszesito === false &&
                             item.fokszam.toString().indexOf('31') === -1 &&
                             item.fokszam.toString().indexOf('454') === -1 &&
                             item.fokszam.toString().indexOf('381') === -1 &&

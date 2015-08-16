@@ -10,8 +10,8 @@ angular.module('myApp.penztar', [])
                 templateUrl: 'konyveles/penztar/penztar.html',
                 controller: 'PenztarCtrl',
                 resolve: {
-                    naplo: function ($http) {
-                        return $http.get('http://localhost:3000/naplo');
+                    naplo: function ($http, appConfig) {
+                        return $http.get(appConfig.baseUrl + 'naplok');
                     }
                 }
             })

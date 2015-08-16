@@ -6,6 +6,7 @@ angular.module('myApp', [
     'ui.bootstrap',
     'ui.router',
     'ui.mask',
+    'angular-loading-bar',
     'myApp.home',
     'myApp.szallito',
     'myApp.vevo',

@@ -35,6 +35,7 @@
             }
 
             $scope.addRow = function () {
+                console.log($scope.sor);
                 if (!$scope.sor.osszeg || !$scope.sor.fokszam || !$scope.sor.megnevezes || !$scope.vevoForm.$valid)
                     return;
                 if ($scope.sor.afa) {
@@ -110,7 +111,7 @@
                     })
                 })
 
-            VevoSrvc.getAfak()
+            CommonSrvc.getAfak()
                 .success(function (data) {
                     $scope.afak = _.filter(data, function (afa) {
                         return afa.fokszam.toString().indexOf('467') > -1;
@@ -124,7 +125,7 @@
                 .success(function (data) {
                     $scope.szamlatukor = _.filter(data, function (item) {
                         return (
-                            item.osszesito === 'N' &&
+                            item.osszesito === false &&
                             item.fokszam.toString().indexOf('31') === -1 &&
                             item.fokszam.toString().indexOf('454') === -1 &&
                             item.fokszam.toString().indexOf('467') === -1 &&
@@ -132,10 +133,9 @@
                         )
                     });
                     $scope.vevok = _.filter(data, function (item) {
-                        return item.fokszam.toString().indexOf('31') > -1 &&
-                            item.osszesito === 'N';
+                        return item.fokszam.toString().substr(0, 2) === '31' &&
+                            item.osszesito === false;
                     });
-
                 })
 
 

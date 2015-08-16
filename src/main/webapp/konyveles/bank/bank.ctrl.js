@@ -135,7 +135,7 @@
                 .success(function (data) {
                     $scope.szamlatukor = _.filter(data, function (item) {
                         return (
-                            item.osszesito === 'N' &&
+                            item.osszesito === false &&
                             item.fokszam.toString().indexOf('381') === -1 &&
                             item.fokszam.toString().indexOf('384') === -1 &&
                             item.fokszam.toString().indexOf('467') === -1 &&
@@ -144,7 +144,7 @@
                     });
                     $scope.bankok = _.filter(data, function (item) {
                         return item.fokszam.toString().indexOf('384') > -1 &&
-                            item.osszesito === 'N';
+                            item.osszesito === false;
                     });
 
                 })
