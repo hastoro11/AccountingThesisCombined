@@ -1,7 +1,7 @@
 package com.sornyei.controller;
 
 import com.sornyei.model.Partner;
-import com.sornyei.service.partnerek.PartnerService;
+import com.sornyei.service.beallitas.partnerek.PartnerService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

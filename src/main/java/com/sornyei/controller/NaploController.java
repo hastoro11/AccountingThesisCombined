@@ -1,7 +1,7 @@
 package com.sornyei.controller;
 
 import com.sornyei.model.Naplo;
-import com.sornyei.service.naplok.NaploService;
+import com.sornyei.service.beallitas.naplok.NaploService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

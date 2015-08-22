@@ -1,7 +1,7 @@
 package com.sornyei.controller;
 
 import com.sornyei.model.AfaKulcs;
-import com.sornyei.service.afakulcsok.AfaKulcsService;
+import com.sornyei.service.beallitas.afakulcsok.AfaKulcsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

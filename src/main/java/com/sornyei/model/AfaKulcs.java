@@ -52,4 +52,15 @@ public class AfaKulcs {
 	public void setMegnevezes(String megnevezes) {
 		this.megnevezes = megnevezes;
 	}
+
+	@Override
+	public String toString() {
+		return "AfaKulcs{" +
+				"id=" + id +
+				", tipus='" + tipus + '\'' +
+				", kulcs=" + kulcs +
+				", fokszam='" + fokszam + '\'' +
+				", megnevezes='" + megnevezes + '\'' +
+				'}';
+	}
 }

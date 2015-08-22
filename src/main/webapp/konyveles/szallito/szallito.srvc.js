@@ -9,6 +9,10 @@ angular.module('myApp.szallito')
             return $http.get(appConfig.baseUrl + 'partnerek');
         }
 
+        factory.save = function (tetel) {
+            return $http.post(appConfig.baseUrl + 'szallito', tetel);
+        }
+
 
         return factory;
     })

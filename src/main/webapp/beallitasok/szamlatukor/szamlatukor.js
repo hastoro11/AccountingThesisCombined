@@ -1,19 +1,21 @@
 /**
  * Created by gaborsornyei on 30/07/15.
  */
-angular.module('myApp.szamlatukor', [])
+angular.module('myApp.szamlatukor', ['chieffancypants.loadingBar'])
 
-    .config(function ($stateProvider) {
+    .config(function ($stateProvider, cfpLoadingBarProvider) {
+        cfpLoadingBarProvider.includeSpinner = true;
         $stateProvider
             .state('szamlatukor', {
                 url: '/szamlatukor',
                 templateUrl: 'beallitasok/szamlatukor/szamlatukor.html',
-                controller: 'SzamlatukorCtrl',
+                controller: 'SzamlatukorCtrl'
+/*                ,
                 resolve: {
                     szamlatukor: function ($http, appConfig) {
                         return $http.get(appConfig.baseUrl + 'szamlatukor');
                     }
-                }
+                }*/
             })
             .state('szamlatukorEdit', {
                 url: '/szamlatukor/:fokszam',
@@ -22,8 +24,12 @@ angular.module('myApp.szamlatukor', [])
             })
     })
 
-    .controller('SzamlatukorCtrl', function ($scope, CommonSrvc, szamlatukor) {
-        $scope.szamlatukor = szamlatukor.data;
+    .controller('SzamlatukorCtrl', function ($scope, CommonSrvc) {
+        //$scope.szamlatukor = szamlatukor.data;
+        CommonSrvc.getSzamlatukor()
+            .success(function (data) {
+                $scope.szamlatukor = data;
+            })
     })
 
     .controller('SzamlatukorEditCtrl', function ($scope, $state, $stateParams, SzamlatukorSrvc) {

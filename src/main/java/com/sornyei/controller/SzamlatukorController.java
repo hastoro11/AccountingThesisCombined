@@ -1,7 +1,7 @@
 package com.sornyei.controller;
 
 import com.sornyei.model.FokSzamla;
-import com.sornyei.service.szamlatukor.SzamlatukorService;
+import com.sornyei.service.beallitas.szamlatukor.SzamlatukorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

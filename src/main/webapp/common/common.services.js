@@ -1,7 +1,7 @@
 /**
  * Created by gaborsornyei on 06/07/15.
  */
-angular.module('myApp.common', [])
+angular.module('myApp.common', ['chieffancypants.loadingBar'])
 
     .factory('CommonSrvc', function ($http, appConfig) {
         var factory = {};

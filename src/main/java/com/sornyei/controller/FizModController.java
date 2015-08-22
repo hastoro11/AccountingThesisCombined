@@ -1,7 +1,7 @@
 package com.sornyei.controller;
 
 import com.sornyei.model.FizMod;
-import com.sornyei.service.fizmodok.FizModService;
+import com.sornyei.service.beallitas.fizmodok.FizModService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

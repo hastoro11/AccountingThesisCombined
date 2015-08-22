@@ -84,9 +84,17 @@ angular.module('myApp.szallito')
         $scope.save = function () {
             if ($scope.szallitoForm.$valid &&
                 $scope.tetel.tartosszesen == $scope.tetel.kovosszesen) {
-                toastr.success('Mentés sikerült!', '', {
-                    "timeOut": "1000"
-                });
+                console.log($scope.tetel);
+                SzallitoSrvc.save($scope.tetel)
+                    .success(function () {
+                        toastr.success('Mentés sikerült!', '', {
+                            "timeOut": "1000"
+                        });
+                    })
+                    .error(function (data) {
+                        console.log(data);
+                    })
+
             }
         }
 
