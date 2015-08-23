@@ -12,10 +12,10 @@ import org.springframework.stereotype.Service;
 public class NaploSorServiceImpl implements NaploSorService{
 
 	@Autowired
-	private NaploSorRepository naploSorRepository;
+	private NaploSorRepository repository;
 
 	@Override
 	public NaploSor saveNaploSor(NaploSor naploSor) {
-		return naploSorRepository.save(naploSor);
+		return repository.save(naploSor);
 	}
 }

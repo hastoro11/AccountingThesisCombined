@@ -12,10 +12,10 @@ import org.springframework.stereotype.Service;
 public class AfaSorServiceImpl implements AfaSorService {
 
 	@Autowired
-	private AfaSorRepository afaSorRepository;
+	private AfaSorRepository repository;
 
 	@Override
 	public AfaSor save(AfaSor afaSor) {
-		return afaSorRepository.save(afaSor);
+		return repository.save(afaSor);
 	}
 }

@@ -12,10 +12,10 @@ import org.springframework.stereotype.Service;
 public class KontirSorServiceImpl implements KontirSorService {
 
 	@Autowired
-	private KontirSorRepository kontirSorRepository;
+	private KontirSorRepository repository;
 
 	@Override
 	public KontirSor save(KontirSor kontirSor) {
-		return kontirSorRepository.save(kontirSor);
+		return repository.save(kontirSor);
 	}
 }

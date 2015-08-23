@@ -25,9 +25,9 @@ public class KontirSorRepositoryImpl implements KontirSorRepository {
 
 	@Override
 	public KontirSor save(KontirSor kontirSor) {
-		String sql = "INSERT INTO kontir(naplokod, naplotipus, naplosorszam, teljdatum, " +
+		String sql = "INSERT INTO kontir(fokszam, naplokod, naplotipus, naplosorszam, teljdatum, " +
 				"bizszam, megnevezes, tkjelleg, osszeg, partnerid, afatetel, torolt) " +
-				"VALUES(:naploKod, :naploTipus, :naploSorszam, :teljDatum, " +
+				"VALUES(:fokszam, :naploKod, :naploTipus, :naploSorszam, :teljDatum, " +
 				":bizszam, :megnevezes, :tkJelleg, :osszeg, :partnerId, :afaTetel, :torolt)";
 		BeanPropertySqlParameterSource parameterSource = new BeanPropertySqlParameterSource(kontirSor);
 		if (jdbcTemplate.update(sql, parameterSource) == 1)

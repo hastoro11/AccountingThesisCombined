@@ -30,7 +30,6 @@ public class AfaSorRepositoryImpl implements AfaSorRepository {
 
 	@Override
 	public AfaSor save(AfaSor afaSor) {
-		logger.info(afaSor);
 		String sql = "INSERT INTO afasor(afakulcsid, naplokod, naplotipus, naplosorszam, bizszam, " +
 				"partnerid, megnevezes, fizmodid, teljdatum,  bruttoosszeg, nettoosszeg, afaosszeg) " +
 				"VALUES (:afaKulcsId, :naploKod, :naploTipus, :naploSorszam, :bizszam, " +

@@ -13,6 +13,7 @@ import com.sornyei.service.input.szallitosor.SzallitoSorService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,6 +36,7 @@ public class SzallitoFormServiceImpl implements SzallitoFormService {
 	private SzallitoSorService szallitoSorService;
 
 	@Override
+	@Transactional
 	public boolean save(SzallitoForm szallitoForm) {
 		// NaploSor
 		NaploSor naploSor = naploSorService.saveNaploSor(getNaploSorFromSzallitoForm(szallitoForm));
