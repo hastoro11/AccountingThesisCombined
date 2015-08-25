@@ -5,6 +5,7 @@ angular.module('myApp.szallito')
 
     .factory('SzallitoSrvc', function ($http, appConfig) {
         var factory = {};
+
         factory.getPartnerek = function () {
             return $http.get(appConfig.baseUrl + 'partnerek');
         }
@@ -12,7 +13,6 @@ angular.module('myApp.szallito')
         factory.save = function (tetel) {
             return $http.post(appConfig.baseUrl + 'szallito', tetel);
         }
-
 
         return factory;
     })

@@ -5,7 +5,7 @@ import java.util.Date;
 /**
  * Created by gaborsornyei on 20/08/15.
  */
-public class SzallitoSor {
+public class PartnerSor {
 	private int id;
 	private int partnerId;
 	private String naploKod;
@@ -122,5 +122,24 @@ public class SzallitoSor {
 
 	public void setOsszeg(int osszeg) {
 		this.osszeg = osszeg;
+	}
+
+	@Override
+	public String toString() {
+		return "PartnerSor{" +
+				"id=" + id +
+				", partnerId=" + partnerId +
+				", naploKod='" + naploKod + '\'' +
+				", naploTipus='" + naploTipus + '\'' +
+				", naploSorszam=" + naploSorszam +
+				", bizszam='" + bizszam + '\'' +
+				", teljDatum=" + teljDatum +
+				", kiallDatum=" + kiallDatum +
+				", esedDatum=" + esedDatum +
+				", kifizDatum=" + kifizDatum +
+				", fizmodId=" + fizmodId +
+				", tkJelleg='" + tkJelleg + '\'' +
+				", osszeg=" + osszeg +
+				'}';
 	}
 }

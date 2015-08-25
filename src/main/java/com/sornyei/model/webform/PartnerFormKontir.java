@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
  * Created by gaborsornyei on 20/08/15.
  */
 @Component
-public class SzallitoFormKontir {
+public class PartnerFormKontir {
 	private String fokszam;
 	private String megnevezes;
 	private AfaKulcs afa;

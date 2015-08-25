@@ -8,6 +8,7 @@ angular.module('myApp.szallito')
 
 
         $scope.tetel = {
+            naplotipus: 'S',
             tkjelleg: 'K',
             osszeg: 0,
             kontir: [],
@@ -125,6 +126,7 @@ angular.module('myApp.szallito')
 
         reset = function () {
             $scope.tetel = {
+                naplotipus: 'S',
                 tkjelleg: 'K',
                 osszeg: 0,
                 kontir: [],

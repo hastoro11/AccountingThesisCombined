@@ -99,4 +99,20 @@ public class NaploSor {
 	public void setOsszeg(int osszeg) {
 		this.osszeg = osszeg;
 	}
+
+	@Override
+	public String toString() {
+		return "NaploSor{" +
+				"id=" + id +
+				", naploTipus='" + naploTipus + '\'' +
+				", naploSorszam=" + naploSorszam +
+				", naploKod='" + naploKod + '\'' +
+				", teljDatum=" + teljDatum +
+				", tkJelleg='" + tkJelleg + '\'' +
+				", fokszam='" + fokszam + '\'' +
+				", bizszam='" + bizszam + '\'' +
+				", megnevezes='" + megnevezes + '\'' +
+				", osszeg=" + osszeg +
+				'}';
+	}
 }

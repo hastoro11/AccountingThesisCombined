@@ -5,7 +5,7 @@
             <!-- Panel heading -->
             <div class="panel-heading">
                 {{naplo.megnevezes}}
-                <span class="pull-right">Sorszám: 1</span>
+                <span class="pull-right">Sorszám: {{naploSorszam}}</span>
             </div>
 
             <!-- Panel body -->
@@ -53,7 +53,7 @@
                                         name="fizmod"
                                         ng-required="true"
                                         ng-model="tetel.fizmod"
-                                        ng-options="fizmod.megnevezes for fizmod in fizmodok">
+                                        ng-options="fizmod.id as fizmod.megnevezes for fizmod in fizmodok">
                                     <option value=""> -- Fizetési módok --</option>
                                 </select>
                             </div>

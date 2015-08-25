@@ -2,7 +2,6 @@ package com.sornyei.model.webform;
 
 import org.springframework.stereotype.Component;
 
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -10,7 +9,8 @@ import java.util.List;
  * Created by gaborsornyei on 20/08/15.
  */
 @Component
-public class SzallitoForm {
+public class PartnerForm {
+	private String naplotipus;
 	private String fokszam;
 	private int partner;
 	private int fizmod;
@@ -21,7 +21,15 @@ public class SzallitoForm {
 	private String megnevezes;
 	private int osszeg;
 	private String tkjelleg;
-	private List<SzallitoFormKontir> kontir;
+	private List<PartnerFormKontir> kontir;
+
+	public String getNaplotipus() {
+		return naplotipus;
+	}
+
+	public void setNaplotipus(String naplotipus) {
+		this.naplotipus = naplotipus;
+	}
 
 	public String getFokszam() {
 		return fokszam;
@@ -103,11 +111,11 @@ public class SzallitoForm {
 		this.tkjelleg = tkjelleg;
 	}
 
-	public List<SzallitoFormKontir> getKontir() {
+	public List<PartnerFormKontir> getKontir() {
 		return kontir;
 	}
 
-	public void setKontir(List<SzallitoFormKontir> kontir) {
+	public void setKontir(List<PartnerFormKontir> kontir) {
 		this.kontir = kontir;
 	}
 
@@ -127,7 +135,7 @@ public class SzallitoForm {
 										  ", tkjelleg='" + tkjelleg + '\'' +
 										  '}');
 
-		for (SzallitoFormKontir sor : kontir) {
+		for (PartnerFormKontir sor : kontir) {
 			int i = 0;
 			result.append("# " + ++i + " " + sor);
 		}

@@ -1,6 +1,9 @@
 package com.sornyei.repository.input.naplosor;
 
 import com.sornyei.model.input.NaploSor;
+import com.sornyei.repository.input.CommonRepository;
+import com.sornyei.service.webform.PartnerFormService;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
@@ -21,8 +24,12 @@ import java.sql.SQLException;
 @Repository
 public class NaploSorRepositoryImpl implements NaploSorRepository {
 
+	final static Logger logger = Logger.getLogger(NaploSorRepository.class);
+
 	private NamedParameterJdbcTemplate jdbcTemplate;
 	private DataSource dataSource;
+	@Autowired
+	CommonRepository commonRepository;
 
 	@Autowired
 	public void setDataSource(DataSource dataSource) {
@@ -31,7 +38,7 @@ public class NaploSorRepositoryImpl implements NaploSorRepository {
 	}
 
 	public NaploSor save(NaploSor naploSor) {
-		int naploSorszam = getLastSorszam(naploSor.getNaploTipus()) + 1;
+		int naploSorszam = commonRepository.getNextNaploSorSzam(naploSor.getNaploTipus());
 		String naploKod = getNaploKod(naploSor.getNaploTipus(), naploSorszam);
 		naploSor.setNaploSorszam(naploSorszam);
 		naploSor.setNaploKod(naploKod);
@@ -49,18 +56,6 @@ public class NaploSorRepositoryImpl implements NaploSorRepository {
 		naploSor.setId(keyHolder.getKey().intValue());
 
 		return naploSor;
-	}
-
-	private int getLastSorszam(String naplotipus) {
-		String sql = "SELECT MAX(naplosorszam) FROM naplosor WHERE naplotipus=:naplotipus";
-		SqlParameterSource parameterSource = new MapSqlParameterSource("naplotipus", naplotipus);
-
-		Integer sorszam = jdbcTemplate.queryForObject(sql, parameterSource, Integer.class);
-
-		if (sorszam == null)
-			return 0;
-		else
-			return sorszam;
 	}
 
 	private String getNaploKod(String naploTipus, int naploSorszam) {

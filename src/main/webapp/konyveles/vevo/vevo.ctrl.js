@@ -7,6 +7,7 @@
         .controller('VevoCtrl', function ($scope, VevoSrvc, CommonSrvc, naplo) {
 
             $scope.tetel = {
+                naplotipus: 'V',
                 tkjelleg: 'T',
                 osszeg: 0,
                 kontir: [],
@@ -35,7 +36,6 @@
             }
 
             $scope.addRow = function () {
-                console.log($scope.sor);
                 if (!$scope.sor.osszeg || !$scope.sor.fokszam || !$scope.sor.megnevezes || !$scope.vevoForm.$valid)
                     return;
                 if ($scope.sor.afa) {
@@ -74,8 +74,34 @@
             }
 
             $scope.reset = function () {
+                reset();
+                toastr.warning('Mezők törölve', '', {
+                    "timeOut": "1000"
+                })
+            }
+
+            $scope.save = function () {
+                if ($scope.vevoForm.$valid &&
+                    $scope.tetel.tartosszesen == $scope.tetel.kovosszesen) {
+                    VevoSrvc.save($scope.tetel)
+                        .success(function () {
+                            reset();
+                            toastr.success('Mentés sikerült!', '', {
+                                "timeOut": "1000"
+                            });
+                            getNextNaploSorszam();
+                        })
+                        .error(function (data) {
+                            console.log(data);
+                        })
+
+                }
+            }
+
+            reset = function () {
                 $scope.tetel = {
-                    tkjelleg: 'T',
+                    naplotipus: 'V',
+                    tkjelleg: 'K',
                     osszeg: 0,
                     kontir: [],
                     tartosszesen: 0,
@@ -84,25 +110,22 @@
                 };
 
                 $scope.sor = {
-                    tkjelleg: 'K',
+                    tkjelleg: 'T',
                     osszeg: 0
                 };
                 $scope.vevoForm.$setUntouched();
-                toastr.warning('Mezők törölve', '', {
-                    "timeOut": "1000"
-                })
             }
 
-            $scope.save = function () {
-                if ($scope.szallitoForm.$valid &&
-                    $scope.tetel.tartosszesen == $scope.tetel.kovosszesen) {
-                    toastr.success('Mentés sikerült!', '', {
-                        "timeOut": "1000"
-                    });
-                }
+            getNextNaploSorszam = function () {
+                CommonSrvc.getNextNaploSorSzam('V')
+                    .success(function (data) {
+                        $scope.naploSorszam = data;
+                    })
             }
 
             // Activate
+
+            getNextNaploSorszam();
 
             VevoSrvc.getPartnerek()
                 .success(function (data) {
