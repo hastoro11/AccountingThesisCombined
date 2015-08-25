@@ -27,6 +27,7 @@ angular.module('myApp.szallito')
         $scope.fizmodok = [];
         $scope.szamlatukor = [];
         $scope.hatarido = 0;
+        $scope.naploSorszam = 0;
         //------------------
 
         // Button Functions
@@ -62,20 +63,7 @@ angular.module('myApp.szallito')
         }
 
         $scope.reset = function () {
-            $scope.tetel = {
-                tkjelleg: 'K',
-                osszeg: 0,
-                kontir: [],
-                tartosszesen: 0,
-                kovosszesen: 0,
-                egyenlegTKjelleg: 'T'
-            };
-
-            $scope.sor = {
-                tkjelleg: 'T',
-                osszeg: 0
-            };
-            $scope.szallitoForm.$setUntouched();
+            reset();
             toastr.warning('Mezők törölve', '', {
                 "timeOut": "1000"
             })
@@ -90,6 +78,8 @@ angular.module('myApp.szallito')
                         toastr.success('Mentés sikerült!', '', {
                             "timeOut": "1000"
                         });
+                        reset();
+                        getNextNaploSorszam();
                     })
                     .error(function (data) {
                         console.log(data);
@@ -133,8 +123,34 @@ angular.module('myApp.szallito')
             $scope.sor.megnevezes = $scope.tetel.megnevezes;
         }
 
+        reset = function () {
+            $scope.tetel = {
+                tkjelleg: 'K',
+                osszeg: 0,
+                kontir: [],
+                tartosszesen: 0,
+                kovosszesen: 0,
+                egyenlegTKjelleg: 'T'
+            };
+
+            $scope.sor = {
+                tkjelleg: 'T',
+                osszeg: 0
+            };
+            $scope.szallitoForm.$setUntouched();
+        }
+
+        getNextNaploSorszam = function () {
+            CommonSrvc.getNextNaploSorSzam('S')
+                .success(function (data) {
+                    $scope.naploSorszam = data;
+                })
+        }
+
         // Activate
         //
+
+        getNextNaploSorszam();
 
         SzallitoSrvc.getPartnerek()
             .success(function (data) {

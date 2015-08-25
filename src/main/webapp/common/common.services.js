@@ -28,6 +28,10 @@ angular.module('myApp.common', ['chieffancypants.loadingBar'])
             return $http.get(appConfig.baseUrl + 'afakulcsok');
         }
 
+        factory.getNextNaploSorSzam = function (naplotipus) {
+            return $http.get(appConfig.baseUrl + 'common/naplo/' + naplotipus);
+        }
+
         //---------------
         return factory;
     })

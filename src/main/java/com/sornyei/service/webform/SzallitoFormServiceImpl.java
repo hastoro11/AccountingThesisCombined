@@ -51,7 +51,6 @@ public class SzallitoFormServiceImpl implements SzallitoFormService {
 
 		// AfaSor
 		for (AfaSor afaSor : getAfaSorFromSzallitoForm(szallitoForm)) {
-			logger.info(afaSor);
 			afaSor.setNaploSorszam(naploSor.getNaploSorszam());
 			afaSor.setNaploKod(naploSor.getNaploKod());
 			afaSor.setNaploTipus("S");
@@ -127,7 +126,6 @@ public class SzallitoFormServiceImpl implements SzallitoFormService {
 		int i = 0;
 
 		while (i < szallitoForm.getKontir().size()) {
-			logger.info("Starting : i =" + i);
 			SzallitoFormKontir kontir = szallitoForm.getKontir().get(i);
 			if (kontir.getAfa() == null) {
 				i++;
@@ -148,7 +146,6 @@ public class SzallitoFormServiceImpl implements SzallitoFormService {
 
 			list.add(afaSor);
 			i++;
-			logger.info("Ending : i =" + i);
 		}
 
 		return list;

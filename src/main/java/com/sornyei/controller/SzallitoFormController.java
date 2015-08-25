@@ -25,7 +25,6 @@ public class SzallitoFormController {
 
 	@RequestMapping(value = "", method = RequestMethod.POST)
 	public ResponseEntity<SzallitoForm> save(@RequestBody SzallitoForm szallitoForm) {
-		logger.info(service.save(szallitoForm));
 		return new ResponseEntity<SzallitoForm>(szallitoForm, HttpStatus.CREATED);
 	}
 
