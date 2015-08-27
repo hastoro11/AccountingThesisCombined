@@ -74,7 +74,7 @@ angular.module('myApp.szallito')
             if ($scope.szallitoForm.$valid &&
                 $scope.tetel.tartosszesen == $scope.tetel.kovosszesen) {
                 console.log($scope.tetel);
-                SzallitoSrvc.save($scope.tetel)
+                CommonSrvc.save($scope.tetel.naplotipus, $scope.tetel)
                     .success(function () {
                         toastr.success('Mentés sikerült!', '', {
                             "timeOut": "1000"
@@ -122,6 +122,17 @@ angular.module('myApp.szallito')
             $scope.sor.osszeg = ($scope.sor.tkjelleg == 'T') ? ($scope.tetel.kovosszesen - $scope.tetel.tartosszesen) :
                 ($scope.tetel.tartosszesen - $scope.tetel.kovosszesen)
             $scope.sor.megnevezes = $scope.tetel.megnevezes;
+        }
+
+        $scope.checkPartnerAndBizszam = function () {
+            CommonSrvc.checkPartnerAndBizszam($scope.tetel.partner, $scope.tetel.bizszam)
+                .success(function (data) {
+                    var result = data;
+                    if (result)
+                        toastr.warning('Ehhez a partnerhez már volt ez a bizonylat rögzítve', '', {
+                            "timeOut": "2000"
+                        })
+                })
         }
 
         reset = function () {

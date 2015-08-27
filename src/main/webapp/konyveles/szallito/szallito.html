@@ -70,7 +70,8 @@
 
                                 <input type="text" class="form-control" name="bizszam"
                                        ng-required="true"
-                                       ng-model="tetel.bizszam">
+                                       ng-model="tetel.bizszam"
+                                       ng-blur="checkPartnerAndBizszam()">
                             </div>
                         </div>
 
@@ -316,6 +317,7 @@
                                 <label class="control-label">Jóváhagyás</label>
                                 <button type="button"
                                         class="btn btn-success form-control"
+                                        ng-disabled="szallitoForm.sorfokszam.$invalid || szallitoForm.sormegnevezes.$invalid || sor.osszeg==0"
                                         ng-click="addRow()">
                                     Mehet
                                 </button>
@@ -420,7 +422,7 @@
                             </a>
                             <a class="btn btn-primary"
                                ng-click="save()"
-                               ng-disabled="!(tetel.tartosszesen == tetel.kovosszesen && tetel.tartosszesen!=0)">
+                               ng-disabled="!(tetel.tartosszesen == tetel.kovosszesen && tetel.tartosszesen!=0) || szallitoForm.$invalid">
                                 Mentés
                             </a>
 

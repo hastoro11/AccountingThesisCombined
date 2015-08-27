@@ -63,13 +63,14 @@ public class PartnerSorRepositoryImpl implements PartnerSorRepository {
 	}
 
 	@Override
-	public PartnerSor getPartnerSorByPartnerIdAndBizszam(int partnerId, String bizszam) {
-		String sql = "SELECT * FROM partnersor WHERE partnerid=:partnerId AND bizszam=:bizszam";
+	public List<PartnerSor> getPartnerSorByPartnerIdAndBizszam(int partnerId, String bizszam) {
+		String sql = "SELECT * FROM partnersor WHERE partnerid=:partnerId AND bizszam=:bizszam " +
+				"AND (naplotipus='S' OR naplotipus='V') ";
 		MapSqlParameterSource parameterSource = new MapSqlParameterSource();
 		parameterSource.addValue("partnerId", partnerId);
 		parameterSource.addValue("bizszam", bizszam);
 
-		return jdbcTemplate.queryForObject(sql, parameterSource, new PartnerSorRowMapper());
+		return jdbcTemplate.query(sql, parameterSource, new PartnerSorRowMapper());
 	}
 
 	class PartnerSorRowMapper implements RowMapper<PartnerSor> {

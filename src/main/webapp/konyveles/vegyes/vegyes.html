@@ -257,6 +257,7 @@
                             <div class="form-group form-group-sm">
                                 <label class="control-label">Jóváhagyás</label>
                                 <button type="button" class="form-control btn btn-success"
+                                        ng-disabled="vegyesForm.sorfokszam.$invalid || vegyesForm.sormegnevezes.$invalid || sor.osszeg==0"
                                         ng-click="addRow()">Mehet
                                 </button>
                             </div>
@@ -364,7 +365,7 @@
                             </a>
                             <a class="btn btn-primary"
                                ng-click="save()"
-                               ng-disabled="!(tetel.tartosszesen == tetel.kovosszesen && tetel.tartosszesen!=0)">
+                               ng-disabled="!(tetel.tartosszesen == tetel.kovosszesen && tetel.tartosszesen!=0) || vegyesForm.$invalid">
                                 Mentés
                             </a>
 

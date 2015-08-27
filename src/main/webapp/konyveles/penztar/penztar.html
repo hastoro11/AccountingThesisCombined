@@ -381,7 +381,7 @@
                             </a>
                             <a class="btn btn-primary"
                                ng-click="save()"
-                               ng-disabled="!(tetel.tartosszesen == tetel.kovosszesen && tetel.tartosszesen!=0)">
+                               ng-disabled="!(tetel.tartosszesen == tetel.kovosszesen && tetel.tartosszesen!=0) || penztarForm.$invalid">
                                 Mentés
                             </a>
 

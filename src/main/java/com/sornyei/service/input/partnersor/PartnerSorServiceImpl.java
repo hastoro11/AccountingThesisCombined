@@ -27,7 +27,7 @@ public class PartnerSorServiceImpl implements PartnerSorService {
 	}
 
 	@Override
-	public PartnerSor getPartnerSorByPartnerIdAndBizszam(int partnerId, String bizszam) {
+	public List<PartnerSor> getPartnerSorByPartnerIdAndBizszam(int partnerId, String bizszam) {
 		return repository.getPartnerSorByPartnerIdAndBizszam(partnerId, bizszam);
 	}
 }

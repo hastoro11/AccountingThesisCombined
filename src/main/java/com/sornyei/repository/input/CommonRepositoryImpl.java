@@ -33,4 +33,5 @@ public class CommonRepositoryImpl implements CommonRepository {
 
 		return sorszam + 1;
 	}
+
 }

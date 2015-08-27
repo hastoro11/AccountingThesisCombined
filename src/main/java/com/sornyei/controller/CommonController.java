@@ -1,8 +1,10 @@
 package com.sornyei.controller;
 
+import com.sornyei.model.input.PartnerSor;
 import com.sornyei.service.CommonService;
 import com.sornyei.service.input.partnersor.PartnerSorService;
 import com.sun.org.glassfish.gmbal.ParameterNames;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,6 +20,8 @@ import java.util.List;
 @RequestMapping(value = "/common")
 public class CommonController {
 
+	final static Logger logger = Logger.getLogger(CommonController.class);
+
 	@Autowired
 	private CommonService commonService;
 	@Autowired
@@ -31,5 +35,13 @@ public class CommonController {
 	@RequestMapping(value = "/kifiztlen/{partnerid}", method = RequestMethod.GET)
 	public List<String> getKifizetetlenBizSzamok(@PathVariable("partnerid") int partnerId) {
 		return partnerSorService.getKifizetetlenBizSzamok(partnerId);
+	}
+
+	@RequestMapping(value = "/checkbizsz/{partnerid}/{bizszam}", method = RequestMethod.GET)
+	public Boolean checkPartnerAndBizszam(@PathVariable("partnerid") int partnerId,
+										  @PathVariable("bizszam") String bizszam) {
+		List<PartnerSor> partnerSorList = partnerSorService.getPartnerSorByPartnerIdAndBizszam(partnerId, bizszam);
+
+		return partnerSorList.size() > 0;
 	}
 }

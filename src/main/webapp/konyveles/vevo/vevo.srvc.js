@@ -10,9 +10,5 @@ angular.module('myApp.vevo')
             return $http.get(appConfig.baseUrl + 'partnerek');
         }
 
-        factory.save = function (tetel) {
-            return $http.post(appConfig.baseUrl + 'vevo', tetel);
-        }
-
         return factory;
     });

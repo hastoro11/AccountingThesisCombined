@@ -83,7 +83,7 @@
             $scope.save = function () {
                 if ($scope.vevoForm.$valid &&
                     $scope.tetel.tartosszesen == $scope.tetel.kovosszesen) {
-                    VevoSrvc.save($scope.tetel)
+                    CommonSrvc.save($scope.tetel.naplotipus, $scope.tetel)
                         .success(function () {
                             reset();
                             toastr.success('Mentés sikerült!', '', {
@@ -96,6 +96,17 @@
                         })
 
                 }
+            }
+
+            $scope.checkPartnerAndBizszam = function () {
+                CommonSrvc.checkPartnerAndBizszam($scope.tetel.partner, $scope.tetel.bizszam)
+                    .success(function (data) {
+                        var result = data;
+                        if (result)
+                            toastr.warning('Ehhez a partnerhez már volt ez a bizonylat rögzítve', '', {
+                                "timeOut": "2000"
+                            })
+                    })
             }
 
             reset = function () {

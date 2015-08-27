@@ -41,6 +41,19 @@ angular.module('myApp.common', ['chieffancypants.loadingBar'])
                 return $http.post(appConfig.baseUrl + 'vegyes', tetel);
             } else if (naplotipus === 'P')
                 return $http.post(appConfig.baseUrl + 'penztar', tetel);
+            else if (naplotipus == 'B') {
+                return $http.post(appConfig.baseUrl + 'bank', tetel);
+            }
+            else if (naplotipus == 'S') {
+                return $http.post(appConfig.baseUrl + 'szallito', tetel);
+            }
+            else if (naplotipus == 'V') {
+                return $http.post(appConfig.baseUrl + 'vevo', tetel);
+            }
+        }
+
+        factory.checkPartnerAndBizszam = function (parnterid, bizsszam) {
+            return $http.get(appConfig.baseUrl + 'common/checkbizsz/' + parnterid + '/' + bizsszam);
         }
 
         //---------------

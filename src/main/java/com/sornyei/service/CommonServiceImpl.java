@@ -10,7 +10,7 @@ import java.util.List;
  * Created by gaborsornyei on 25/08/15.
  */
 @Service
-public class CommonServiceImpl implements CommonService{
+public class CommonServiceImpl implements CommonService {
 
 	@Autowired
 	private CommonRepository repository;

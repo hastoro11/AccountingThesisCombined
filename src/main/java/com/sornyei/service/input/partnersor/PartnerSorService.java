@@ -10,5 +10,5 @@ import java.util.List;
 public interface PartnerSorService {
 	PartnerSor save(PartnerSor partnerSor);
 	List<String> getKifizetetlenBizSzamok(int partnerId);
-	PartnerSor getPartnerSorByPartnerIdAndBizszam(int partnerId, String bizszam);
+	List<PartnerSor> getPartnerSorByPartnerIdAndBizszam(int partnerId, String bizszam);
 }

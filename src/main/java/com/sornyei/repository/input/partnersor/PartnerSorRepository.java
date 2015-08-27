@@ -12,5 +12,5 @@ public interface PartnerSorRepository {
 
 	List<String> getKifizetetlenBizSzamok(int partnerId);
 
-	PartnerSor getPartnerSorByPartnerIdAndBizszam(int partnerId, String bizszam);
+	List<PartnerSor> getPartnerSorByPartnerIdAndBizszam(int partnerId, String bizszam);
 }

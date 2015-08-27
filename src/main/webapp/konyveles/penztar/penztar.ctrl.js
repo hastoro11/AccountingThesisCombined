@@ -89,9 +89,8 @@
             $scope.save = function () {
                 if ($scope.penztarForm.$valid &&
                     $scope.tetel.tartosszesen == $scope.tetel.kovosszesen) {
-                    CommonSrvc.save('P', $scope.tetel)
+                    CommonSrvc.save($scope.tetel.naplotipus, $scope.tetel)
                         .success(function () {
-                            console.log('Saving...');
                             reset();
                             getNextNaploSorszam();
                             toastr.success('Mentés sikerült!', '', {
@@ -167,7 +166,6 @@
                     var fizmod = _.filter(data, function (fizmod) {
                         return fizmod.megnevezes === "készpénz";
                     })
-                    console.log(fizmod);
                     $scope.tetel.fizmod = fizmod[0].id;
                 }))
             CommonSrvc.getSzamlatukor()

@@ -14,7 +14,6 @@
                 tartosszesen: 0,
                 kovosszesen: 0,
                 egyenlegTKjelleg: 'K',
-                ellenbizszam: ''
             };
             $scope.sor = {
                 tkjelleg: 'K',
@@ -90,9 +89,15 @@
             $scope.save = function () {
                 if ($scope.bankForm.$valid &&
                     $scope.tetel.tartosszesen == $scope.tetel.kovosszesen) {
-                    toastr.success('Mentés sikerült!', '', {
-                        "timeOut": "1000"
-                    });
+                    CommonSrvc.save($scope.tetel.naplotipus, $scope.tetel)
+                        .success(function () {
+                            reset()
+                            getNextNaploSorszam();
+                            toastr.success('Mentés sikerült!', '', {
+                                "timeOut": "1000"
+                            });
+                        })
+
                 }
             }
 
@@ -105,6 +110,18 @@
                 } else {
                     $scope.kiegyenlites = false;
                 }
+            }
+
+            $scope.checkBizszam = function () {
+                CommonSrvc.getKifizetetlenBizszamok($scope.tetel.partner)
+                    .success(function (bizszamok) {
+                        if (bizszamok.indexOf($scope.sor.ellenbizszam) < 0) {
+                            toastr.warning('Ez a bizonylatszám nem könyvelhető a megadott partnerhez', '', {
+                                timeOut: "3000"
+                            });
+                            $scope.bankForm.ellenbizszam.$invalid = true;
+                        }
+                    })
             }
 
             reset = function () {
@@ -143,9 +160,7 @@
 
             CommonSrvc.getFizModok()
                 .success((function (data) {
-                    $scope.tetel.fizmod = _.filter(data, function (fizmod) {
-                        return fizmod.megnevezes === "készpénz";
-                    })
+                    $scope.fizmodok = data;
                 }))
             CommonSrvc.getSzamlatukor()
                 .success(function (data) {

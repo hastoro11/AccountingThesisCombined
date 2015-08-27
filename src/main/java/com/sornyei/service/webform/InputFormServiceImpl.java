@@ -66,8 +66,10 @@ public class InputFormServiceImpl implements InputFormService {
 		} else if (naploSor.getNaploTipus().equals("P") || naploSor.getNaploTipus().equals("B")) {
 			for (InputFormKontir ks : inputForm.getKontir()) {
 				if (ks.getEllenbizszam() != null && ks.getEllenbizszam().length() > 0) {
-					PartnerSor partnerSor = partnerSorService
+					List<PartnerSor> partnerSorList = partnerSorService
 							.getPartnerSorByPartnerIdAndBizszam(inputForm.getPartner(), ks.getEllenbizszam());
+					PartnerSor partnerSor=partnerSorList.get(0);
+
 					partnerSor.setKifizDatum(inputForm.getTeljdatum());
 					partnerSor.setKifizOsszeg(ks.getOsszeg());
 					partnerSor.setOsszeg(0);

@@ -54,4 +54,12 @@ public class InputFormController {
 			return new ResponseEntity<InputForm>(HttpStatus.NOT_FOUND);
 	}
 
+	@RequestMapping(value = "/bank", method = RequestMethod.POST)
+	public ResponseEntity<InputForm> saveBank(@RequestBody InputForm inputForm) {
+		if (service.save(inputForm))
+			return new ResponseEntity<InputForm>(inputForm, HttpStatus.CREATED);
+		else
+			return new ResponseEntity<InputForm>(HttpStatus.NOT_FOUND);
+	}
+
 }
