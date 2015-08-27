@@ -19,6 +19,7 @@ public class PartnerSor {
 	private int fizmodId;
 	private String tkJelleg;
 	private int osszeg;
+	private int kifizOsszeg;
 
 	public int getId() {
 		return id;
@@ -124,6 +125,14 @@ public class PartnerSor {
 		this.osszeg = osszeg;
 	}
 
+	public int getKifizOsszeg() {
+		return kifizOsszeg;
+	}
+
+	public void setKifizOsszeg(int kifizOsszeg) {
+		this.kifizOsszeg = kifizOsszeg;
+	}
+
 	@Override
 	public String toString() {
 		return "PartnerSor{" +
@@ -140,6 +149,7 @@ public class PartnerSor {
 				", fizmodId=" + fizmodId +
 				", tkJelleg='" + tkJelleg + '\'' +
 				", osszeg=" + osszeg +
+				", kifizOsszeg=" + kifizOsszeg +
 				'}';
 	}
 }

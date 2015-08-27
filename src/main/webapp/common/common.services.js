@@ -32,6 +32,17 @@ angular.module('myApp.common', ['chieffancypants.loadingBar'])
             return $http.get(appConfig.baseUrl + 'common/naplo/' + naplotipus);
         }
 
+        factory.getKifizetetlenBizszamok = function (partnerid) {
+            return $http.get(appConfig.baseUrl + 'common/kifiztlen/' + partnerid);
+        }
+
+        factory.save = function (naplotipus, tetel) {
+            if (naplotipus === 'E') {
+                return $http.post(appConfig.baseUrl + 'vegyes', tetel);
+            } else if (naplotipus === 'P')
+                return $http.post(appConfig.baseUrl + 'penztar', tetel);
+        }
+
         //---------------
         return factory;
     })

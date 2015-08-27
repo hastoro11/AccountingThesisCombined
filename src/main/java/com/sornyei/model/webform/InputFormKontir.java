@@ -7,9 +7,10 @@ import org.springframework.stereotype.Component;
  * Created by gaborsornyei on 20/08/15.
  */
 @Component
-public class PartnerFormKontir {
+public class InputFormKontir {
 	private String fokszam;
 	private String megnevezes;
+	private String ellenbizszam;
 	private AfaKulcs afa;
 	private int osszeg;
 	private String tkjelleg;
@@ -24,6 +25,14 @@ public class PartnerFormKontir {
 
 	public String getMegnevezes() {
 		return megnevezes;
+	}
+
+	public String getEllenbizszam() {
+		return ellenbizszam;
+	}
+
+	public void setEllenbizszam(String ellenbizszam) {
+		this.ellenbizszam = ellenbizszam;
 	}
 
 	public void setMegnevezes(String megnevezes) {
@@ -56,9 +65,10 @@ public class PartnerFormKontir {
 
 	@Override
 	public String toString() {
-		return "SzallitoFormKontir{" +
+		return "InputFormKontir{" +
 				"fokszam='" + fokszam + '\'' +
 				", megnevezes='" + megnevezes + '\'' +
+				", ellenbizszam='" + ellenbizszam + '\'' +
 				", afa=" + afa +
 				", osszeg=" + osszeg +
 				", tkjelleg='" + tkjelleg + '\'' +

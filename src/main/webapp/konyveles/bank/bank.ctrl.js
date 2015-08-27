@@ -7,6 +7,7 @@
         .controller('BankCtrl', function ($scope, $stateParams, CommonSrvc, naplo) {
 
             $scope.tetel = {
+                naplotipus: 'B',
                 tkjelleg: 'T',
                 osszeg: 0,
                 kontir: [],
@@ -80,20 +81,7 @@
             }
 
             $scope.reset = function () {
-                $scope.tetel = {
-                    tkjelleg: 'T',
-                    osszeg: 0,
-                    kontir: [],
-                    tartosszesen: 0,
-                    kovosszesen: 0,
-                    egyenlegTKjelleg: 'T'
-                };
-
-                $scope.sor = {
-                    tkjelleg: 'K',
-                    osszeg: 0
-                };
-                $scope.bankForm.$setUntouched();
+                reset();
                 toastr.warning('Mezők törölve', '', {
                     "timeOut": "1000"
                 })
@@ -119,7 +107,35 @@
                 }
             }
 
+            reset = function () {
+                $scope.tetel = {
+                    naplotipus: 'B',
+                    tkjelleg: 'T',
+                    osszeg: 0,
+                    kontir: [],
+                    tartosszesen: 0,
+                    kovosszesen: 0,
+                    egyenlegTKjelleg: 'T'
+                };
+
+                $scope.sor = {
+                    tkjelleg: 'K',
+                    osszeg: 0
+                };
+                $scope.bankForm.$setUntouched();
+            }
+
+            getNextNaploSorszam = function () {
+                CommonSrvc.getNextNaploSorSzam('B')
+                    .success(function (data) {
+                        $scope.naploSorszam = data;
+                    })
+            }
+
             // Activate
+
+            getNextNaploSorszam();
+
             CommonSrvc.getPartnerek()
                 .success(function (data) {
                     $scope.partnerek = data;

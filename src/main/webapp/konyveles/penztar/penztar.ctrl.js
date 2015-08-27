@@ -7,13 +7,13 @@
         .controller('PenztarCtrl', function ($scope, $stateParams, CommonSrvc, naplo) {
 
             $scope.tetel = {
+                naplotipus: 'P',
                 tkjelleg: 'T',
                 osszeg: 0,
                 kontir: [],
                 tartosszesen: 0,
                 kovosszesen: 0,
                 egyenlegTKjelleg: 'K',
-                ellenbizszam: ''
             };
             $scope.sor = {
                 tkjelleg: 'K',
@@ -80,7 +80,57 @@
             }
 
             $scope.reset = function () {
+                reset();
+                toastr.warning('Mezők törölve', '', {
+                    "timeOut": "1000"
+                })
+            }
+
+            $scope.save = function () {
+                if ($scope.penztarForm.$valid &&
+                    $scope.tetel.tartosszesen == $scope.tetel.kovosszesen) {
+                    CommonSrvc.save('P', $scope.tetel)
+                        .success(function () {
+                            console.log('Saving...');
+                            reset();
+                            getNextNaploSorszam();
+                            toastr.success('Mentés sikerült!', '', {
+                                "timeOut": "1000"
+                            });
+                        })
+
+                }
+            }
+
+            $scope.kiegyenlit = function (fokszam) {
+                if ($scope.sor.fokszam.toString().indexOf('31') > -1
+                    || $scope.sor.fokszam.toString().indexOf('454') > -1
+                ) {
+                    $scope.kiegyenlites = true;
+                    $scope.sor.megnevezes = "Kiegyenlítés";
+                } else {
+                    $scope.kiegyenlites = false;
+                }
+            }
+
+            $scope.checkBizszam = function () {
+                CommonSrvc.getKifizetetlenBizszamok($scope.tetel.partner)
+                    .success(function (bizszamok) {
+                        console.log(bizszamok);
+                        console.log($scope.sor);
+                        console.log($scope.tetel);
+                        if (bizszamok.indexOf($scope.sor.ellenbizszam) < 0) {
+                            toastr.warning('Ez a bizonylatszám nem könyvelhető a megadott partnerhez', '', {
+                                timeOut: "3000"
+                            });
+                            $scope.penztarForm.ellenbizszam.$invalid = true;
+                        }
+                    })
+            }
+
+            reset = function () {
                 $scope.tetel = {
+                    naplotipus: 'P',
                     tkjelleg: 'T',
                     osszeg: 0,
                     kontir: [],
@@ -94,32 +144,19 @@
                     osszeg: 0
                 };
                 $scope.penztarForm.$setUntouched();
-                toastr.warning('Mezők törölve', '', {
-                    "timeOut": "1000"
-                })
             }
 
-            $scope.save = function () {
-                if ($scope.penztarForm.$valid &&
-                    $scope.tetel.tartosszesen == $scope.tetel.kovosszesen) {
-                    toastr.success('Mentés sikerült!', '', {
-                        "timeOut": "1000"
-                    });
-                }
-            }
-
-            $scope.kiegyenlit = function (fokszam) {
-                if ($scope.sor.fokszam.toString().indexOf('31') > -1
-                    || $scope.sor.fokszam.toString().indexOf('454') > -1
-                ) {
-                    $scope.kiegyenlites = true;
-                    $scope.sor.megnevezes="Kiegyenlítés";
-                } else {
-                    $scope.kiegyenlites = false;
-                }
+            getNextNaploSorszam = function () {
+                CommonSrvc.getNextNaploSorSzam('P')
+                    .success(function (data) {
+                        $scope.naploSorszam = data;
+                    })
             }
 
             // Activate
+
+            getNextNaploSorszam();
+
             CommonSrvc.getPartnerek()
                 .success(function (data) {
                     $scope.partnerek = data;
@@ -127,9 +164,11 @@
 
             CommonSrvc.getFizModok()
                 .success((function (data) {
-                    $scope.tetel.fizmod = _.filter(data, function (fizmod) {
+                    var fizmod = _.filter(data, function (fizmod) {
                         return fizmod.megnevezes === "készpénz";
                     })
+                    console.log(fizmod);
+                    $scope.tetel.fizmod = fizmod[0].id;
                 }))
             CommonSrvc.getSzamlatukor()
                 .success(function (data) {

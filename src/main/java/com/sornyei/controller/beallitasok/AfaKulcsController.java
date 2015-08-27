@@ -1,4 +1,4 @@
-package com.sornyei.controller;
+package com.sornyei.controller.beallitasok;
 
 import com.sornyei.model.AfaKulcs;
 import com.sornyei.service.beallitas.afakulcsok.AfaKulcsService;

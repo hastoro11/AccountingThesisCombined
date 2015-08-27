@@ -5,7 +5,7 @@
             <!-- Panel heading -->
             <div class="panel-heading">
                 {{naplo.megnevezes}}
-                <span class="pull-right">Sorszám: 1</span>
+                <span class="pull-right">Sorszám: {{naploSorszam}}</span>
             </div>
 
             <!-- Panel body -->
@@ -204,7 +204,8 @@
                                 <input type="text" class="form-control"
                                        name="ellenbizszam"
                                        ng-required="true"
-                                       ng-model="sor.ellenbizszam">
+                                       ng-model="sor.ellenbizszam"
+                                       ng-blur="checkBizszam()">
                             </div>
                         </div>
 
@@ -232,13 +233,13 @@
                                 <div class="col-sm-12">
                                     <label class="radio-inline">
                                         <input type="radio" value="T"
-                                               name="sor.tkjelleg"
+                                               name="sortkjelleg"
                                                ng-model="sor.tkjelleg"> T
                                     </label>
 
                                     <label class="radio-inline">
                                         <input type="radio" value="K"
-                                               name="sor.tkjelleg"
+                                               name="sortkjelleg"
                                                ng-model="sor.tkjelleg"> K
                                     </label>
                                 </div>
@@ -262,7 +263,7 @@
                                         ng-model="sor.afa"
                                         ng-disabled="kiegyenlites"
                                         ng-options="afa.fokszam + ' - ' + afa.kulcs + '%-os ÁFA' for afa in afak">
-                                    <option value=""> -- ÁFA --</option>
+                                    <option value=""> -- ÁFA -- </option>
                                 </select>
                             </div>
                         </div>
@@ -272,6 +273,7 @@
                             <div class="form-group form-group-sm">
                                 <label class="control-label">Jóváhagyás</label>
                                 <button type="button" class="form-control btn btn-success"
+                                        ng-disabled="penztarForm.sorfokszam.$invalid || penztarForm.ellenbizszam.$invalid || penztarForm.sormegnevezes.$invalid || sor.osszeg===0"
                                         ng-click="addRow()">Mehet
                                 </button>
                             </div>

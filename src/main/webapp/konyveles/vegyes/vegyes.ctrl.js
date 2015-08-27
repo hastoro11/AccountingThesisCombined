@@ -7,6 +7,7 @@
         .controller('VegyesCtrl', function ($scope, $stateParams, CommonSrvc, naplo) {
 
             $scope.tetel = {
+                naplotipus: 'E',
                 tkjelleg: 'T',
                 osszeg: 0,
                 kontir: [],
@@ -77,7 +78,31 @@
             }
 
             $scope.reset = function () {
+                reset();
+                toastr.warning('Mezők törölve', '', {
+                    "timeOut": "1000"
+                })
+            }
+
+            $scope.save = function () {
+                if ($scope.vegyesForm.$valid &&
+                    $scope.tetel.tartosszesen == $scope.tetel.kovosszesen) {
+                    console.log($scope.tetel);
+                    CommonSrvc.save($scope.tetel.naplotipus, $scope.tetel)
+                        .success(function () {
+                            reset();
+                            getNextNaploSorszam();
+                            toastr.success('Mentés sikerült!', '', {
+                                "timeOut": "1000"
+                            });
+                        })
+
+                }
+            }
+
+            reset = function () {
                 $scope.tetel = {
+                    naplotipus: 'E',
                     tkjelleg: 'T',
                     osszeg: 0,
                     kontir: [],
@@ -91,34 +116,31 @@
                     osszeg: 0
                 };
                 $scope.vegyesForm.$setUntouched();
-                toastr.warning('Mezők törölve', '', {
-                    "timeOut": "1000"
-                })
             }
 
-            $scope.save = function () {
-                if ($scope.vegyesForm.$valid &&
-                    $scope.tetel.tartosszesen == $scope.tetel.kovosszesen) {
-                    toastr.success('Mentés sikerült!', '', {
-                        "timeOut": "1000"
-                    });
-                }
+            getNextNaploSorszam = function () {
+                CommonSrvc.getNextNaploSorSzam('E')
+                    .success(function (data) {
+                        $scope.naploSorszam = data;
+                    })
             }
 
 
             // Activate
+
+            getNextNaploSorszam();
 
             CommonSrvc.getSzamlatukor()
                 .success(function (data) {
                     $scope.szamlatukor = _.filter(data, function (item) {
                         return (
                             item.osszesito === false &&
-                            item.fokszam.toString().indexOf('31') === -1 &&
-                            item.fokszam.toString().indexOf('454') === -1 &&
-                            item.fokszam.toString().indexOf('381') === -1 &&
-                            item.fokszam.toString().indexOf('384') === -1 &&
-                            item.fokszam.toString().indexOf('467') === -1 &&
-                            item.fokszam.toString().indexOf('466') === -1
+                            item.fokszam.toString().substr(0,2)!=='31' &&
+                            item.fokszam.toString().substr(0,3)!=='454' &&
+                            item.fokszam.toString().substr(0,3)!=='381'&&
+                            item.fokszam.toString().substr(0,3)!=='384' &&
+                            item.fokszam.toString().substr(0,3)!=='467' &&
+                            item.fokszam.toString().substr(0,3)!=='466'
                         )
                     });
 

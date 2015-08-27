@@ -9,7 +9,7 @@ import java.util.List;
  * Created by gaborsornyei on 20/08/15.
  */
 @Component
-public class PartnerForm {
+public class InputForm {
 	private String naplotipus;
 	private String fokszam;
 	private int partner;
@@ -21,7 +21,7 @@ public class PartnerForm {
 	private String megnevezes;
 	private int osszeg;
 	private String tkjelleg;
-	private List<PartnerFormKontir> kontir;
+	private List<InputFormKontir> kontir;
 
 	public String getNaplotipus() {
 		return naplotipus;
@@ -111,11 +111,11 @@ public class PartnerForm {
 		this.tkjelleg = tkjelleg;
 	}
 
-	public List<PartnerFormKontir> getKontir() {
+	public List<InputFormKontir> getKontir() {
 		return kontir;
 	}
 
-	public void setKontir(List<PartnerFormKontir> kontir) {
+	public void setKontir(List<InputFormKontir> kontir) {
 		this.kontir = kontir;
 	}
 
@@ -135,7 +135,7 @@ public class PartnerForm {
 										  ", tkjelleg='" + tkjelleg + '\'' +
 										  '}');
 
-		for (PartnerFormKontir sor : kontir) {
+		for (InputFormKontir sor : kontir) {
 			int i = 0;
 			result.append("# " + ++i + " " + sor);
 		}
