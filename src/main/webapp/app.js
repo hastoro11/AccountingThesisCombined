@@ -43,6 +43,6 @@ angular.module('myApp', [
     }])
 
     .constant('appConfig', {
-        baseUrl: '/rest/'
+        baseUrl: '/'
     })
 
