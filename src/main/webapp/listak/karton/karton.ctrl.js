@@ -3,15 +3,15 @@
  */
 angular.module('myApp.karton')
 
-    .controller('KartonCtrl', function ($scope, $modal, $window, $state) {
-        var init=function() {
+    .controller('KartonCtrl', function ($scope, $modal, $window, $state, $http, appConfig) {
+        var init = function () {
             var modalInstance = $modal.open({
                     animation: false,
                     templateUrl: 'listak/karton/karton.modal.html',
                     controller: 'KartonModalCtrl',
                     resolve: {
                         szamlak: function ($http) {
-                            return $http.get('http://localhost:3000/szamlatukor')
+                            return $http.get(appConfig.baseUrl + 'szamlatukor')
                         }
                     }
                 }
@@ -19,7 +19,13 @@ angular.module('myApp.karton')
 
             modalInstance.result
                 .then(function (data) {
-                    $scope.karton = data;
+                    $scope.data = data;
+                    console.log(data);
+                    $http.get(appConfig.baseUrl + 'kartonlista/' + data.datumtol + '/' + data.datumig + '/' + data.fokszam)
+                        .success(function (data) {
+                            $scope.karton = data;
+                            console.log(data);
+                        })
                 },
                 function () {
                     //$state.go('home');

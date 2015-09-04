@@ -1,5 +1,6 @@
 package com.sornyei.service.lista;
 
+import com.sornyei.model.lista.NaploLista;
 import com.sornyei.model.lista.NaploTetel;
 import com.sornyei.repository.lista.NaploListaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +19,12 @@ public class NaploListaServiceImpl implements NaploListaService {
 	private NaploListaRepository repository;
 
 	@Override
-	public List<NaploTetel> getNaploTetelListOrderByTeljDatum(Date from, Date to, String tipus) {
-		return repository.getNaploTetelListOrderByTeljDatum(from, to, tipus);
+	public NaploLista getNaploTetelListOrderByTeljDatum(Date from, Date to, String tipus) {
+		NaploLista naploLista = new NaploLista();
+		List<NaploTetel> naploTetelList = repository.getNaploTetelListOrderByTeljDatum(from, to, tipus);
+		naploLista.setNaploTetelList(naploTetelList);
+		naploLista.calculate();
+
+		return naploLista;
 	}
 }

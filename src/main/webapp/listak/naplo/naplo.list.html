@@ -4,21 +4,21 @@
         <h4 class="row">
             <div class="col-sm-4">
                 <span>Dátumtól: </span>
-                <span>{{naplo.datumtol | date : 'yyyy-MM-dd'}}</span>
+                <span>{{data.datumtol | date : 'yyyy-MM-dd'}}</span>
             </div>
             <div class="col-sm-4">
                 <span>Dátumig: </span>
-                <span>{{naplo.datumig | date : 'yyyy-MM-dd'}}</span>
+                <span>{{data.datumig | date : 'yyyy-MM-dd'}}</span>
             </div>
         </h4>
         <h4 class="row">
             <div class="col-sm-4">
                 <span>Napló: </span>
-                <span>{{naplo.tipus.megnevezes}}</span>
+                <span>{{data.tipus.megnevezes}}</span>
             </div>
             <div class="col-sm-4">
                 <span>Főkönyvi szám: </span>
-                <span>{{naplo.tipus.fokszam}}</span>
+                <span>{{data.tipus.fokszam}}</span>
             </div>
         </h4>
         <hr/>
@@ -49,17 +49,17 @@
                 <td><strong>Követel</strong></td>
             </tr>
             </thead>
-            <tr ng-repeat="naplotetel in naplotetelek | filter: searchKey">
-                <td>{{naplotetel.naploKod}}</td>
-                <td>{{naplotetel.teljDatum}}</td>
-                <td>{{naplotetel.tkJelleg}}</td>
-                <td>{{naplotetel.fokSzam}}</td>
-                <td>{{naplotetel.bizSzam}}</td>
-                <td>{{naplotetel.megnevezes}}</td>
-                <td ng-if="naplotetel.tartozik!==0">{{naplotetel.tartozik | number}}</td>
-                <td ng-if="naplotetel.tartozik===0"></td>
-                <td ng-if="naplotetel.kovetel!==0">{{naplotetel.kovetel | number}}</td>
-                <td ng-if="naplotetel.kovetel===0"></td>
+            <tr ng-repeat="tetel in naplo.naploTetelList | filter: searchKey">
+                <td>{{tetel.naploKod}}</td>
+                <td>{{tetel.teljDatum}}</td>
+                <td>{{tetel.tkJelleg}}</td>
+                <td>{{tetel.fokSzam}}</td>
+                <td>{{tetel.bizSzam}}</td>
+                <td>{{tetel.megnevezes}}</td>
+                <td ng-if="tetel.tartozik!==0">{{tetel.tartozik | number}}</td>
+                <td ng-if="tetel.tartozik===0"></td>
+                <td ng-if="tetel.kovetel!==0">{{tetel.kovetel | number}}</td>
+                <td ng-if="tetel.kovetel===0"></td>
             </tr>
             <tr>
                 <td></td>
@@ -68,8 +68,8 @@
                 <td></td>
                 <td></td>
                 <td><strong>Összesen: </strong></td>
-                <td><strong>{{naplotetelek.tartOsszesen | number}}</strong></td>
-                <td><strong>{{naplotetelek.kovOsszesen | number}}</strong></td>
+                <td><strong>{{naplo.tartOsszesen | number}}</strong></td>
+                <td><strong>{{naplo.kovOsszesen | number}}</strong></td>
             </tr>
         </table>
     </div>

@@ -5,20 +5,55 @@
         <h4 class="row">
             <div class="col-sm-4">
                 <span>Dátumtól: </span>
-                <span>{{karton.datumtol | date:'yyyy-MM-dd'}}</span>
+                <span>{{data.datumtol | date:'yyyy-MM-dd'}}</span>
             </div>
             <div class="col-sm-4">
                 <span>Dátumig: </span>
-                <span>{{karton.datumig | date : 'yyyy-MM-dd'}}</span>
+                <span>{{data.datumig | date : 'yyyy-MM-dd'}}</span>
             </div>
         </h4>
         <h4 class="row">
             <div class="col-sm-12">
                 <span>Főkönyvi szám: </span>
-                <span>{{karton.fokszam}}</span>
+                <span>{{data.fokszam}}</span>
             </div>
         </h4>
         <hr/>
         <button type="button" class="btn btn-primary" ng-click="launch()">Új lekérdezés</button>
+        <hr/>
+        <table class="table table-condensed table-striped">
+            <tr>
+                <th>Kelte</th>
+                <th>Bizonylat</th>
+                <th>Megjegyzés</th>
+                <th>Tartozik</th>
+                <th>Követel</th>
+                <th>Egyenleg</th>
+                <th>T/K</th>
+                <th>Naplókód</th>
+            </tr>
+            <tr ng-repeat="tetel in karton.kartonTetelList | filter:searchKey">
+                <td>{{tetel.teljDatum}}</td>
+                <td>{{tetel.bizSzam}}</td>
+                <td>{{tetel.megnevezes}}</td>
+                <td ng-if="tetel.tartOsszeg!==0">{{tetel.tartOsszeg | number}}</td>
+                <td ng-if="tetel.tartOsszeg===0"></td>
+                <td ng-if="tetel.kovOsszeg!==0">{{tetel.kovOsszeg | number}}</td>
+                <td ng-if="tetel.kovOsszeg===0"></td>
+                <td>{{tetel.egyenleg | number}}</td>
+                <td>{{tetel.egyenlegTkJelleg}}</td>
+                <td>{{tetel.naploKod}}</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td><span ng-if="karton.kartonTetelList.length>0"span><strong>{{karton.tartOsszesen | number}}</strong></span></td>
+                <td><span ng-if="karton.kartonTetelList.length>0"><strong>{{karton.kovOsszesen | number}}</strong></span></td>
+                <td><span ng-if="karton.kartonTetelList.length>0"><strong>{{karton.egyenleg | number}}</strong></span></td>
+                <td><strong>{{karton.egyenlegTkJelleg}}</strong></td>
+                <td></td>
+            </tr>
+        </table>
     </div>
 </div>

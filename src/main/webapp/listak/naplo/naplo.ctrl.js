@@ -18,7 +18,7 @@ angular.module('myApp.naplo')
 
             modalInstance.result
                 .then(function (data) {
-                    $scope.naplo = data;
+                    $scope.data = data;
                     console.log($scope.naplo);
                     var from = new Date(data.datumtol);
                     var to = new Date(data.datumig);
@@ -26,11 +26,7 @@ angular.module('myApp.naplo')
                     $http.get(appConfig.baseUrl + url)
                         .success(function (data) {
                             console.log(data);
-                            $scope.naplotetelek = data;
-                            osszesen = osszesit(data);
-                            console.log(osszesen);
-                            $scope.naplotetelek.tartOsszesen = osszesen[0];
-                            $scope.naplotetelek.kovOsszesen = osszesen[1];
+                            $scope.naplo = data;
                         })
                 }, function () {
                     //$window.history.back();
