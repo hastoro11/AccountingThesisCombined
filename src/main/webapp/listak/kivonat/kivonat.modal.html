@@ -53,6 +53,7 @@
                 </div>
             </div>
         </div>
+
         <!-- Dátumok vége -->
         <!-- Főkönyvi számok -->
         <div class="row">
@@ -81,6 +82,19 @@
                 </div>
             </div>
         </div>
+
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox"
+                               name="ures"
+                               ng-model="kivonat.ures"
+                               > Üres sorokat ne listázza
+                    </label>
+                </div>
+            </div>
+        </div>
     </form>
 </div>
 
@@ -89,5 +103,6 @@
     <button type="button" class="btn btn-primary"
             ng-click="ok()"
             ng-disabled="kivonatForm.$invalid"
-            >Rendben</button>
+            >Rendben
+    </button>
 </div>

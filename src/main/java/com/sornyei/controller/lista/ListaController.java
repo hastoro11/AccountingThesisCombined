@@ -1,7 +1,9 @@
 package com.sornyei.controller.lista;
 
+import com.sornyei.model.lista.FokonyvLista;
 import com.sornyei.model.lista.KartonLista;
 import com.sornyei.model.lista.NaploLista;
+import com.sornyei.service.lista.FokonyvListaService;
 import com.sornyei.service.lista.KartonListaService;
 import com.sornyei.service.lista.NaploListaService;
 import org.apache.log4j.Logger;
@@ -26,11 +28,13 @@ public class ListaController {
 	private NaploListaService naploListaService;
 	@Autowired
 	private KartonListaService kartonListaService;
+	@Autowired
+	private FokonyvListaService fokonyvListaService;
 
 	@RequestMapping(value = "/naplolista/{from}/{to}/{tipus}")
 	public ResponseEntity<NaploLista> getNaploLista(@PathVariable("from") Date from,
-											   @PathVariable("to") Date to,
-											   @PathVariable("tipus") String tipus
+													@PathVariable("to") Date to,
+													@PathVariable("tipus") String tipus
 	) {
 		logger.info(to + "-" + from + ", " + tipus);
 		return new ResponseEntity<NaploLista>(
@@ -39,10 +43,20 @@ public class ListaController {
 
 	@RequestMapping(value = "/kartonlista/{from}/{to}/{fokszam}")
 	public ResponseEntity<KartonLista> getKartonLista(@PathVariable("from") Date from,
-												 @PathVariable("to") Date to,
-												 @PathVariable("fokszam") String fokszam) {
+													  @PathVariable("to") Date to,
+													  @PathVariable("fokszam") String fokszam) {
 		return new ResponseEntity<KartonLista>(kartonListaService.getKartonByTeljDatumAndFokSzam(from, to, fokszam),
-										  HttpStatus.OK);
+											   HttpStatus.OK);
+	}
+
+	@RequestMapping(value = "/fokonyvlista/{fromDate}/{toDate}/{fromFokszam}/{toFokszam}")
+	public ResponseEntity<FokonyvLista> getFokonyvLista(@PathVariable("fromDate") Date fromDate,
+														@PathVariable("toDate") Date toDate,
+														@PathVariable("fromFokszam") String fromFokszam,
+														@PathVariable("toFokszam") String toFokszam) {
+
+		return new ResponseEntity<FokonyvLista>(
+				fokonyvListaService.getFokonyvLista(fromDate, toDate, fromFokszam, toFokszam), HttpStatus.OK);
 	}
 
 }

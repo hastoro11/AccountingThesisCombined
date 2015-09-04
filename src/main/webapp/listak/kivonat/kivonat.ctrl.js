@@ -3,7 +3,7 @@
  */
 angular.module('myApp.kivonat')
 
-    .controller('KivonatCtrl', function ($modal, $scope, $state, $window) {
+    .controller('KivonatCtrl', function ($modal, $scope, $state, $window, appConfig, $http) {
         var init = function () {
             var modalInstance = $modal.open({
                 animation: false,
@@ -11,14 +11,28 @@ angular.module('myApp.kivonat')
                 controller: 'ModalCtrl',
                 resolve: {
                     szamlak: function ($http) {
-                        return $http.get('http://localhost:3000/szamlatukor');
+                        return $http.get(appConfig.baseUrl + 'szamlatukor');
                     }
                 }
             });
 
             modalInstance.result
                 .then(function (data) {
+                    console.log(data);
                     $scope.data = data;
+                    $http.get(appConfig.baseUrl + 'fokonyvlista/' + data.datumtol + '/' +
+                        data.datumig + '/' + data.fokszamtol + '/' + data.fokszamig)
+                        .success(function (data) {
+                            if ($scope.data.ures) {
+                                data.fokonyvTetelList = _.filter(data.fokonyvTetelList, function (item) {
+                                    return item.halmTartForgalom !== 0 || item.halmKovForgalom !== 0 || item.fokszam.length === 1;
+                                })
+                            }
+                            $scope.fokonyv = data;
+                            console.log(data);
+
+                        })
+
                 }, function () {
                     //$state.go('home');
                 });
@@ -34,6 +48,9 @@ angular.module('myApp.kivonat')
 
     .controller('ModalCtrl', function ($scope, $modalInstance, szamlak) {
         $scope.szamlak = szamlak.data;
+        $scope.kivonat = {
+            ures: true
+        }
         $scope.ok = function () {
             $modalInstance.close($scope.kivonat);
         }

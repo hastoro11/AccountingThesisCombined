@@ -30,7 +30,7 @@ public class SzamlatukorRepositoryImpl implements SzamlatukorRepository {
 	}
 
 	public List<FokSzamla> findAll() {
-		String sql = "SELECT * FROM szamlatukor";
+		String sql = "SELECT * FROM szamlatukor ORDER BY fokszam";
 
 		return jdbcTemplate.query(sql, new SzamlatukorRowMapper());
 	}

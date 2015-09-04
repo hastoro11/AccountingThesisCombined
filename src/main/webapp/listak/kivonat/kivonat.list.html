@@ -25,5 +25,33 @@
         </h4>
         <hr/>
         <button type="button" class="btn btn-primary" ng-click="launch()">Új lekérdezés</button>
+        <hr/>
+        <table class="table table-condensed">
+            <tr class="bg-primary">
+                <th>Főkönyvi szám</th>
+                <th>Megnevezés</th>
+                <th>Tartozik Forgalom</th>
+                <th>Követel Forgalom</th>
+                <th>Tartozik Egyenleg</th>
+                <th>Követel Egyenleg</th>
+            </tr>
+            <tr ng-repeat="tetel in fokonyv.fokonyvTetelList"
+                ng-class="{'bg-info':tetel.fokszam.length===1, 'osszesito':tetel.fokszam.length===1, 'osszesito':tetel.osszesito}">
+                <td>{{tetel.fokszam}}</td>
+                <td>{{tetel.megnevezes}}</td>
+                <td>{{tetel.halmTartForgalom | number }}</td>
+                <td>{{tetel.halmKovForgalom | number }}</td>
+                <td>{{tetel.halmTartEgyenleg | number}}</td>
+                <td>{{tetel.halmKovEgyenleg | number}}</td>
+            </tr>
+            <tr class="bg-primary osszesito">
+                <td><strong>Összesen: </strong></td>
+                <td></td>
+                <td>{{fokonyv.halmTartForgalom | number}}</td>
+                <td>{{fokonyv.halmKovForgalom | number}}</td>
+                <td>{{fokonyv.halmTartEgyenleg | number}}</td>
+                <td>{{fokonyv.halmKovEgyenleg | number}}</td>
+            </tr>
+        </table>
     </div>
 </div>
