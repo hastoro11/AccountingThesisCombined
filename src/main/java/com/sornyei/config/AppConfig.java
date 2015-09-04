@@ -21,7 +21,7 @@ import javax.sql.DataSource;
  */
 @Configuration
 @ComponentScan(basePackages = {"com.sornyei"})
-@PropertySource("classpath:application.openshift.properties")
+@PropertySource("classpath:application.properties")
 @EnableTransactionManagement
 @EnableWebMvc
 public class AppConfig {

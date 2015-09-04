@@ -1,4 +1,4 @@
-package com.sornyei.controller.beallitasok;
+package com.sornyei.controller.beallitas;
 
 import com.sornyei.model.Partner;
 import com.sornyei.service.beallitas.partnerek.PartnerService;

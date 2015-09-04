@@ -1,4 +1,4 @@
-package com.sornyei.controller.beallitasok;
+package com.sornyei.controller.beallitas;
 
 import com.sornyei.model.Naplo;
 import com.sornyei.service.beallitas.naplok.NaploService;

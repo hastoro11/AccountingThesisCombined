@@ -3,7 +3,7 @@
  */
 angular.module('myApp.naplo')
 
-    .controller('NaploCtrl', function ($scope, $modal, $window) {
+    .controller('NaploCtrl', function ($scope, $modal, $window, $http, appConfig) {
         var init = function () {
             var modalInstance = $modal.open({
                 animation: false,
@@ -11,7 +11,7 @@ angular.module('myApp.naplo')
                 controller: 'NaploModalCtrl',
                 resolve: {
                     naplok: function ($http) {
-                        return $http.get('http://localhost:3000/fizmodok');
+                        return $http.get(appConfig.baseUrl + 'naplok');
                     }
                 }
             });
@@ -19,6 +19,19 @@ angular.module('myApp.naplo')
             modalInstance.result
                 .then(function (data) {
                     $scope.naplo = data;
+                    console.log($scope.naplo);
+                    var from = new Date(data.datumtol);
+                    var to = new Date(data.datumig);
+                    var url = 'naplolista/' + from + '/' + to + '/' + data.tipus.jel;
+                    $http.get(appConfig.baseUrl + url)
+                        .success(function (data) {
+                            console.log(data);
+                            $scope.naplotetelek = data;
+                            osszesen = osszesit(data);
+                            console.log(osszesen);
+                            $scope.naplotetelek.tartOsszesen = osszesen[0];
+                            $scope.naplotetelek.kovOsszesen = osszesen[1];
+                        })
                 }, function () {
                     //$window.history.back();
                 })
@@ -26,6 +39,18 @@ angular.module('myApp.naplo')
 
         $scope.launch = function () {
             init();
+        }
+
+        osszesit = function (naplolista) {
+            var osszesen = [];
+            osszesen[0]=0;
+            osszesen[1]=0;
+            for (var i = 0; i < naplolista.length; i++) {
+                osszesen[0] += naplolista[i].tartozik;
+                osszesen[1] += naplolista[i].kovetel;
+            }
+
+            return osszesen;
         }
 
         init();
