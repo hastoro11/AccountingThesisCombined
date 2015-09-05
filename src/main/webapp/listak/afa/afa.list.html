@@ -1,0 +1,94 @@
+<div class="row">
+    <div class="col-sm-12">
+        <h2>ÁFA Analitika</h2>
+
+        <h4 class="row">
+            <div class="col-sm-4">
+                <span>Dátumtól: </span>
+                <span>{{data.datumtol | date:'yyyy-MM-dd'}}</span>
+            </div>
+            <div class="col-sm-4">
+                <span>Dátumig: </span>
+                <span>{{data.datumig | date : 'yyyy-MM-dd'}}</span>
+            </div>
+        </h4>
+        <h4 class="row">
+            <div class="col-sm-12">
+                <span>Típus: </span>
+                <span ng-if="data.tipus==='L'">Levonható ÁFA</span>
+                <span ng-if="data.tipus==='F'">Fizetendő ÁFA</span>
+            </div>
+        </h4>
+        <hr/>
+        <button type="button" class="btn btn-primary" ng-click="launch()">Új lekérdezés</button>
+        <hr/>
+        <div class="panel panel-default"
+             ng-repeat="afalista in afalistak">
+            <div class="panel-heading">
+                {{afalista.afaKulcs.megnevezes}}
+            </div>
+            <table class="table table-condensed">
+                <tr>
+                    <th>Telj.dátum</th>
+                    <th>Naplókód</th>
+                    <th>Bizonylat</th>
+                    <th>Cégnév</th>
+                    <th>Adószám</th>
+                    <th>Megnevezés</th>
+                    <th>Fizetési mód</th>
+                    <th>Bruttó érték</th>
+                    <th>ÁFA alap</th>
+                    <th>ÁFA összeg</th>
+                </tr>
+                <tr ng-repeat="tetel in afalista.afaTetelList">
+                    <td>{{tetel.teljDatum}}</td>
+                    <td>{{tetel.naploKod}}</td>
+                    <td>{{tetel.bizSzam}}</td>
+                    <td>{{tetel.nev}}</td>
+                    <td>{{tetel.adoszam}}</td>
+                    <td>{{tetel.megnevezes}}</td>
+                    <td>{{tetel.fizmod}}</td>
+                    <td>{{tetel.bruttoOsszeg | number}}</td>
+                    <td>{{tetel.nettoOsszeg | number}}</td>
+                    <td>{{tetel.afaOsszeg | number}}</td>
+                </tr>
+                <tr class="bg-info osszesito">
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>Végösszesen:</td>
+                    <td></td>
+                    <td>{{afalista.bruttoOsszesen | number}}</td>
+                    <td>{{afalista.nettoOsszesen | number}}</td>
+                    <td>{{afalista.afaOsszesen | number}}</td>
+                </tr>
+            </table>
+
+        </div>
+
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                Összesítő
+            </div>
+            <table class="table table-condensed">
+                <tr>
+                    <th class="col-sm-3">Megnevezés</th>
+                    <th class="col-sm-2">Bruttó összeg</th>
+                    <th class="col-sm-2">Nettó összeg</th>
+                    <th class="col-sm-2">ÁFA összeg</th>
+                    <th class="col-sm-3"></th>
+                </tr>
+                <tr ng-repeat="afalista in afalistak" class="osszesito">
+                    <td>{{afalista.afaKulcs.megnevezes}}</td>
+                    <td>{{afalista.bruttoOsszesen | number}}</td>
+                    <td>{{afalista.nettoOsszesen | number}}</td>
+                    <td>{{afalista.afaOsszesen | number}}</td>
+                    <td></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+</div>

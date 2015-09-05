@@ -16,6 +16,7 @@ angular.module('myApp', [
     'myApp.kivonat',
     'myApp.karton',
     'myApp.naplo',
+    'myApp.afa',
     'myApp.common',
     'myApp.cegadatok',
     'myApp.partnerek',

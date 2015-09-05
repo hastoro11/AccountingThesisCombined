@@ -20,11 +20,9 @@ angular.module('myApp.karton')
             modalInstance.result
                 .then(function (data) {
                     $scope.data = data;
-                    console.log(data);
                     $http.get(appConfig.baseUrl + 'kartonlista/' + data.datumtol + '/' + data.datumig + '/' + data.fokszam)
                         .success(function (data) {
                             $scope.karton = data;
-                            console.log(data);
                         })
                 },
                 function () {

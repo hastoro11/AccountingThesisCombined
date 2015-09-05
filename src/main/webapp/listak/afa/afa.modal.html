@@ -1,0 +1,76 @@
+<div class="modal-header">
+    <h3 class="modal-title">
+        ÁFA Analitika
+    </h3>
+</div>
+
+<div class="modal-body">
+    <form name="afaForm">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group form-group-sm">
+                    <label class="control-label">Dátumtól</label>
+
+                    <div class="input-group input-group-sm">
+                        <input type="text" class="form-control"
+                               name="datumtol"
+                               ng-required="true"
+                               datepicker-popup
+                               is-open="tolopened"
+                               ng-model="afa.datumtol"
+                                >
+                        <span class="input-group-btn">
+                            <button class="btn btn-info" type="button"
+                                    ng-click="open($event, 'tolopened')">
+                                <i class="glyphicon glyphicon-calendar"></i>
+                            </button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group form-group-sm">
+                    <label class="control-label">Dátumig</label>
+
+                    <div class="input-group input-group-sm">
+                        <input type="text" class="form-control"
+                               name="datumig"
+                               ng-required="true"
+                               datepicker-popup
+                               is-open="igopened"
+                               ng-model="afa.datumig"
+                                >
+                        <span class="input-group-btn">
+                            <button class="btn btn-info" type="button"
+                                    ng-click="open($event, 'igopened')">
+                                <i class="glyphicon glyphicon-calendar"></i>
+                            </button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group form-group-sm">
+                    <label class="control-label">Főkönyvi szám</label>
+                    <select class="form-control"
+                            name="fokszam"
+                            ng-required="true"
+                            ng-model="afa.tipus"
+                            >
+                        <option value=""> -- ÁFA típusa -- </option>
+                        <option value="L">Levonható ÁFA</option>
+                        <option value="F">Fizetendő ÁFA</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="modal-footer">
+    <button type="button" class="btn btn-warning" ng-click="cancel()">Mégsem</button>
+    <button type="button" class="btn btn-primary"
+            ng-click="ok()"
+            ng-disabled="afaForm.$invalid">Rendben
+    </button>
+</div>
