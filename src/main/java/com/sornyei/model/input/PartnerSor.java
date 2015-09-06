@@ -12,6 +12,7 @@ public class PartnerSor {
 	private String naploTipus;
 	private int naploSorszam;
 	private String bizszam;
+	private String megnevezes;
 	private Date teljDatum;
 	private Date kiallDatum;
 	private Date esedDatum;
@@ -20,6 +21,7 @@ public class PartnerSor {
 	private String tkJelleg;
 	private int osszeg;
 	private int kifizOsszeg;
+	private boolean kipontozott;
 
 	public int getId() {
 		return id;
@@ -67,6 +69,14 @@ public class PartnerSor {
 
 	public void setBizszam(String bizszam) {
 		this.bizszam = bizszam;
+	}
+
+	public String getMegnevezes() {
+		return megnevezes;
+	}
+
+	public void setMegnevezes(String megnevezes) {
+		this.megnevezes = megnevezes;
 	}
 
 	public Date getTeljDatum() {
@@ -131,6 +141,14 @@ public class PartnerSor {
 
 	public void setKifizOsszeg(int kifizOsszeg) {
 		this.kifizOsszeg = kifizOsszeg;
+	}
+
+	public boolean isKipontozott() {
+		return kipontozott;
+	}
+
+	public void setKipontozott(boolean kipontozott) {
+		this.kipontozott = kipontozott;
 	}
 
 	@Override

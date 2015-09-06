@@ -34,7 +34,6 @@ angular.module('myApp.afa')
 
     .controller('AfaModalCtrl', function ($scope, $modalInstance) {
         $scope.ok = function () {
-            console.log($scope.afa);
             $modalInstance.close($scope.afa);
         }
 

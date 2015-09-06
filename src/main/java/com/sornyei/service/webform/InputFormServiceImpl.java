@@ -175,6 +175,7 @@ public class InputFormServiceImpl implements InputFormService {
 
 		partnerSor.setPartnerId(inputForm.getPartner());
 		partnerSor.setBizszam(inputForm.getBizszam());
+		partnerSor.setMegnevezes(inputForm.getMegnevezes());
 		partnerSor.setTeljDatum(inputForm.getTeljdatum());
 		partnerSor.setKiallDatum(inputForm.getKialldatum());
 		partnerSor.setEsedDatum(inputForm.getEseddatum());

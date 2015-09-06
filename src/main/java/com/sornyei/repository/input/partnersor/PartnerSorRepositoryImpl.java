@@ -37,10 +37,10 @@ public class PartnerSorRepositoryImpl implements PartnerSorRepository {
 
 	@Override
 	public PartnerSor save(PartnerSor partnerSor) {
-		String sql = "INSERT INTO partnersor(partnerid, naplokod, naplotipus, naplosorszam, bizszam," +
-				"teljdatum, kialldatum, eseddatum, kifizdatum, fizmodid, tkjelleg, osszeg, kifizosszeg)" +
-				"VALUES (:partnerId, :naploKod, :naploTipus, :naploSorszam, :bizszam," +
-				":teljDatum, :kiallDatum, :esedDatum, :kifizDatum, :fizmodId, :tkJelleg, :osszeg, :kifizOsszeg)";
+		String sql = "INSERT INTO partnersor(partnerid, naplokod, naplotipus, naplosorszam, bizszam, megnevezes, " +
+				"teljdatum, kialldatum, eseddatum, kifizdatum, fizmodid, tkjelleg, osszeg, kifizosszeg, kipontozott )" +
+				"VALUES (:partnerId, :naploKod, :naploTipus, :naploSorszam, :bizszam, :megnevezes, " +
+				":teljDatum, :kiallDatum, :esedDatum, :kifizDatum, :fizmodId, :tkJelleg, :osszeg, :kifizOsszeg, :kipontozott)";
 
 		BeanPropertySqlParameterSource parameterSource = new BeanPropertySqlParameterSource(partnerSor);
 		KeyHolder keyHolder = new GeneratedKeyHolder();
@@ -84,6 +84,7 @@ public class PartnerSorRepositoryImpl implements PartnerSorRepository {
 			partnerSor.setNaploTipus(rs.getString("naplotipus"));
 			partnerSor.setNaploSorszam(rs.getInt("naplosorszam"));
 			partnerSor.setBizszam(rs.getString("bizszam"));
+			partnerSor.setMegnevezes(rs.getString("megnevezes"));
 			partnerSor.setTeljDatum(rs.getDate("teljdatum"));
 			partnerSor.setKiallDatum(rs.getDate("kialldatum"));
 			partnerSor.setEsedDatum(rs.getDate("eseddatum"));
@@ -92,6 +93,7 @@ public class PartnerSorRepositoryImpl implements PartnerSorRepository {
 			partnerSor.setTkJelleg(rs.getString("tkjelleg"));
 			partnerSor.setOsszeg(rs.getInt("osszeg"));
 			partnerSor.setKifizOsszeg(rs.getInt("kifizosszeg"));
+			partnerSor.setKipontozott(rs.getBoolean("kipontozott"));
 
 			return partnerSor;
 		}

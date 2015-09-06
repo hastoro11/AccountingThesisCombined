@@ -1,0 +1,29 @@
+<div class="modal-header">
+    <h3 class="modal-title">
+        Vevő-Szállító Analitika
+    </h3>
+</div>
+
+<div class="modal-body">
+    <form name="afaForm">
+        <div class="row">
+            <div class="col-sm-3 col-sm-offset-3">
+                <label class="radio-inline">
+                    <input type="radio" name="partnertipus" ng-model="partner.tipus" value="S">
+                    Szállítók
+                </label>
+            </div>
+            <div class="col-sm-3">
+                <label class="radio-inline">
+                    <input type="radio" name="partnertipus" ng-model="partner.tipus" value="V"> Vevők
+                </label>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="modal-footer">
+    <button type="button" class="btn btn-warning" ng-click="cancel()">Mégsem</button>
+    <button type="button" class="btn btn-primary" ng-click="ok()">Rendben
+    </button>
+</div>

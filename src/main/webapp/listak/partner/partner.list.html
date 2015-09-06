@@ -1,0 +1,64 @@
+<div class="row">
+    <div class="col-sm-12">
+        <h2>Vevő-szállító Analitika</h2>
+
+        <h4 class="row">
+            <div class="col-sm-12">
+                <span>Típus: </span>
+                <span ng-if="data.tipus==='S'">Szállítók</span>
+                <span ng-if="data.tipus==='V'">Vevők</span>
+            </div>
+        </h4>
+        <hr/>
+        <button type="button" class="btn btn-primary" ng-click="launch()">Új lekérdezés</button>
+        <hr/>
+
+        <div class="panel panel-default"
+                ng-repeat="partnerlista in partnerlistak">
+            <div class="panel-heading">
+                {{partnerlista.partner.nev}}
+            </div>
+            <table class="table table-condensed">
+                <tr>
+                    <th>Naplókód</th>
+                    <th>Bizszám</th>
+                    <th>Megnevezés</th>
+                    <th>Telj. dátuma</th>
+                    <th>Esed. dátuma</th>
+                    <th>Kifiz. dátuma</th>
+                    <th>Fizetési mód</th>
+                    <th>Tartozik</th>
+                    <th>Követel</th>
+                    <th>Egyenleg</th>
+                </tr>
+                <tr ng-repeat="tetel in partnerlista.partnerTetelList">
+                    <td>{{tetel.naplokod}}</td>
+                    <td>{{tetel.bizSzam}}</td>
+                    <td>{{tetel.megnevezes}}</td>
+                    <td>{{tetel.teljDatum}}</td>
+                    <td>{{tetel.esedDatum}}</td>
+                    <td>{{tetel.kifizDatum}}</td>
+                    <td></td>
+                    <td ng-if="tetel.tartOsszeg===0"></td>
+                    <td ng-if="tetel.tartOsszeg!==0">{{tetel.tartOsszeg | number}}</td>
+                    <td ng-if="tetel.kovOsszeg===0"></td>
+                    <td ng-if="tetel.kovOsszeg!==0">{{tetel.kovOsszeg | number}}</td>
+                    <td>{{tetel.egyenleg | number}}</td>
+                </tr>
+                <tr class="bg-info osszesito">
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>{{partnerlista.tartOsszesen | number}}</td>
+                    <td>{{partnerlista.kovOsszesen | number}}</td>
+                    <td>{{partnerlista.egyenleg | number}}</td>
+                </tr>
+            </table>
+        </div>
+
+    </div>
+</div>

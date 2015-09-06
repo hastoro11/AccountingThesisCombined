@@ -13,6 +13,8 @@ public interface PartnerRepository {
 
 	Partner findById(int id);
 
+	List<Partner> findByTipus(String tipus);
+
 	Partner update(Partner partner);
 
 	Partner create(Partner partner);

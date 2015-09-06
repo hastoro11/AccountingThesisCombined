@@ -1,13 +1,7 @@
 package com.sornyei.controller.lista;
 
-import com.sornyei.model.lista.AfaLista;
-import com.sornyei.model.lista.FokonyvLista;
-import com.sornyei.model.lista.KartonLista;
-import com.sornyei.model.lista.NaploLista;
-import com.sornyei.service.lista.AfaListaService;
-import com.sornyei.service.lista.FokonyvListaService;
-import com.sornyei.service.lista.KartonListaService;
-import com.sornyei.service.lista.NaploListaService;
+import com.sornyei.model.lista.*;
+import com.sornyei.service.lista.*;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -35,6 +29,8 @@ public class ListaController {
 	private FokonyvListaService fokonyvListaService;
 	@Autowired
 	private AfaListaService afaListaService;
+	@Autowired
+	private PartnerListaService partnerListaService;
 
 	@RequestMapping(value = "/naplolista/{from}/{to}/{tipus}")
 	public ResponseEntity<NaploLista> getNaploLista(@PathVariable("from") Date from,
@@ -70,6 +66,11 @@ public class ListaController {
 													  @PathVariable("tipus") String tipus) {
 		return new ResponseEntity<List<AfaLista>>(afaListaService.getAfaListaByDateAndTipus(from, to, tipus),
 												  HttpStatus.OK);
+	}
+
+	@RequestMapping(value = "/partnerlista/{tipus}")
+	public ResponseEntity<List<PartnerLista>> getPartnerLista(@PathVariable("tipus") String tipus) {
+		return new ResponseEntity<List<PartnerLista>>(partnerListaService.getPartnerListaByTipus(tipus), HttpStatus.OK);
 	}
 
 }

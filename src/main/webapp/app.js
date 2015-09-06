@@ -17,6 +17,7 @@ angular.module('myApp', [
     'myApp.karton',
     'myApp.naplo',
     'myApp.afa',
+    'myApp.partner',
     'myApp.common',
     'myApp.cegadatok',
     'myApp.partnerek',

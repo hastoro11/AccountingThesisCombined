@@ -44,6 +44,16 @@ public class PartnerRepositoryImpl implements PartnerRepository {
 		return jdbcTemplate.queryForObject(sql, parameterSource, new PartnerRowMapper());
 	}
 
+	public List<Partner> findByTipus(String tipus) {
+		String sql = "";
+		if (tipus.equals("S"))
+			sql = "SELECT * FROM partnerek WHERE szallito=true";
+		else if (tipus.equals("V"))
+			sql = "SELECT * FROM partnerek WHERE vevo=true";
+
+		return jdbcTemplate.query(sql, new PartnerRowMapper());
+	}
+
 	public Partner update(Partner partner) {
 		String sql = "UPDATE partnerek SET nev=:nev, adoszam=:adoszam, " +
 				"cim=:cim, szallito=:szallito, vevo=:vevo WHERE id=:id";
