@@ -15,7 +15,6 @@ import org.springframework.stereotype.Repository;
 import javax.sql.DataSource;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -63,7 +62,7 @@ public class PartnerSorRepositoryImpl implements PartnerSorRepository {
 	}
 
 	@Override
-	public List<PartnerSor> getPartnerSorByPartnerIdAndBizszam(int partnerId, String bizszam) {
+	public List<PartnerSor> getPartnerSorByPartnerIdAndBizszamOnlySzallOrVevo(int partnerId, String bizszam) {
 		String sql = "SELECT * FROM partnersor WHERE partnerid=:partnerId AND bizszam=:bizszam " +
 				"AND (naplotipus='S' OR naplotipus='V') ";
 		MapSqlParameterSource parameterSource = new MapSqlParameterSource();
@@ -71,6 +70,41 @@ public class PartnerSorRepositoryImpl implements PartnerSorRepository {
 		parameterSource.addValue("bizszam", bizszam);
 
 		return jdbcTemplate.query(sql, parameterSource, new PartnerSorRowMapper());
+	}
+
+	@Override
+	public List<PartnerSor> getPartnerSorByPartnerIdAndBizszam(int partnerId, String bizszam) {
+		String sql = "SELECT * FROM partnersor WHERE partnerid=:partnerId AND bizszam=:bizszam";
+		MapSqlParameterSource parameterSource = new MapSqlParameterSource();
+		parameterSource.addValue("partnerId", partnerId);
+		parameterSource.addValue("bizszam", bizszam);
+
+		return jdbcTemplate.query(sql, parameterSource, new PartnerSorRowMapper());
+	}
+
+	@Override
+	public List<Object[]> getBizszamNotKipontozott() {
+		String sql = "SELECT DISTINCT bizszam, partnerid FROM partnersor WHERE kipontozott=false";
+
+		return jdbcTemplate.query(sql, new RowMapper<Object[]>() {
+			@Override
+			public Object[] mapRow(ResultSet rs, int rowNum) throws SQLException {
+				Object[] a = new Object[2];
+				a[0] = rs.getObject("bizszam");
+				a[1] = rs.getObject("partnerid");
+				return a;
+			}
+		});
+	}
+
+	@Override
+	public void kipontoz(int partnerId, String bizszam) {
+		String sql = "UPDATE partnersor SET kipontozott=true WHERE bizszam=:bizszam AND partnerid=:partnerId";
+		MapSqlParameterSource parameterSource = new MapSqlParameterSource();
+		parameterSource.addValue("bizszam", bizszam);
+		parameterSource.addValue("partnerId", partnerId);
+
+		jdbcTemplate.update(sql, parameterSource);
 	}
 
 	class PartnerSorRowMapper implements RowMapper<PartnerSor> {
@@ -98,4 +132,6 @@ public class PartnerSorRepositoryImpl implements PartnerSorRepository {
 			return partnerSor;
 		}
 	}
+
+
 }

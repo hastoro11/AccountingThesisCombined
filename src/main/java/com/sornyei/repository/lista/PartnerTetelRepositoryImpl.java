@@ -27,15 +27,22 @@ public class PartnerTetelRepositoryImpl implements PartnerTetelRepository {
 		jdbcTemplate = new NamedParameterJdbcTemplate(dataSource);
 	}
 
-	public List<PartnerTetel> getPartnerTetelByPartnerId(int partnerId) {
+	public List<PartnerTetel> getPartnerTetelByPartnerId(int partnerId, boolean kipontozott) {
 		String sql = "SELECT naplokod, partnerek.nev, bizszam, partnersor.megnevezes, eseddatum, " +
 				"teljdatum, kifizdatum, tkjelleg, osszeg, kifizosszeg " +
 				"FROM partnersor partnersor " +
 				"JOIN partnerek partnerek ON partnersor.partnerid=partnerek.id " +
 				"JOIN fizmodok fizmodok ON fizmodok.id=partnersor.fizmodid " +
-				"WHERE partnerid=:partnerId " +
-				"ORDER BY bizszam, nev, eseddatum";
-		MapSqlParameterSource parameterSource = new MapSqlParameterSource("partnerId", partnerId);
+				"WHERE partnerid=:partnerId ";
+
+		if (kipontozott) {
+			sql += "AND kipontozott=false ORDER BY bizszam, nev, eseddatum";
+		} else {
+			sql += "ORDER BY bizszam, nev, eseddatum";
+		}
+
+		MapSqlParameterSource parameterSource = new MapSqlParameterSource();
+		parameterSource.addValue("partnerId", partnerId);
 		return jdbcTemplate.query(sql, parameterSource, new PartnerTetelRowMapper());
 	}
 

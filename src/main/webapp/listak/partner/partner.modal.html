@@ -5,9 +5,9 @@
 </div>
 
 <div class="modal-body">
-    <form name="afaForm">
+    <form name="partnerForm">
         <div class="row">
-            <div class="col-sm-3 col-sm-offset-3">
+            <div class="col-sm-3 col-sm-offset-1">
                 <label class="radio-inline">
                     <input type="radio" name="partnertipus" ng-model="partner.tipus" value="S">
                     Szállítók
@@ -18,7 +18,13 @@
                     <input type="radio" name="partnertipus" ng-model="partner.tipus" value="V"> Vevők
                 </label>
             </div>
+            <div class="col-sm-5">
+                <label class="checkbox-inline">
+                    <input type="checkbox" ng-model="partner.kipontozott" name="kipontozott"> Csak a ki nem fizetett számlák
+                </label>
+            </div>
         </div>
+
     </form>
 </div>
 

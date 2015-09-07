@@ -68,9 +68,11 @@ public class ListaController {
 												  HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/partnerlista/{tipus}")
-	public ResponseEntity<List<PartnerLista>> getPartnerLista(@PathVariable("tipus") String tipus) {
-		return new ResponseEntity<List<PartnerLista>>(partnerListaService.getPartnerListaByTipus(tipus), HttpStatus.OK);
+	@RequestMapping(value = "/partnerlista/{tipus}/{kipontozott}")
+	public ResponseEntity<List<PartnerLista>> getPartnerLista(@PathVariable("tipus") String tipus,
+															  @PathVariable("kipontozott") boolean kipontozott) {
+		return new ResponseEntity<List<PartnerLista>>(partnerListaService.getPartnerListaByTipus(tipus, kipontozott),
+													  HttpStatus.OK);
 	}
 
 }

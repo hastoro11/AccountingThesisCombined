@@ -14,9 +14,14 @@ angular.module('myApp.partner')
             modalInstance.result
                 .then(function (data) {
                     $scope.data = data;
-                    $http.get(appConfig.baseUrl + 'partnerlista/' + data.tipus)
+                    $http.get(appConfig.baseUrl + 'partnerlista/' + data.tipus + '/' + data.kipontozott)
                         .success(function (data) {
-                            $scope.partnerlistak = data;
+                            //$scope.partnerlista = data;
+
+                            $scope.partnerlistak = _.filter(data, function (item) {
+                                return item.partnerTetelList.length > 0;
+                            })
+
                         })
                 })
         }
@@ -29,9 +34,8 @@ angular.module('myApp.partner')
     })
 
     .controller('PartnerListModalCtrl', function ($scope, $modalInstance) {
-        $scope.partner = {tipus: 'S'}
+        $scope.partner = {tipus: 'S', kipontozott: true}
         $scope.ok = function () {
-            console.log($scope.partner);
             $modalInstance.close($scope.partner);
         }
 

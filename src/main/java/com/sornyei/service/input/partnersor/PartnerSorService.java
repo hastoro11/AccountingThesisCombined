@@ -9,6 +9,10 @@ import java.util.List;
  */
 public interface PartnerSorService {
 	PartnerSor save(PartnerSor partnerSor);
+
 	List<String> getKifizetetlenBizSzamok(int partnerId);
+
 	List<PartnerSor> getPartnerSorByPartnerIdAndBizszam(int partnerId, String bizszam);
+
+	void kipontoz();
 }

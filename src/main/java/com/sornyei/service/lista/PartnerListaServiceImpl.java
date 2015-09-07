@@ -23,14 +23,14 @@ public class PartnerListaServiceImpl implements PartnerListaService {
 	private PartnerRepository partnerRepository;
 
 	@Override
-	public List<PartnerLista> getPartnerListaByTipus(String tipus) {
+	public List<PartnerLista> getPartnerListaByTipus(String tipus, boolean kipontozott) {
 		List<Partner> partners = partnerRepository.findByTipus(tipus);
 		List<PartnerLista> partnerListaList = new ArrayList<>();
 
 		for (Partner partner : partners) {
 			PartnerLista partnerLista = new PartnerLista();
 			partnerLista.setPartner(partner);
-			partnerLista.setPartnerTetelList(partnerTetelRepository.getPartnerTetelByPartnerId(partner.getId()));
+			partnerLista.setPartnerTetelList(partnerTetelRepository.getPartnerTetelByPartnerId(partner.getId(), kipontozott));
 
 			for (PartnerTetel tetel : partnerLista.getPartnerTetelList()) {
 				partnerLista.setTartOsszesen(partnerLista.getTartOsszesen() + tetel.getTartOsszeg());

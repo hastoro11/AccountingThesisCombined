@@ -12,5 +12,11 @@ public interface PartnerSorRepository {
 
 	List<String> getKifizetetlenBizSzamok(int partnerId);
 
+	List<PartnerSor> getPartnerSorByPartnerIdAndBizszamOnlySzallOrVevo(int partnerId, String bizszam);
+
 	List<PartnerSor> getPartnerSorByPartnerIdAndBizszam(int partnerId, String bizszam);
+
+	List<Object[]> getBizszamNotKipontozott();
+
+	void kipontoz(int partnerId, String bizszam);
 }

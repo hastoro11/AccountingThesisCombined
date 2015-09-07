@@ -28,6 +28,30 @@ public class PartnerSorServiceImpl implements PartnerSorService {
 
 	@Override
 	public List<PartnerSor> getPartnerSorByPartnerIdAndBizszam(int partnerId, String bizszam) {
-		return repository.getPartnerSorByPartnerIdAndBizszam(partnerId, bizszam);
+		return repository.getPartnerSorByPartnerIdAndBizszamOnlySzallOrVevo(partnerId, bizszam);
+	}
+
+	@Override
+	public void kipontoz() {
+
+		List<Object[]> nemKipontozott = repository.getBizszamNotKipontozott();
+		for (Object[] a : nemKipontozott) {
+			String bizSzam = (String) a[0];
+			int partnerId = (Integer) a[1];
+
+			List<PartnerSor> partnerSorList = repository
+					.getPartnerSorByPartnerIdAndBizszam(partnerId, bizSzam);
+			int osszeg = 0;
+			int kifizOsszeg = 0;
+			for (PartnerSor pSor : partnerSorList) {
+				osszeg += pSor.getOsszeg();
+				kifizOsszeg += pSor.getKifizOsszeg();
+			}
+			if (osszeg == kifizOsszeg) {
+				repository.kipontoz(partnerId, bizSzam);
+			}
+
+		}
+
 	}
 }
