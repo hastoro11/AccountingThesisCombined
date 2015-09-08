@@ -1,8 +1,10 @@
 package com.sornyei.controller.beallitas;
 
-import com.sornyei.model.AfaKulcs;
+import com.sornyei.model.*;
+import com.sornyei.model.Error;
 import com.sornyei.service.beallitas.afakulcsok.AfaKulcsService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,7 +23,7 @@ public class AfaKulcsController {
 
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public ResponseEntity<List<AfaKulcs>> getAfaKulcsok() {
-		return new ResponseEntity<List<AfaKulcs>>(service.findAll(), HttpStatus.OK);
+		return new ResponseEntity<List<AfaKulcs>>(service.findAll(),HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)

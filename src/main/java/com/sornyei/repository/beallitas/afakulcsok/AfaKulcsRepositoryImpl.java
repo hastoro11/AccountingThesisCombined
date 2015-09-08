@@ -2,6 +2,7 @@ package com.sornyei.repository.beallitas.afakulcsok;
 
 import com.sornyei.model.AfaKulcs;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -31,20 +32,20 @@ public class AfaKulcsRepositoryImpl implements AfaKulcsRepository {
 		jdbcTemplate = new NamedParameterJdbcTemplate(dataSource);
 	}
 
-	public List<AfaKulcs> findAll() {
+	public List<AfaKulcs> findAll() throws DataAccessException{
 		String sql = "SELECT * FROM afakulcsok";
 
 		return jdbcTemplate.query(sql, new AfaKulcsRowMapper());
 	}
 
-	public AfaKulcs findById(int id) {
+	public AfaKulcs findById(int id) throws DataAccessException{
 		String sql = "SELECT * FROM afakulcsok WHERE id=:id";
 		SqlParameterSource parameterSource = new MapSqlParameterSource("id", id);
 
 		return jdbcTemplate.queryForObject(sql, parameterSource, new AfaKulcsRowMapper());
 	}
 
-	public AfaKulcs update(AfaKulcs afaKulcs) {
+	public AfaKulcs update(AfaKulcs afaKulcs) throws DataAccessException{
 		String sql = "UPDATE afakulcsok SET tipus=:tipus, kulcs=:kulcs, fokszam=:fokszam, megnevezes=:megnevezes WHERE id=:id";
 		SqlParameterSource parameterSource = new BeanPropertySqlParameterSource(afaKulcs);
 
@@ -54,7 +55,7 @@ public class AfaKulcsRepositoryImpl implements AfaKulcsRepository {
 			return null;
 	}
 
-	public AfaKulcs create(AfaKulcs afaKulcs) {
+	public AfaKulcs create(AfaKulcs afaKulcs) throws DataAccessException{
 		String sql = "INSERT INTO afakulcsok(tipus, kulcs, fokszam, megnevezes) " +
 				"VALUES(:tipus, :kulcs, :fokszam, :megnevezes)";
 		SqlParameterSource parameterSource = new BeanPropertySqlParameterSource(afaKulcs);
@@ -67,7 +68,7 @@ public class AfaKulcsRepositoryImpl implements AfaKulcsRepository {
 			return null;
 	}
 
-	public boolean delete(int id) {
+	public boolean delete(int id) throws DataAccessException{
 		String sql = "DELETE FROM afakulcsok WHERE id=:id";
 		SqlParameterSource parameterSource = new MapSqlParameterSource("id", id);
 

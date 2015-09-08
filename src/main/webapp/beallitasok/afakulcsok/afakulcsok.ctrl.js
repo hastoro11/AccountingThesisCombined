@@ -3,7 +3,7 @@
  */
 angular.module('myApp.afakulcsok')
 
-    .controller('AfakulcsokCtrl', function ($scope, AfakulcsokSrvc) {
+    .controller('AfakulcsokCtrl', function ($scope, $state, $rootScope, AfakulcsokSrvc) {
 
 
         AfakulcsokSrvc.getAfak()
@@ -14,6 +14,10 @@ angular.module('myApp.afakulcsok')
                 $scope.levafak = _.filter(data, function (afa) {
                     return afa.fokszam.toString().indexOf('466') > -1;
                 });
+            })
+            .error(function (data) {
+                $rootScope.error = data;
+                $state.go('error');
             })
     })
 

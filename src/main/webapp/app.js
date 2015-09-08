@@ -41,8 +41,16 @@ angular.module('myApp', [
 
                 }
             })
+            .state('error', {
+                templateUrl: 'common/error.html',
+                controller: 'ErrorCtrl'
+            })
 
     }])
+
+    .controller('ErrorCtrl', function ($scope, $rootScope) {
+        $scope.error = $rootScope.error;
+    })
 
     .constant('appConfig', {
         baseUrl: '/'
