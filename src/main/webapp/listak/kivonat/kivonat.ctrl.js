@@ -3,7 +3,7 @@
  */
 angular.module('myApp.kivonat')
 
-    .controller('KivonatCtrl', function ($modal, $scope, $state, $window, appConfig, $http) {
+    .controller('KivonatCtrl', function ($modal, $scope, $rootScope, $state, $window, appConfig, $http) {
         var init = function () {
             var modalInstance = $modal.open({
                 animation: false,
@@ -31,6 +31,10 @@ angular.module('myApp.kivonat')
                             $scope.fokonyv = data;
                             console.log(data);
 
+                        })
+                        .error(function (data) {
+                            $rootScope.error = data;
+                            $state.go('error');
                         })
 
                 }, function () {

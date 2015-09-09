@@ -4,7 +4,7 @@
 (function () {
     angular.module('myApp.vevo')
 
-        .controller('VevoCtrl', function ($scope, VevoSrvc, CommonSrvc, naplo) {
+        .controller('VevoCtrl', function ($scope, $rootScope, $state, VevoSrvc, CommonSrvc, naplo) {
 
             $scope.tetel = {
                 naplotipus: 'V',
@@ -92,7 +92,8 @@
                             getNextNaploSorszam();
                         })
                         .error(function (data) {
-                            console.log(data);
+                            $rootScope.error = data;
+                            $state.go('error');
                         })
 
                 }
@@ -106,6 +107,10 @@
                             toastr.warning('Ehhez a partnerhez már volt ez a bizonylat rögzítve', '', {
                                 "timeOut": "2000"
                             })
+                    })
+                    .error(function (data) {
+                        $rootScope.error = data;
+                        $state.go('error');
                     })
             }
 
@@ -132,6 +137,10 @@
                     .success(function (data) {
                         $scope.naploSorszam = data;
                     })
+                    .error(function (data) {
+                        $rootScope.error = data;
+                        $state.go('error');
+                    })
             }
 
             // Activate
@@ -144,6 +153,10 @@
                         return partner.vevo === true;
                     })
                 })
+                .error(function (data) {
+                    $rootScope.error = data;
+                    $state.go('error');
+                })
 
             CommonSrvc.getAfak()
                 .success(function (data) {
@@ -151,10 +164,20 @@
                         return afa.fokszam.toString().indexOf('467') > -1;
                     })
                 })
+                .error(function (data) {
+                    $rootScope.error = data;
+                    $state.go('error');
+                })
+
             CommonSrvc.getFizModok()
                 .success((function (data) {
                     $scope.fizmodok = data;
                 }))
+                .error(function (data) {
+                    $rootScope.error = data;
+                    $state.go('error');
+                })
+
             CommonSrvc.getSzamlatukor()
                 .success(function (data) {
                     $scope.szamlatukor = _.filter(data, function (item) {
@@ -170,6 +193,10 @@
                         return item.fokszam.toString().substr(0, 2) === '31' &&
                             item.osszesito === false;
                     });
+                })
+                .error(function (data) {
+                    $rootScope.error = data;
+                    $state.go('error');
                 })
 
 

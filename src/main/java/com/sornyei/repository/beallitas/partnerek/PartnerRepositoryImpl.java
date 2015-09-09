@@ -3,6 +3,7 @@ package com.sornyei.repository.beallitas.partnerek;
 import com.sornyei.model.Partner;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -33,18 +34,18 @@ public class PartnerRepositoryImpl implements PartnerRepository {
 		jdbcTemplate = new NamedParameterJdbcTemplate(dataSource);
 	}
 
-	public List<Partner> findAll() {
+	public List<Partner> findAll() throws DataAccessException{
 		String sql = "SELECT * FROM partnerek";
 		return jdbcTemplate.query(sql, new PartnerRowMapper());
 	}
 
-	public Partner findById(int id) {
+	public Partner findById(int id) throws DataAccessException{
 		String sql = "SELECT * FROM partnerek WHERE id=:id";
 		MapSqlParameterSource parameterSource = new MapSqlParameterSource("id", id);
 		return jdbcTemplate.queryForObject(sql, parameterSource, new PartnerRowMapper());
 	}
 
-	public List<Partner> findByTipus(String tipus) {
+	public List<Partner> findByTipus(String tipus) throws DataAccessException{
 		String sql = "";
 		if (tipus.equals("S"))
 			sql = "SELECT * FROM partnerek WHERE szallito=true";
@@ -54,7 +55,7 @@ public class PartnerRepositoryImpl implements PartnerRepository {
 		return jdbcTemplate.query(sql, new PartnerRowMapper());
 	}
 
-	public Partner update(Partner partner) {
+	public Partner update(Partner partner) throws DataAccessException{
 		String sql = "UPDATE partnerek SET nev=:nev, adoszam=:adoszam, " +
 				"cim=:cim, szallito=:szallito, vevo=:vevo WHERE id=:id";
 		BeanPropertySqlParameterSource parameterSource = new BeanPropertySqlParameterSource(partner);
@@ -63,7 +64,7 @@ public class PartnerRepositoryImpl implements PartnerRepository {
 		return partner;
 	}
 
-	public Partner create(Partner partner) {
+	public Partner create(Partner partner) throws DataAccessException{
 		String sql = "INSERT INTO partnerek(nev, adoszam, cim, szallito, vevo) " +
 				"VALUES(:nev, :adoszam, :cim, :szallito, :vevo)";
 		BeanPropertySqlParameterSource parameterSource = new BeanPropertySqlParameterSource(partner);
@@ -74,7 +75,7 @@ public class PartnerRepositoryImpl implements PartnerRepository {
 		return partner;
 	}
 
-	public boolean delete(int id) {
+	public boolean delete(int id) throws DataAccessException{
 		String sql = "DELETE FROM partnerek WHERE id=:id";
 		SqlParameterSource parameterSource = new MapSqlParameterSource("id", id);
 		return jdbcTemplate.update(sql, parameterSource) == 1;

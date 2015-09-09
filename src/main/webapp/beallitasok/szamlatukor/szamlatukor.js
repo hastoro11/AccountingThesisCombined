@@ -24,25 +24,27 @@ angular.module('myApp.szamlatukor', ['chieffancypants.loadingBar'])
             })
     })
 
-    .controller('SzamlatukorCtrl', function ($scope, CommonSrvc) {
+    .controller('SzamlatukorCtrl', function ($scope, $rootScope, $state, CommonSrvc) {
         //$scope.szamlatukor = szamlatukor.data;
         CommonSrvc.getSzamlatukor()
             .success(function (data) {
                 $scope.szamlatukor = data;
             })
+            .error(function (data) {
+                $rootScope.error = data;
+                $state.go('error');
+            })
     })
 
-    .controller('SzamlatukorEditCtrl', function ($scope, $state, $stateParams, SzamlatukorSrvc) {
+    .controller('SzamlatukorEditCtrl', function ($scope, $rootScope, $state, $stateParams, SzamlatukorSrvc) {
         var fokszam = $stateParams.fokszam;
         SzamlatukorSrvc.getFokSzamla(fokszam)
             .success(function (data) {
                 $scope.fokszamla = data;
             })
-            .error(function (data, status, header, config) {
-                console.log(data);
-                console.log(status);
-                console.log(header);
-                console.log(config);
+            .error(function (data) {
+                $rootScope.error = data;
+                $state.go('error');
             })
         $scope.cancel = function () {
             $state.go('szamlatukor');
@@ -53,6 +55,10 @@ angular.module('myApp.szamlatukor', ['chieffancypants.loadingBar'])
                 .success(function () {
                     toastr.success('Mentés sikeres', '', {"timeOut": 1000})
                     $state.go('szamlatukor');
+                })
+                .error(function (data) {
+                    $rootScope.error = data;
+                    $state.go('error');
                 })
         }
 

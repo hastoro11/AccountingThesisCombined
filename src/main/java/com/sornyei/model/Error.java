@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 public class Error {
 	private int status;
 	private String message;
+	private String description;
 
 	public int getStatus() {
 		return status;
@@ -24,5 +25,13 @@ public class Error {
 
 	public void setMessage(String message) {
 		this.message = message;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 }

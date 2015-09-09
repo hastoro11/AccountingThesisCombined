@@ -2,6 +2,7 @@ package com.sornyei.repository.beallitas.naplok;
 
 import com.sornyei.model.Naplo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -26,7 +27,7 @@ public class NaploRepositoryImpl implements NaploRepository {
 		jdbcTemplate = new NamedParameterJdbcTemplate(dataSource);
 	}
 
-	public List<Naplo> findAll() {
+	public List<Naplo> findAll() throws DataAccessException{
 		String sql = "SELECT * FROM naplok";
 		return jdbcTemplate.query(sql, new NaploRowMapeer());
 	}

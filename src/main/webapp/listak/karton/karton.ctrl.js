@@ -3,7 +3,7 @@
  */
 angular.module('myApp.karton')
 
-    .controller('KartonCtrl', function ($scope, $modal, $window, $state, $http, appConfig) {
+    .controller('KartonCtrl', function ($scope, $rootScope, $modal, $window, $state, $http, appConfig) {
         var init = function () {
             var modalInstance = $modal.open({
                     animation: false,
@@ -23,6 +23,10 @@ angular.module('myApp.karton')
                     $http.get(appConfig.baseUrl + 'kartonlista/' + data.datumtol + '/' + data.datumig + '/' + data.fokszam)
                         .success(function (data) {
                             $scope.karton = data;
+                        })
+                        .error(function (data) {
+                            $rootScope.error = data;
+                            $state.go('error');
                         })
                 },
                 function () {

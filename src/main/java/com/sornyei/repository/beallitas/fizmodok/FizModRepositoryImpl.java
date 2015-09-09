@@ -2,6 +2,7 @@ package com.sornyei.repository.beallitas.fizmodok;
 
 import com.sornyei.model.FizMod;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -31,18 +32,18 @@ public class FizModRepositoryImpl implements FizModRepository {
 		jdbcTemplate = new NamedParameterJdbcTemplate(dataSource);
 	}
 
-	public List<FizMod> findAll() {
+	public List<FizMod> findAll() throws DataAccessException{
 		String sql = "SELECT * FROM fizmodok";
 		return jdbcTemplate.query(sql, new FizModRowMapper());
 	}
 
-	public FizMod findById(int id) {
+	public FizMod findById(int id) throws DataAccessException{
 		String sql = "SELECT * FROM fizmodok WHERE id=:id";
 		SqlParameterSource parameterSource = new MapSqlParameterSource("id", id);
 		return jdbcTemplate.queryForObject(sql, parameterSource, new FizModRowMapper());
 	}
 
-	public FizMod update(FizMod fizMod) {
+	public FizMod update(FizMod fizMod) throws DataAccessException{
 		String sql = "UPDATE fizmodok SET megnevezes=:megnevezes, fizhatarido=:fizhatarido, " +
 				"torolheto=:torolheto WHERE id=:id";
 		BeanPropertySqlParameterSource parameterSource = new BeanPropertySqlParameterSource(fizMod);
@@ -54,7 +55,7 @@ public class FizModRepositoryImpl implements FizModRepository {
 		}
 	}
 
-	public FizMod create(FizMod fizMod) {
+	public FizMod create(FizMod fizMod) throws DataAccessException{
 		String sql = "INSERT INTO fizmodok(megnevezes, fizhatarido, torolheto) " +
 				"VALUES(:megnevezes, :fizhatarido, :torolheto)";
 		BeanPropertySqlParameterSource parameterSource = new BeanPropertySqlParameterSource(fizMod);
@@ -65,7 +66,7 @@ public class FizModRepositoryImpl implements FizModRepository {
 		return fizMod;
 	}
 
-	public boolean delete(int id) {
+	public boolean delete(int id) throws DataAccessException{
 		String sql = "DELETE FROM fizmodok WHERE id=:id AND torolheto=1";
 		SqlParameterSource parameterSource = new MapSqlParameterSource("id", id);
 		return jdbcTemplate.update(sql, parameterSource) == 1;

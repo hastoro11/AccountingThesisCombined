@@ -3,7 +3,7 @@
  */
 angular.module('myApp.naplo')
 
-    .controller('NaploCtrl', function ($scope, $modal, $window, $http, appConfig) {
+    .controller('NaploCtrl', function ($scope, $rootScope, $state, $modal, $window, $http, appConfig) {
         var init = function () {
             var modalInstance = $modal.open({
                 animation: false,
@@ -27,6 +27,10 @@ angular.module('myApp.naplo')
                         .success(function (data) {
                             console.log(data);
                             $scope.naplo = data;
+                        })
+                        .error(function (data) {
+                            $rootScope.error = data;
+                            $state.go('error');
                         })
                 }, function () {
                     //$window.history.back();

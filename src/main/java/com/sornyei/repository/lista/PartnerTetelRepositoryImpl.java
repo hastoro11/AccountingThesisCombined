@@ -2,6 +2,7 @@ package com.sornyei.repository.lista;
 
 import com.sornyei.model.lista.PartnerTetel;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -27,7 +28,8 @@ public class PartnerTetelRepositoryImpl implements PartnerTetelRepository {
 		jdbcTemplate = new NamedParameterJdbcTemplate(dataSource);
 	}
 
-	public List<PartnerTetel> getPartnerTetelByPartnerId(int partnerId, boolean kipontozott) {
+	public List<PartnerTetel> getPartnerTetelByPartnerId(int partnerId, boolean kipontozott) throws
+			DataAccessException{
 		String sql = "SELECT naplokod, partnerek.nev, bizszam, partnersor.megnevezes, eseddatum, " +
 				"teljdatum, kifizdatum, tkjelleg, osszeg, kifizosszeg " +
 				"FROM partnersor partnersor " +

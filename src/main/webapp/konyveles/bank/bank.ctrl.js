@@ -4,7 +4,7 @@
 (function () {
     angular.module('myApp.bank')
 
-        .controller('BankCtrl', function ($scope, $stateParams, CommonSrvc, naplo) {
+        .controller('BankCtrl', function ($scope, $rootScope, $state, $stateParams, CommonSrvc, naplo) {
 
             $scope.tetel = {
                 naplotipus: 'B',
@@ -97,6 +97,10 @@
                                 "timeOut": "1000"
                             });
                         })
+                        .error(function (data) {
+                            $rootScope.error = data;
+                            $state.go('error');
+                        })
 
                 }
             }
@@ -121,6 +125,10 @@
                             });
                             $scope.bankForm.ellenbizszam.$invalid = true;
                         }
+                    })
+                    .error(function (data) {
+                        $rootScope.error = data;
+                        $state.go('error');
                     })
             }
 
@@ -147,6 +155,10 @@
                     .success(function (data) {
                         $scope.naploSorszam = data;
                     })
+                    .error(function (data) {
+                        $rootScope.error = data;
+                        $state.go('error');
+                    })
             }
 
             // Activate
@@ -157,11 +169,19 @@
                 .success(function (data) {
                     $scope.partnerek = data;
                 })
+                .error(function (data) {
+                    $rootScope.error = data;
+                    $state.go('error');
+                })
 
             CommonSrvc.getFizModok()
                 .success((function (data) {
                     $scope.fizmodok = data;
                 }))
+                .error(function (data) {
+                    $rootScope.error = data;
+                    $state.go('error');
+                })
             CommonSrvc.getSzamlatukor()
                 .success(function (data) {
                     $scope.szamlatukor = _.filter(data, function (item) {
@@ -179,10 +199,18 @@
                     });
 
                 })
+                .error(function (data) {
+                    $rootScope.error = data;
+                    $state.go('error');
+                })
 
             CommonSrvc.getAfak()
                 .success(function (data) {
                     $scope.afak = data;
+                })
+                .error(function (data) {
+                    $rootScope.error = data;
+                    $state.go('error');
                 })
 
 

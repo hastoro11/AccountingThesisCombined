@@ -3,6 +3,7 @@ package com.sornyei.repository.lista;
 import com.sornyei.model.AfaKulcs;
 import com.sornyei.model.lista.AfaTetel;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -29,7 +30,7 @@ public class AfaListaRepositoryImpl implements AfaListaRepository{
 		jdbcTemplate = new NamedParameterJdbcTemplate(dataSource);
 	}
 
-	public List<AfaKulcs> getAfaKulcsByTipus(String tipus) {
+	public List<AfaKulcs> getAfaKulcsByTipus(String tipus) throws DataAccessException{
 		String sql = "SELECT * FROM afakulcsok WHERE tipus=:tipus";
 		MapSqlParameterSource parameterSource = new MapSqlParameterSource("tipus", tipus);
 
@@ -48,7 +49,7 @@ public class AfaListaRepositoryImpl implements AfaListaRepository{
 		});
 	}
 
-	public List<AfaTetel> getAfaTetelByDateAndAfaKulcs(Date from, Date to, int afaKulcsId) {
+	public List<AfaTetel> getAfaTetelByDateAndAfaKulcs(Date from, Date to, int afaKulcsId) throws DataAccessException{
 		String sql = "SELECT teljdatum, naplokod, bizszam, partnerek.nev, partnerek.adoszam, afasor.megnevezes, " +
 				"fizmodok.megnevezes as fizmod, bruttoosszeg, nettoosszeg, afaosszeg, afakulcsid FROM afasor afasor " +
 				"JOIN partnerek partnerek ON afasor.partnerid=partnerek.id " +

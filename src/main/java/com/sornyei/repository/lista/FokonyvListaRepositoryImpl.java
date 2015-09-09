@@ -3,6 +3,7 @@ package com.sornyei.repository.lista;
 import com.sornyei.model.lista.FokonyvLista;
 import com.sornyei.model.lista.FokonyvTetel;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -30,7 +31,8 @@ public class FokonyvListaRepositoryImpl implements FokonyListaRepository {
 	}
 
 	@Override
-	public List<FokonyvTetel> getFokonyvTetelList(Date fromDate, Date toDate, String fromFokszam, String toFokszam) {
+	public List<FokonyvTetel> getFokonyvTetelList(Date fromDate, Date toDate, String fromFokszam, String toFokszam) throws
+			DataAccessException{
 		String sql = "SELECT fokszam, megnevezes, osszesito, " +
 				"(SELECT SUM(osszeg) FROM kontir k WHERE tkjelleg='T' AND k.fokszam=s.fokszam " +
 				"AND k.teljdatum >= :fromDate AND k.teljdatum <= :toDate) AS halmTartForgalom, " +
@@ -49,7 +51,7 @@ public class FokonyvListaRepositoryImpl implements FokonyListaRepository {
 	}
 
 	@Override
-	public FokonyvTetel getFokonyvTetelByLike(Date fromDate, Date toDate, String fokszam) {
+	public FokonyvTetel getFokonyvTetelByLike(Date fromDate, Date toDate, String fokszam) throws DataAccessException{
 		String sql = "SELECT fokszam, megnevezes, osszesito, " +
 				"(SELECT SUM(osszeg) FROM kontir k WHERE tkjelleg='T' AND k.fokszam LIKE :fokszam " +
 				"AND k.teljdatum >= :fromDate AND k.teljdatum <= :toDate) AS halmTartForgalom, " +

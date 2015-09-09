@@ -3,15 +3,19 @@
  */
 angular.module('myApp.fizmodok')
 
-    .controller('FizmodokCtrl', function ($scope, FizmodokSrvc) {
+    .controller('FizmodokCtrl', function ($scope, $rootScope, $state, FizmodokSrvc) {
 
         FizmodokSrvc.getFizmodok()
             .success(function (data) {
                 $scope.fizmodok = data;
             })
+            .error(function (data) {
+                $rootScope.error = data;
+                $state.go('error');
+            })
     })
 
-    .controller('FizmodokEditCtrl', function ($scope, $modal, $state, $stateParams, FizmodokSrvc) {
+    .controller('FizmodokEditCtrl', function ($scope, $rootScope, $modal, $state, $stateParams, FizmodokSrvc) {
         $scope.edit = false;
         $scope.title = 'Új fizetési mód felvitele';
         if ($stateParams.id > 0) {
@@ -20,6 +24,10 @@ angular.module('myApp.fizmodok')
             FizmodokSrvc.getFizmodById($stateParams.id)
                 .success(function (data) {
                     $scope.fizmod = data;
+                })
+                .error(function (data) {
+                    $rootScope.error = data;
+                    $state.go('error');
                 })
         }
 
@@ -30,12 +38,20 @@ angular.module('myApp.fizmodok')
                         toastr.success('A mentés sikerült', '', {timeOut: 1000});
                         $state.go('fizmodok');
                     })
+                    .error(function (data) {
+                        $rootScope.error = data;
+                        $state.go('error');
+                    })
             } else {
                 $scope.fizmod.torolheto = true;
                 FizmodokSrvc.createFizomd($scope.fizmod)
                     .success(function () {
                         toastr.success('A mentés sikerült', '', {timeOut: 1000});
                         $state.go('fizmodok');
+                    })
+                    .error(function (data) {
+                        $rootScope.error = data;
+                        $state.go('error');
                     })
             }
         }
@@ -60,6 +76,10 @@ angular.module('myApp.fizmodok')
                         .success(function () {
                             toastr.success('A törlés sikerült', '', {timeOut: 1000});
                             $state.go('fizmodok');
+                        })
+                        .error(function (data) {
+                            $rootScope.error = data;
+                            $state.go('error');
                         })
 
                 }, function () {

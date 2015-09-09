@@ -2,6 +2,7 @@ package com.sornyei.repository.beallitas.szamlatukor;
 
 import com.sornyei.model.FokSzamla;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -29,20 +30,20 @@ public class SzamlatukorRepositoryImpl implements SzamlatukorRepository {
 		jdbcTemplate = new NamedParameterJdbcTemplate(dataSource);
 	}
 
-	public List<FokSzamla> findAll() {
+	public List<FokSzamla> findAll() throws DataAccessException{
 		String sql = "SELECT * FROM szamlatukor ORDER BY fokszam";
 
 		return jdbcTemplate.query(sql, new SzamlatukorRowMapper());
 	}
 
-	public FokSzamla findByFokSzam(String fokszam) {
-		String sql = "SELECT * FROM szamlatukor WHERE fokszam=:fokszam";
+	public FokSzamla findByFokSzam(String fokszam) throws DataAccessException{
+		String sql = "SELECT  FROM szamlatukor WHERE fokszam=:fokszam";
 		SqlParameterSource parameterSource = new MapSqlParameterSource("fokszam", fokszam);
 
 		return jdbcTemplate.queryForObject(sql, parameterSource, new SzamlatukorRowMapper());
 	}
 
-	public FokSzamla update(FokSzamla fokSzamla) {
+	public FokSzamla update(FokSzamla fokSzamla) throws DataAccessException{
 		String sql="UPDATE szamlatukor SET megnevezes=:megnevezes WHERE fokszam=:fokszam";
 		BeanPropertySqlParameterSource parameterSource = new BeanPropertySqlParameterSource(fokSzamla);
 

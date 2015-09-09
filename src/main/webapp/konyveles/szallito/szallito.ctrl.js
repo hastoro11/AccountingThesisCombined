@@ -4,7 +4,7 @@
 angular.module('myApp.szallito')
 
 
-    .controller('SzallitoCtrl', function ($scope, SzallitoSrvc, CommonSrvc, naplo) {
+    .controller('SzallitoCtrl', function ($scope, $rootScope, $state, SzallitoSrvc, CommonSrvc, naplo) {
 
 
         $scope.tetel = {
@@ -83,7 +83,8 @@ angular.module('myApp.szallito')
                         getNextNaploSorszam();
                     })
                     .error(function (data) {
-                        console.log(data);
+                        $rootScope.error = data;
+                        $state.go('error');
                     })
 
             }
@@ -133,6 +134,10 @@ angular.module('myApp.szallito')
                             "timeOut": "2000"
                         })
                 })
+                .error(function (data) {
+                    $rootScope.error = data;
+                    $state.go('error');
+                })
         }
 
         reset = function () {
@@ -158,6 +163,10 @@ angular.module('myApp.szallito')
                 .success(function (data) {
                     $scope.naploSorszam = data;
                 })
+                .error(function (data) {
+                    $rootScope.error = data;
+                    $state.go('error');
+                })
         }
 
         // Activate
@@ -171,16 +180,31 @@ angular.module('myApp.szallito')
                     return partner.szallito === true;
                 })
             })
+            .error(function (data) {
+                $rootScope.error = data;
+                $state.go('error');
+            })
+
         CommonSrvc.getAfak()
             .success(function (data) {
                 $scope.afak = _.filter(data, function (afa) {
                     return afa.fokszam.toString().indexOf('466') > -1
                 })
             })
+            .error(function (data) {
+                $rootScope.error = data;
+                $state.go('error');
+            })
+
         CommonSrvc.getFizModok().
             success(function (data) {
                 $scope.fizmodok = data;
             })
+            .error(function (data) {
+                $rootScope.error = data;
+                $state.go('error');
+            })
+
         CommonSrvc.getSzamlatukor()
             .success(function (data) {
                 $scope.szamlatukor = _.filter(data, function (szamla) {
@@ -194,7 +218,11 @@ angular.module('myApp.szallito')
                     return item.fokszam.toString().indexOf('454') > -1 &&
                         item.osszesito === false;
                 })
-            });
+            })
+            .error(function (data) {
+                $rootScope.error = data;
+                $state.go('error');
+            })
 
 
     });

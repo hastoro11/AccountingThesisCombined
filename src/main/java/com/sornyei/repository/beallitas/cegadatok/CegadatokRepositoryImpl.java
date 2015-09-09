@@ -2,6 +2,7 @@ package com.sornyei.repository.beallitas.cegadatok;
 
 import com.sornyei.model.Cegadatok;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -27,13 +28,13 @@ public class CegadatokRepositoryImpl implements CegadatokRepository {
 		jdbcTemplate = new NamedParameterJdbcTemplate(dataSource);
 	}
 
-	public Cegadatok find() {
+	public Cegadatok find() throws DataAccessException{
 		String sql = "SELECT * FROM cegadatok";
 		List<Cegadatok> cegadatokList = jdbcTemplate.query(sql, new CegadatokRowMapper());
 		return cegadatokList.get(0);
 	}
 
-	public Cegadatok update(Cegadatok cegadatok) {
+	public Cegadatok update(Cegadatok cegadatok) throws DataAccessException{
 		String sql = "UPDATE cegadatok SET cegnev=:cegnev, " +
 				"cim=:cim, adoszam=:adoszam, cegjegyzekszam=:cegjegyzekszam, " +
 				"bankszamlaszam=:bankszamlaszam, kshszam=:kshszam WHERE id=:id";

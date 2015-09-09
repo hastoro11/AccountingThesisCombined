@@ -3,7 +3,7 @@
  */
 angular.module('myApp.partnerek')
 
-    .controller('PartnerekCtrl', function ($scope, $state, PartnerekSrvc) {
+    .controller('PartnerekCtrl', function ($scope, $rootScope, $state, PartnerekSrvc) {
 
         $scope.vevo = {open: false};
         $scope.szallito = {open: false};
@@ -37,10 +37,14 @@ angular.module('myApp.partnerek')
                     return partner.vevo === true;
                 })
             })
+            .error(function (data) {
+                $rootScope.error = data;
+                $state.go('error');
+            })
     })
 
 
-    .controller('PartnerekEditCtrl', function ($scope, $state, $stateParams, $modal, PartnerekSrvc) {
+    .controller('PartnerekEditCtrl', function ($scope, $rootScope, $state, $stateParams, $modal, PartnerekSrvc) {
         $scope.edit = false;
         if ($stateParams.id > 0) { //Edit
             $scope.edit = true;
@@ -48,6 +52,10 @@ angular.module('myApp.partnerek')
             PartnerekSrvc.getPartnerById($stateParams.id)
                 .success(function (data) {
                     $scope.partner = data;
+                })
+                .error(function (data) {
+                    $rootScope.error = data;
+                    $state.go('error');
                 })
         } else {
             $scope.title = 'Új partner felvitele';
@@ -64,6 +72,10 @@ angular.module('myApp.partnerek')
                 success(function () {
                     toastr.success('Mentés sikeres', '', {"timeOut": 1000})
                     $state.go('partnerek');
+                })
+                .error(function (data) {
+                    $rootScope.error = data;
+                    $state.go('error');
                 })
 
         }
@@ -93,6 +105,10 @@ angular.module('myApp.partnerek')
                         .success(function (data) {
                             toastr.success('A törlés sikerült', '', {timeOut: 1000});
                             $state.go('partnerek');
+                        })
+                        .error(function (data) {
+                            $rootScope.error = data;
+                            $state.go('error');
                         })
                 }, function () {
                     toastr.warning('A törlés megszakítva', '', {timeOut: 1000});

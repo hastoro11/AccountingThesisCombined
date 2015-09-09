@@ -4,7 +4,7 @@
 (function () {
     angular.module('myApp.vegyes')
 
-        .controller('VegyesCtrl', function ($scope, $stateParams, CommonSrvc, naplo) {
+        .controller('VegyesCtrl', function ($scope, $rootScope, $state, $stateParams, CommonSrvc, naplo) {
 
             $scope.tetel = {
                 naplotipus: 'E',
@@ -96,6 +96,10 @@
                                 "timeOut": "1000"
                             });
                         })
+                        .error(function (data) {
+                            $rootScope.error = data;
+                            $state.go('error');
+                        })
 
                 }
             }
@@ -123,6 +127,10 @@
                     .success(function (data) {
                         $scope.naploSorszam = data;
                     })
+                    .error(function (data) {
+                        $rootScope.error = data;
+                        $state.go('error');
+                    })
             }
 
 
@@ -144,6 +152,10 @@
                         )
                     });
 
+                })
+                .error(function (data) {
+                    $rootScope.error = data;
+                    $state.go('error');
                 })
 
             // Functions

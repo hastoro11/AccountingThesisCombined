@@ -2,7 +2,7 @@
  * Created by gaborsornyei on 15. 09. 05..
  */
 angular.module('myApp.afa')
-    .controller('AfaCtrl', function (appConfig, $scope, $http, $modal) {
+    .controller('AfaCtrl', function (appConfig, $scope, $rootScope, $state, $http, $modal) {
 
         var init = function () {
 
@@ -21,6 +21,10 @@ angular.module('myApp.afa')
                             $scope.afalistak = _.filter(afalistak, function (item) {
                                 return item.afaTetelList.length > 0;
                             });
+                        })
+                        .error(function (data) {
+                            $rootScope.error = data;
+                            $state.go('error');
                         })
                 })
         }

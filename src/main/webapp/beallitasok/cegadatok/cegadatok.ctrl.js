@@ -3,22 +3,30 @@
  */
 angular.module('myApp.cegadatok')
 
-    .controller('CegadatokCtrl', function ($scope, $state, $window, CegadatokSrvc) {
+    .controller('CegadatokCtrl', function ($scope, $rootScope, $state, $window, CegadatokSrvc) {
         $scope.cegadatok = {};
         CegadatokSrvc.getCegadatok()
             .success(function (data) {
                 $scope.cegadatok = data;
             })
+            .error(function (data) {
+                $rootScope.error = data;
+                $state.go('error');
+            })
 
 
     })
 
-    .controller('CegadatokEditCtrl', function ($scope, $state, CegadatokSrvc) {
+    .controller('CegadatokEditCtrl', function ($scope, $rootScope, $state, CegadatokSrvc) {
 
         $scope.cegadatok = {};
         CegadatokSrvc.getCegadatok()
             .success(function (data) {
                 $scope.cegadatok = data;
+            })
+            .error(function (data) {
+                $rootScope.error = data;
+                $state.go('error');
             })
 
         $scope.save = function () {
@@ -27,9 +35,10 @@ angular.module('myApp.cegadatok')
                     toastr.success('A mentés sikerült', '', {"timeOut": 1000});
                     $state.go('cegadatok');
                 })
-                .error(function (data, header, config) {
-                    toastr.error('A mentés nem sikerült', '', {"timeOut": 1000});
-                });
+                .error(function (data) {
+                    $rootScope.error = data;
+                    $state.go('error');
+                })
         }
 
 

@@ -2,6 +2,7 @@ package com.sornyei.repository.input.kontirsor;
 
 import com.sornyei.model.input.KontirSor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -24,7 +25,7 @@ public class KontirSorRepositoryImpl implements KontirSorRepository {
 	}
 
 	@Override
-	public KontirSor save(KontirSor kontirSor) {
+	public KontirSor save(KontirSor kontirSor) throws DataAccessException{
 		String sql = "INSERT INTO kontir(fokszam, naplokod, naplotipus, naplosorszam, teljdatum, " +
 				"bizszam, megnevezes, tkjelleg, osszeg, partnerid, afatetel, torolt) " +
 				"VALUES(:fokszam, :naploKod, :naploTipus, :naploSorszam, :teljDatum, " +

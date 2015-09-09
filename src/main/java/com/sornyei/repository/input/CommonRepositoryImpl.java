@@ -1,6 +1,7 @@
 package com.sornyei.repository.input;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
@@ -24,7 +25,7 @@ public class CommonRepositoryImpl implements CommonRepository {
 	}
 
 	@Override
-	public int getNextNaploSorSzam(String naploTipus) {
+	public int getNextNaploSorSzam(String naploTipus) throws DataAccessException{
 		String sql = "SELECT MAX(naplosorszam) FROM naplosor WHERE naplotipus=:naploTipus";
 		SqlParameterSource parameterSource = new MapSqlParameterSource("naploTipus", naploTipus);
 		Integer sorszam = jdbcTemplate.queryForObject(sql, parameterSource, Integer.class);

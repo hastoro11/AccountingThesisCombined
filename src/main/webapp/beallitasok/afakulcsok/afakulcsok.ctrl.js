@@ -30,6 +30,10 @@ angular.module('myApp.afakulcsok')
                 .success(function (data) {
                     $scope.afakulcs = data;
                 })
+                .error(function (data) {
+                    $rootScope.error = data;
+                    $state.go('error');
+                })
         }
 
         $scope.save = function () {
@@ -39,11 +43,19 @@ angular.module('myApp.afakulcsok')
                         toastr.success('A mentés sikerült', '', {timeOut: 1000});
                         $state.go('afakulcsok');
                     })
+                    .error(function (data) {
+                        $rootScope.error = data;
+                        $state.go('error');
+                    })
             } else {
                 AfakulcsokSrvc.createAfa($scope.afakulcs)
                     .success(function () {
                         toastr.success('A mentés sikerült', '', {timeOut: 1000});
                         $state.go('afakulcsok');
+                    })
+                    .error(function (data) {
+                        $rootScope.error = data;
+                        $state.go('error');
                     })
             }
         }
@@ -73,6 +85,10 @@ angular.module('myApp.afakulcsok')
                             toastr.success('A törlés sikerült', '', {timeOut: 1000});
                             $state.go('afakulcsok');
                         })
+                        .error(function (data) {
+                            $rootScope.error = data;
+                            $state.go('error');
+                        })
                 },
                 function () {
                     toastr.warning('A törlés megszakítva', '', {timeOut: 1000})
@@ -90,6 +106,10 @@ angular.module('myApp.afakulcsok')
                 $scope.levafak = _.filter(data, function (fokszam) {
                     return fokszam.fokszam.toString().indexOf('466') > -1 && fokszam.osszesito === false;
                 });
+            })
+            .error(function (data) {
+                $rootScope.error = data;
+                $state.go('error');
             })
 
     })

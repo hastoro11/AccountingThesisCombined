@@ -2,6 +2,7 @@ package com.sornyei.repository.lista;
 
 import com.sornyei.model.lista.NaploTetel;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -29,7 +30,8 @@ public class NaploListaRepositoryImpl implements NaploListaRepository {
 	}
 
 	@Override
-	public List<NaploTetel> getNaploTetelListOrderByTeljDatum(Date from, Date to, String tipus) {
+	public List<NaploTetel> getNaploTetelListOrderByTeljDatum(Date from, Date to, String tipus) throws
+			DataAccessException{
 		String sql = "SELECT naplokod, teljdatum, fokszam, bizszam, megnevezes, tkjelleg, osszeg FROM kontir " +
 				"WHERE (teljdatum >= :from AND teljdatum <= :to) AND naplotipus=:naploTipus ORDER BY teljdatum";
 		MapSqlParameterSource parameterSource = new MapSqlParameterSource();

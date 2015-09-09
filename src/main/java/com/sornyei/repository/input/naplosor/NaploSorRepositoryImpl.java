@@ -4,6 +4,7 @@ import com.sornyei.model.input.NaploSor;
 import com.sornyei.repository.input.CommonRepository;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -34,7 +35,7 @@ public class NaploSorRepositoryImpl implements NaploSorRepository {
 		jdbcTemplate = new NamedParameterJdbcTemplate(dataSource);
 	}
 
-	public NaploSor save(NaploSor naploSor) {
+	public NaploSor save(NaploSor naploSor) throws DataAccessException{
 		int naploSorszam = commonRepository.getNextNaploSorSzam(naploSor.getNaploTipus());
 		String naploKod = getNaploKod(naploSor.getNaploTipus(), naploSorszam);
 		naploSor.setNaploSorszam(naploSorszam);

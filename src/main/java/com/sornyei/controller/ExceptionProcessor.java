@@ -15,10 +15,11 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 public class ExceptionProcessor {
 
 	@ExceptionHandler(DataAccessException.class)
-	public ResponseEntity<Error> exceptionHandler() {
+	public ResponseEntity<Error> exceptionHandler(DataAccessException ex) {
 		Error error = new Error();
 		error.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
-		error.setMessage("Szerver hiba");
+		error.setDescription(HttpStatus.INTERNAL_SERVER_ERROR.name());
+		error.setMessage(ex.getMessage());
 		return new ResponseEntity<Error>(error, HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 }

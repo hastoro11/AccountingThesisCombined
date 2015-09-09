@@ -2,7 +2,7 @@
  * Created by gaborsornyei on 15. 09. 06..
  */
 angular.module('myApp.partner')
-    .controller('PartnerCtrl', function ($scope, $http, $modal, appConfig) {
+    .controller('PartnerCtrl', function ($scope, $rootScope, $state, $http, $modal, appConfig) {
         var init = function () {
 
             var modalInstance = $modal.open({
@@ -22,6 +22,10 @@ angular.module('myApp.partner')
                                 return item.partnerTetelList.length > 0;
                             })
 
+                        })
+                        .error(function (data) {
+                            $rootScope.error = data;
+                            $state.go('error');
                         })
                 })
         }

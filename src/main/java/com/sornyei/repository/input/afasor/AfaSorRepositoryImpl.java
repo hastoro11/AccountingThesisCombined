@@ -3,6 +3,7 @@ package com.sornyei.repository.input.afasor;
 import com.sornyei.model.input.AfaSor;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
@@ -29,7 +30,7 @@ public class AfaSorRepositoryImpl implements AfaSorRepository {
 	}
 
 	@Override
-	public AfaSor save(AfaSor afaSor) {
+	public AfaSor save(AfaSor afaSor) throws DataAccessException{
 		String sql = "INSERT INTO afasor(afakulcsid, naplokod, naplotipus, naplosorszam, bizszam, " +
 				"partnerid, megnevezes, fizmodid, teljdatum,  bruttoosszeg, nettoosszeg, afaosszeg) " +
 				"VALUES (:afaKulcsId, :naploKod, :naploTipus, :naploSorszam, :bizszam, " +

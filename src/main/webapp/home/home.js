@@ -7,7 +7,7 @@ angular.module('myApp.home', [])
             })
     })
 
-    .controller('KipontozCtrl', function ($scope, $http, $state, $modal, appConfig) {
+    .controller('KipontozCtrl', function ($scope, $rootScope, $http, $state, $modal, appConfig) {
 
         var init = function () {
             var modalInstance = $modal.open({
@@ -24,6 +24,10 @@ angular.module('myApp.home', [])
                                 timeOut: 1000
                             });
                             $state.go('home')
+                        })
+                        .error(function (data) {
+                            $rootScope.error = data;
+                            $state.go('error');
                         })
                 })
         }

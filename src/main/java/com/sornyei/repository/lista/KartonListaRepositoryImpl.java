@@ -2,6 +2,7 @@ package com.sornyei.repository.lista;
 
 import com.sornyei.model.lista.KartonTetel;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -29,7 +30,7 @@ public class KartonListaRepositoryImpl implements KartonListaRepository {
 	}
 
 	@Override
-	public List<KartonTetel> getKartonTetelList(Date from, Date to, String fokszam) {
+	public List<KartonTetel> getKartonTetelList(Date from, Date to, String fokszam) throws DataAccessException{
 		String sql = "SELECT teljdatum, bizszam, megnevezes, tkjelleg, osszeg, naplokod FROM kontir " +
 				"WHERE (teljdatum>=:from AND teljdatum <= :to) AND fokszam=:fokszam " +
 				"order by teljdatum, naplokod";
