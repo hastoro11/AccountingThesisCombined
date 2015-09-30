@@ -33,7 +33,6 @@ public class InputFormServiceImpl implements InputFormService {
 	private PartnerSorService partnerSorService;
 
 
-	@Override
 	@Transactional
 	public boolean save(InputForm inputForm) {
 		// NaploSor
@@ -68,7 +67,7 @@ public class InputFormServiceImpl implements InputFormService {
 				if (ks.getEllenbizszam() != null && ks.getEllenbizszam().length() > 0) {
 					List<PartnerSor> partnerSorList = partnerSorService
 							.getPartnerSorByPartnerIdAndBizszam(inputForm.getPartner(), ks.getEllenbizszam());
-					PartnerSor partnerSor=partnerSorList.get(0);
+					PartnerSor partnerSor = partnerSorList.get(0);
 
 					partnerSor.setKifizDatum(inputForm.getTeljdatum());
 					partnerSor.setKifizOsszeg(ks.getOsszeg());

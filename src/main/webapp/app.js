@@ -7,6 +7,8 @@ angular.module('myApp', [
     'ui.router',
     'ui.mask',
     'angular-loading-bar',
+    'ngStorage',
+    'myApp.auth',
     'myApp.home',
     'myApp.szallito',
     'myApp.vevo',
@@ -54,5 +56,11 @@ angular.module('myApp', [
 
     .constant('appConfig', {
         baseUrl: '/'
+    })
+
+    .run(function ($rootScope, AuthSrvc, $localStorage) {
+        if (AuthSrvc.isLoggedIn()) {
+            $rootScope.user = $localStorage.user;
+        }
     })
 

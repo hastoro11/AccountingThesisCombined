@@ -34,8 +34,10 @@ angular.module('myApp.home', [])
         init();
     })
 
-    .controller('HomeCtrl', function ($scope) {
-
+    .controller('HomeCtrl', function ($scope, AuthSrvc, $state) {
+        if (!AuthSrvc.isLoggedIn()) {
+            $state.go('login');
+        }
     })
 
     .controller('KipontozMdlCtrl', function ($scope, $state, $modalInstance) {

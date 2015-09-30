@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="app.css">
 </head>
 <body>
-<nav class="navbar navbar-inverse navbar-fixed-top">
+<nav class="navbar navbar-inverse navbar-fixed-top" ng-if="$root.user.loggedIn">
     <div class="container">
         <div class="navbar-header">
             <a class="navbar-brand" ui-sref="home">SörnyeiGábor</a>
@@ -68,6 +68,21 @@
                 </li>
                 <!-- Dokumentáció -->
                 <li><a ui-sref="dokumentacio" href="#"> Dokumentáció </a></li>
+                <li><a ui-sref="logout" href="">{{$root.user.name}} - Logout </a> </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<nav class="navbar navbar-inverse navbar-fixed-top" ng-if="!$root.user.loggedIn">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" ui-sref="home">SörnyeiGábor</a>
+        </div>
+
+        <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+
             </ul>
         </div>
     </div>
@@ -96,10 +111,12 @@
 <script src="bower_components/angular-animate/angular-animate.js"></script>
 <script src="bower_components/toastr/toastr.js"></script>
 <script src="bower_components/angular-loading-bar/src/loading-bar.js"></script>
+<script src="bower_components/ngstorage/ngStorage.js"></script>
 <!-- My libraries and script files -->
 <script src="app.js"></script>
 <script src="common/common.services.js"></script>
 <script src="home/home.js"></script>
+<script src="security/login.js"></script>
 <!-- Szállító -->
 <script src="konyveles/szallito/szallito.js"></script>
 <script src="konyveles/szallito/szallito.ctrl.js"></script>

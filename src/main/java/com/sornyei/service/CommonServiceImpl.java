@@ -15,7 +15,6 @@ public class CommonServiceImpl implements CommonService {
 	@Autowired
 	private CommonRepository repository;
 
-	@Override
 	public int getNextNaploSorSzam(String naploTipus) {
 		return repository.getNextNaploSorSzam(naploTipus);
 	}
