@@ -10,12 +10,12 @@ angular.module('myApp.szamlatukor', ['chieffancypants.loadingBar'])
                 url: '/szamlatukor',
                 templateUrl: 'beallitasok/szamlatukor/szamlatukor.html',
                 controller: 'SzamlatukorCtrl'
-/*                ,
-                resolve: {
-                    szamlatukor: function ($http, appConfig) {
-                        return $http.get(appConfig.baseUrl + 'szamlatukor');
-                    }
-                }*/
+                /*                ,
+                 resolve: {
+                 szamlatukor: function ($http, appConfig) {
+                 return $http.get(appConfig.baseUrl + 'szamlatukor');
+                 }
+                 }*/
             })
             .state('szamlatukorEdit', {
                 url: '/szamlatukor/:fokszam',
@@ -24,7 +24,12 @@ angular.module('myApp.szamlatukor', ['chieffancypants.loadingBar'])
             })
     })
 
-    .controller('SzamlatukorCtrl', function ($scope, $rootScope, $state, CommonSrvc) {
+    .controller('SzamlatukorCtrl', function ($scope, $rootScope, $state, CommonSrvc, AuthSrvc) {
+
+        if (!AuthSrvc.isLoggedIn()) {
+            $state.go('login');
+        }
+
         //$scope.szamlatukor = szamlatukor.data;
         CommonSrvc.getSzamlatukor()
             .success(function (data) {
@@ -36,7 +41,12 @@ angular.module('myApp.szamlatukor', ['chieffancypants.loadingBar'])
             })
     })
 
-    .controller('SzamlatukorEditCtrl', function ($scope, $rootScope, $state, $stateParams, SzamlatukorSrvc) {
+    .controller('SzamlatukorEditCtrl', function ($scope, $rootScope, $state, $stateParams, SzamlatukorSrvc, AuthSrvc) {
+
+        if (!AuthSrvc.isLoggedIn()) {
+            $state.go('login');
+        }
+
         var fokszam = $stateParams.fokszam;
         SzamlatukorSrvc.getFokSzamla(fokszam)
             .success(function (data) {

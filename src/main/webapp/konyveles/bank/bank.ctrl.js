@@ -4,7 +4,11 @@
 (function () {
     angular.module('myApp.bank')
 
-        .controller('BankCtrl', function ($scope, $rootScope, $state, $stateParams, CommonSrvc, naplo) {
+        .controller('BankCtrl', function ($scope, $rootScope, $state, $stateParams, CommonSrvc, naplo, AuthSrvc) {
+
+            if (!AuthSrvc.isLoggedIn()) {
+                $state.go('login');
+            }
 
             $scope.tetel = {
                 naplotipus: 'B',

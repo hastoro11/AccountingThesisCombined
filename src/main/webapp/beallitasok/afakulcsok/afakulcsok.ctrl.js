@@ -3,8 +3,11 @@
  */
 angular.module('myApp.afakulcsok')
 
-    .controller('AfakulcsokCtrl', function ($scope, $state, $rootScope, AfakulcsokSrvc) {
+    .controller('AfakulcsokCtrl', function ($scope, $state, $rootScope, AfakulcsokSrvc, AuthSrvc) {
 
+        if (!AuthSrvc.isLoggedIn()) {
+            $state.go('login');
+        }
 
         AfakulcsokSrvc.getAfak()
             .success(function (data) {
@@ -21,7 +24,12 @@ angular.module('myApp.afakulcsok')
             })
     })
 
-    .controller('AfakulcsokEditCtrl', function ($scope, $state, $stateParams, $modal, CommonSrvc, AfakulcsokSrvc) {
+    .controller('AfakulcsokEditCtrl', function ($scope, $state, $stateParams, $modal, CommonSrvc, AfakulcsokSrvc, AuthSrvc) {
+
+        if (!AuthSrvc.isLoggedIn()) {
+            $state.go('login');
+        }
+
         $scope.edit = false;
 
         if ($stateParams.id > 0) { // Edit

@@ -42,14 +42,21 @@ angular.module('myApp.auth', [])
             delete $localStorage.user;
             $http.post(appConfig.baseUrl + 'auth/getcredentials', user)
                 .success(function (data) {
-                    console.log(data);
+                    //console.log(data);
                     data.loggedIn = true;
                     $localStorage.user = data;
                     $rootScope.user = data;
                     $state.go('home')
                 })
-                .error(function () {
-                    console.log('Wrong');
+                .error(function (data, status, headers, config) {
+                    if (status == 401 || status == 400) {
+                        $rootScope.error = {};
+                        $rootScope.error.status = status;
+                        $rootScope.error.description = 'Hiba a bejelentkezés közben';
+                        $rootScope.error.message = 'A megadott név és jelszó nem létezik';
+
+                        $state.go('error');
+                    }
                 })
         }
 

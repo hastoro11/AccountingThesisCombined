@@ -3,7 +3,12 @@
  */
 angular.module('myApp.cegadatok')
 
-    .controller('CegadatokCtrl', function ($scope, $rootScope, $state, $window, CegadatokSrvc) {
+    .controller('CegadatokCtrl', function ($scope, $rootScope, $state, $window, CegadatokSrvc, AuthSrvc) {
+
+        if (!AuthSrvc.isLoggedIn()) {
+            $state.go('login');
+        }
+
         $scope.cegadatok = {};
         CegadatokSrvc.getCegadatok()
             .success(function (data) {
@@ -17,7 +22,11 @@ angular.module('myApp.cegadatok')
 
     })
 
-    .controller('CegadatokEditCtrl', function ($scope, $rootScope, $state, CegadatokSrvc) {
+    .controller('CegadatokEditCtrl', function ($scope, $rootScope, $state, CegadatokSrvc, AuthSrvc) {
+
+        if (!AuthSrvc.isLoggedIn()) {
+            $state.go('login');
+        }
 
         $scope.cegadatok = {};
         CegadatokSrvc.getCegadatok()

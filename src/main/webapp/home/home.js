@@ -9,6 +9,10 @@ angular.module('myApp.home', [])
 
     .controller('KipontozCtrl', function ($scope, $rootScope, $http, $state, $modal, appConfig) {
 
+        if (!AuthSrvc.isLoggedIn()) {
+            $state.go('login');
+        }
+
         var init = function () {
             var modalInstance = $modal.open({
                 animation: false,

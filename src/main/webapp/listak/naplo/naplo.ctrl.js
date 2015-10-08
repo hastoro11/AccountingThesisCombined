@@ -3,38 +3,43 @@
  */
 angular.module('myApp.naplo')
 
-    .controller('NaploCtrl', function ($scope, $rootScope, $state, $modal, $window, $http, appConfig) {
+    .controller('NaploCtrl', function ($scope, $rootScope, $state, $modal, $window, $http, appConfig, AuthSrvc) {
         var init = function () {
-            var modalInstance = $modal.open({
-                animation: false,
-                templateUrl: 'listak/naplo/naplo.modal.html',
-                controller: 'NaploModalCtrl',
-                resolve: {
-                    naplok: function ($http) {
-                        return $http.get(appConfig.baseUrl + 'naplok');
+            if (!AuthSrvc.isLoggedIn()) {
+                $state.go('login');
+            }
+            else {
+                var modalInstance = $modal.open({
+                    animation: false,
+                    templateUrl: 'listak/naplo/naplo.modal.html',
+                    controller: 'NaploModalCtrl',
+                    resolve: {
+                        naplok: function ($http) {
+                            return $http.get(appConfig.baseUrl + 'naplok');
+                        }
                     }
-                }
-            });
+                });
 
-            modalInstance.result
-                .then(function (data) {
-                    $scope.data = data;
-                    console.log($scope.naplo);
-                    var from = new Date(data.datumtol);
-                    var to = new Date(data.datumig);
-                    var url = 'naplolista/' + from + '/' + to + '/' + data.tipus.jel;
-                    $http.get(appConfig.baseUrl + url)
-                        .success(function (data) {
-                            console.log(data);
-                            $scope.naplo = data;
-                        })
-                        .error(function (data) {
-                            $rootScope.error = data;
-                            $state.go('error');
-                        })
-                }, function () {
-                    //$window.history.back();
-                })
+                modalInstance.result
+                    .then(function (data) {
+                        $scope.data = data;
+                        console.log($scope.naplo);
+                        var from = new Date(data.datumtol);
+                        var to = new Date(data.datumig);
+                        var url = 'naplolista/' + from + '/' + to + '/' + data.tipus.jel;
+                        $http.get(appConfig.baseUrl + url)
+                            .success(function (data) {
+                                console.log(data);
+                                $scope.naplo = data;
+                            })
+                            .error(function (data) {
+                                $rootScope.error = data;
+                                $state.go('error');
+                            })
+                    }, function () {
+                        //$window.history.back();
+                    })
+            }
         }
 
         $scope.launch = function () {
@@ -43,8 +48,8 @@ angular.module('myApp.naplo')
 
         osszesit = function (naplolista) {
             var osszesen = [];
-            osszesen[0]=0;
-            osszesen[1]=0;
+            osszesen[0] = 0;
+            osszesen[1] = 0;
             for (var i = 0; i < naplolista.length; i++) {
                 osszesen[0] += naplolista[i].tartozik;
                 osszesen[1] += naplolista[i].kovetel;

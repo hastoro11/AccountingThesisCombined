@@ -4,7 +4,11 @@
 (function () {
     angular.module('myApp.vevo')
 
-        .controller('VevoCtrl', function ($scope, $rootScope, $state, VevoSrvc, CommonSrvc, naplo) {
+        .controller('VevoCtrl', function ($scope, $rootScope, $state, VevoSrvc, CommonSrvc, naplo, AuthSrvc) {
+
+            if (!AuthSrvc.isLoggedIn()) {
+                $state.go('login');
+            }
 
             $scope.tetel = {
                 naplotipus: 'V',

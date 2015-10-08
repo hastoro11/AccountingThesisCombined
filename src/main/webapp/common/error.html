@@ -2,7 +2,7 @@
     <div class="col-sm-8 col-sm-offset-2">
         <h2 class="text-danger">Hiba történt!</h2>
         <h4><span class="text-warning">Hiba kódja:</span> {{error.status}}</h4>
-        <h4><span class="text-warning">Hiba megnevezése:</span> {{error.description}}</h4>
+        <h4><span class="text-warning">Hiba megnevezése:</span> <em>{{error.description}}</em></h4>
 
         <p>Hiba történt a kért adatok betöltése közben.</p>
 
@@ -11,6 +11,6 @@
 
         <p><strong>A hiba pontos leírása: </strong></p>
 
-        <p>{{error.message}}</p>
+        <p><em>{{error.message}}</em></p>
     </div>
 </div>

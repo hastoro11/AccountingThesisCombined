@@ -3,36 +3,45 @@
  */
 angular.module('myApp.karton')
 
-    .controller('KartonCtrl', function ($scope, $rootScope, $modal, $window, $state, $http, appConfig) {
+    .controller('KartonCtrl', function ($scope, $rootScope, $modal, $window, $state, $http, appConfig, AuthSrvc) {
+
+
+
         var init = function () {
-            var modalInstance = $modal.open({
-                    animation: false,
-                    templateUrl: 'listak/karton/karton.modal.html',
-                    controller: 'KartonModalCtrl',
-                    resolve: {
-                        szamlak: function ($http) {
-                            return $http.get(appConfig.baseUrl + 'szamlatukor')
+
+            if (!AuthSrvc.isLoggedIn()) {
+                $state.go('login');
+            }else {
+
+                var modalInstance = $modal.open({
+                        animation: false,
+                        templateUrl: 'listak/karton/karton.modal.html',
+                        controller: 'KartonModalCtrl',
+                        resolve: {
+                            szamlak: function ($http) {
+                                return $http.get(appConfig.baseUrl + 'szamlatukor')
+                            }
                         }
                     }
-                }
-            )
+                )
 
-            modalInstance.result
-                .then(function (data) {
-                    $scope.data = data;
-                    $http.get(appConfig.baseUrl + 'kartonlista/' + data.datumtol + '/' + data.datumig + '/' + data.fokszam)
-                        .success(function (data) {
-                            $scope.karton = data;
-                        })
-                        .error(function (data) {
-                            $rootScope.error = data;
-                            $state.go('error');
-                        })
-                },
-                function () {
-                    //$state.go('home');
-                }
-            )
+                modalInstance.result
+                    .then(function (data) {
+                        $scope.data = data;
+                        $http.get(appConfig.baseUrl + 'kartonlista/' + data.datumtol + '/' + data.datumig + '/' + data.fokszam)
+                            .success(function (data) {
+                                $scope.karton = data;
+                            })
+                            .error(function (data) {
+                                $rootScope.error = data;
+                                $state.go('error');
+                            })
+                    },
+                    function () {
+                        //$state.go('home');
+                    }
+                )
+            }
         }
 
         $scope.launch = function () {
@@ -42,7 +51,12 @@ angular.module('myApp.karton')
         init();
     })
 
-    .controller('KartonModalCtrl', function ($scope, szamlak, $modalInstance) {
+    .controller('KartonModalCtrl', function ($scope, szamlak, $modalInstance, AuthSrvc, $state) {
+
+        if (!AuthSrvc.isLoggedIn()) {
+            $state.go('login');
+        }
+
         $scope.szamlak = szamlak.data;
         $scope.ok = function () {
             $modalInstance.close($scope.karton);

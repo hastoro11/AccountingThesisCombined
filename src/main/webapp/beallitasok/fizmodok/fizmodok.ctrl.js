@@ -3,7 +3,11 @@
  */
 angular.module('myApp.fizmodok')
 
-    .controller('FizmodokCtrl', function ($scope, $rootScope, $state, FizmodokSrvc) {
+    .controller('FizmodokCtrl', function ($scope, $rootScope, $state, FizmodokSrvc, AuthSrvc) {
+
+        if (!AuthSrvc.isLoggedIn()) {
+            $state.go('login');
+        }
 
         FizmodokSrvc.getFizmodok()
             .success(function (data) {
@@ -15,7 +19,12 @@ angular.module('myApp.fizmodok')
             })
     })
 
-    .controller('FizmodokEditCtrl', function ($scope, $rootScope, $modal, $state, $stateParams, FizmodokSrvc) {
+    .controller('FizmodokEditCtrl', function ($scope, $rootScope, $modal, $state, $stateParams, FizmodokSrvc, AuthSrvc) {
+
+        if (!AuthSrvc.isLoggedIn()) {
+            $state.go('login');
+        }
+
         $scope.edit = false;
         $scope.title = 'Új fizetési mód felvitele';
         if ($stateParams.id > 0) {

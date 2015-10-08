@@ -4,8 +4,11 @@
 angular.module('myApp.szallito')
 
 
-    .controller('SzallitoCtrl', function ($scope, $rootScope, $state, SzallitoSrvc, CommonSrvc, naplo) {
+    .controller('SzallitoCtrl', function ($scope, $rootScope, $state, SzallitoSrvc, CommonSrvc, naplo, AuthSrvc) {
 
+        if (!AuthSrvc.isLoggedIn()) {
+            $state.go('login');
+        }
 
         $scope.tetel = {
             naplotipus: 'S',

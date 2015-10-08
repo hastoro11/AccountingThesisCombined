@@ -4,7 +4,11 @@
 (function () {
     angular.module('myApp.vegyes')
 
-        .controller('VegyesCtrl', function ($scope, $rootScope, $state, $stateParams, CommonSrvc, naplo) {
+        .controller('VegyesCtrl', function ($scope, $rootScope, $state, $stateParams, CommonSrvc, naplo, AuthSrvc) {
+
+            if (!AuthSrvc.isLoggedIn()) {
+                $state.go('login');
+            }
 
             $scope.tetel = {
                 naplotipus: 'E',

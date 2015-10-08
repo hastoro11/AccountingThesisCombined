@@ -4,7 +4,11 @@
 (function () {
     angular.module('myApp.penztar')
 
-        .controller('PenztarCtrl', function ($scope, $rootScope, $state, $stateParams, CommonSrvc, naplo) {
+        .controller('PenztarCtrl', function ($scope, $rootScope, $state, $stateParams, CommonSrvc, naplo, AuthSrvc) {
+
+            if (!AuthSrvc.isLoggedIn()) {
+                $state.go('login');
+            }
 
             $scope.tetel = {
                 naplotipus: 'P',

@@ -3,7 +3,11 @@
  */
 angular.module('myApp.partnerek')
 
-    .controller('PartnerekCtrl', function ($scope, $rootScope, $state, PartnerekSrvc) {
+    .controller('PartnerekCtrl', function ($scope, $rootScope, $state, PartnerekSrvc, AuthSrvc) {
+
+        if (!AuthSrvc.isLoggedIn()) {
+            $state.go('login');
+        }
 
         $scope.vevo = {open: false};
         $scope.szallito = {open: false};
@@ -44,7 +48,12 @@ angular.module('myApp.partnerek')
     })
 
 
-    .controller('PartnerekEditCtrl', function ($scope, $rootScope, $state, $stateParams, $modal, PartnerekSrvc) {
+    .controller('PartnerekEditCtrl', function ($scope, $rootScope, $state, $stateParams, $modal, PartnerekSrvc, AuthSrvc) {
+
+        if (!AuthSrvc.isLoggedIn()) {
+            $state.go('login');
+        }
+
         $scope.edit = false;
         if ($stateParams.id > 0) { //Edit
             $scope.edit = true;
