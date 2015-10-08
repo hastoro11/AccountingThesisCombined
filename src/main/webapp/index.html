@@ -71,7 +71,8 @@
 
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a ui-sref="logout" href="">{{$root.user.name}} - Logout </a> </li>
+                <li><p class="navbar-text">Bejelentkezve: <strong>{{$root.user.name}}</strong></p></li>
+                <li><a ui-sref="logout" href=""><span class="glyphicon glyphicon-user"></span> Kilépés </a></li>
             </ul>
         </div>
     </div>
@@ -83,9 +84,13 @@
             <a class="navbar-brand" ui-sref="home">SörnyeiGábor</a>
         </div>
 
-        <div class="collapse navbar-collapse">
-            <ul class="nav navbar-nav">
+        <ul class="nav navbar-nav">
+            <li><a href="" ui-sref="login"><span class="glyphicon glyphicon-user"></span> Bejelentkezés</a></li>
+        </ul>
 
+        <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a ui-sref="dokumentacio" href="#"> Dokumentáció </a></li>
             </ul>
         </div>
     </div>

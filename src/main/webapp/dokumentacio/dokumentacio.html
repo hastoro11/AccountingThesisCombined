@@ -13,7 +13,17 @@
                 <h4>Általános leírás</h4>
 
                 <p>A programmal a számviteli törvény szerinti kettős könyvelési feladatokat lehet elvégezni.</p>
-                <p-><strong>Gazdasági teljesítés időpontja</strong></p->
+
+                <p><strong>Belépés</strong></p>
+
+                <p>Az alkalmazásba csak belépési jogosultsággal rendelkezők léphetnek be. A dokumnetáción kívül minden
+                    más egyéb funkció elérhetetlen bejelentkezés nélkül. A bejelentkezés email cím és jelszó megadásával
+                    történik</p>
+
+                <p>Jelenlegi belépési adatok: john@doe.com/password</p>
+
+                <p><strong>Gazdasági teljesítés időpontja</strong></p>
+
                 <p>A kettős könyvvitel során a pénzforgalomtól függetlenül kell a gazdasági eseményeket leíró
                     bizonylatokat az adatbázisban rögzíteni. A gazdasági esemény időpontja minden esetben a teljesítés
                     ideje, termékértékesítés során ez általában a termék fizikai átadását jelenti, de a jogszabályok ezt
@@ -30,6 +40,9 @@
                 <p>A számviteli bizonylatok típusokba sorolhatók, amelyek naplókban kerülnek rögzítésre. Az egyes
                     bizonylatokat helyesen kell a megfelelő naplóba besorolni, mert másik naplóban a könyvelés esetleg
                     nem megengedett (pl. ÁFÁ-s bizonylatok a vegyes naplóban nem rögzíthetők).</p>
+
+                <p>Az adott naplóhoz tartozó rögzített bizonylatok száma (illetve a rögzítendő tétel száma) a Sorszám
+                    mezőben feltüntetésre kerül.</p>
                 <p-><strong>Listák</strong></p->
                 <p>A könyvvezetéshez hozzátartozik a megfelelő dokumentumok előállítása. Ezek egy részét a számviteli
                     törvény írja elő (pl. főkönyvi kivonat), mások a könyvelő munkáját segítik, egyszerűsítik, mint pl.
@@ -37,7 +50,8 @@
                 <p-><strong>Beállítások</strong></p->
                 <p>Az alkalmazás bizonyos lehetőséget biztosít arra, hogy saját magunk számára átalakítsunk egyes
                     funkciókat. Ezek a lehetőségek korlátozottak, de természetesen a nyilvántartás számára alapvető
-                    funkciókat, pl. ügyfelek felvitele, cégadatok karbantartása, stb. megenged a felhasználónak elvégezni.</p>
+                    funkciókat, pl. ügyfelek felvitele, cégadatok karbantartása, stb. megenged a felhasználónak
+                    elvégezni.</p>
 
             </accordion-group>
 
@@ -48,7 +62,29 @@
                            ng-class="{'glyphicon-chevron-down':szallvev.open,'glyphicon-chevron-right':!szallvev.open }"></i>
                     </h4>
                 </accordion-heading>
-                <p>Szállító és vevő számlák könyvelése</p>
+                <h4>Szállító és vevő számlák könyvelése</h4>
+
+                <p>Ezeken a beviteli oldalakon történik az utalásos számlák könyvelése. A szállító lapon a beszerzések
+                    számláit, a vevő lapon pedig az értékesítések számláit kell rögzíteni.</p>
+
+                <p>Az oldal felső részében a számlával kapcsolatos információkat kell megadni. Minden mezőt ki kell
+                    tölteni, amennyiben valamelyik kimarad, az alkalmazás hibaüzenetet ad. A legördülő listák előre
+                    feltöltöttek, újak hozzáadására itt nincs lehetőség. A dátumok a mezők mellett levő gombokkal
+                    választhatók ki.</p>
+
+                <p>Ezután következik az ellenszámla oldala, ide is fel kell vinni a megfelelő információkat. ÁFÁ-s
+                    számlák esetén az ÁFA legördülő listából választható ki az az ÁFA típusa, az itt szereplő kulcsnak
+                    megfelelően fogja a program számítani a számla nettó, bruttó összegét és az általános forgalmi
+                    adót.</p>
+
+                <p>Amennyiben minden mező megfelelően ki van töltve, a Mehet gomb aktívvá válik és hozzáadható a tétel a
+                    könyvelési listához. Egy számlában több könyvelési sor is szerepelhet, hiszen ugyanabban a számlában
+                    kiszámlázható többféle termék vagy szolgáltatás. Amennyiben a könyvelendő sor nem használja fel
+                    teljesen a számla teljes összegét, akkor a maradék összeget a Bruttó összeg nevű mezőbe a program
+                    beírja. Ha a számla könyvelése teljes, akkor a Tartozik összesen és a Követel összesen mező értéke
+                    megegyezik, a Mentés gomb aktívvá válik, és a számla lekönyvelhető.</p>
+
+                <p>A Töröl gomb lehetőséget ad arra, hogy az egész beviteli oldalt alaphelyzetbe állítsuk.</p>
             </accordion-group>
 
             <accordion-group is-open="penztbank.open">
@@ -58,7 +94,16 @@
                            ng-class="{'glyphicon-chevron-down':penztbank.open,'glyphicon-chevron-right':!penztbank.open }"></i>
                     </h4>
                 </accordion-heading>
-                <p>Pénztár és bank könyvelése</p>
+                <h4>Pénztár és bank könyvelése</h4>
+
+                <p>A bank és a pénztár könyvelése csak kevéssé tér el a vevő/szállító számlákétól. A fizetési mód
+                    rögzített, hiszen a bankon csak banki tételek, a pénztárbam pedig csak készpénz forgalom
+                    szerepelnek. </p>
+
+                <p>Eltérés van viszont abban az esetben, ha ellenszámként vevő (31) vagy szállító (454) számlát
+                    választunk ki. Ebben az esetben a könyvelés célja az, hogy egy utalásos számla kiegyenlítését
+                    rögzítsük. Ilynekor egy újabb mező jelenik meg, ahova be kell írni a kiegyenlítendő számla számát.
+                    Ha ezen a számon a kiválasztott partnerhez nem történt számla könyvelése, a program hibát jelez.</p>
             </accordion-group>
 
             <accordion-group is-open="vegyes.open">
@@ -68,7 +113,13 @@
                            ng-class="{'glyphicon-chevron-down':vegyes.open,'glyphicon-chevron-right':!vegyes.open }"></i>
                     </h4>
                 </accordion-heading>
-                <p>Vegyes tételek könyvelése</p>
+                <h4>Vegyes tételek könyvelése</h4>
+
+                <p>Vegyes tételként kell lekönyvelni minden olyan gazdasági eseményt, amelyik nem sorolható be az előző
+                    négy napló tételeihez. Ezek a tételek nem érintenek pénzmozgást, így a fizetási mód rögzített,
+                    és partnerhez sem csatolhatók, így partnert sem lehet kiválasztani.</p>
+
+                <p>Csak egy dátumérték adható meg, amely a gazdasági esemény teljesítési időpontját jelöli.</p>
             </accordion-group>
 
             <accordion-group is-open="fok.open">
@@ -78,7 +129,18 @@
                            ng-class="{'glyphicon-chevron-down':fok.open,'glyphicon-chevron-right':!fok.open }"></i>
                     </h4>
                 </accordion-heading>
-                <p>Főkönyvi kivonat, kartonok és napló</p>
+                <h4>Főkönyvi kivonat, kartonok és napló</h4>
+
+                <p>A lekérendő listák egy felugró párbeszédpanellal indulnak. Ebben ki kell választani minden
+                    mezőt, és a célnak megfelelően ki kell tölteni. Hiányos kitöltés esetén nem tudunk továbbhaladni,
+                    vagy visszatérünk, vagy befejezzük a párbeszédpanel kitöltését.</p>
+
+                <p>A párbeszédpanel bezárása után (amennyiben a Mehet gombot választottuk) a program generálja a kért
+                    listákat.</p>
+
+                <p>Új, más paraméterezésű, de ugyanilyen lista lekérése esetén nem a menüből kell ismételten
+                    kiválasztani a parancsot, hanem az Új lekérdezés gomb lenyomásával adhatjuk meg az újabb lekérési
+                    adatokat.</p>
             </accordion-group>
 
             <accordion-group is-open="analitika.open">
@@ -88,7 +150,21 @@
                            ng-class="{'glyphicon-chevron-down':analitika.open,'glyphicon-chevron-right':!analitika.open }"></i>
                     </h4>
                 </accordion-heading>
-                <p>Analitikák</p>
+                <h4>Analitikák</h4>
+
+                <p>Az analtikákat a listákhoz hasonlóan egy felugró párbeszédpanelen keresztül lehet elérrni. Ennek
+                    megfelelő kitöltése után folytatódhat a lekérdezés.</p>
+
+                <p>A Vevő-Szállító Analitika párbeszédpanelén kijelölhető, hogy csak azokat a számlák szerepeljenek
+                    a listában, amelyek még nem lettek teljesen kifizetve, vagy pedig az összes számla és
+                    kiegyenlítés szerepeljen. Értelemszerűen külön lehet lekérdezni a vevőket és a szállítókat.</p>
+
+                <p>Az ÁFA Analitika célja, hogy az időszaki ÁFA bevallás kitöltéséhez nyújtson segítséget. A megfelelő
+                    időszak kitöltése után választahtunk, hogy a fizetendő vagy az előzetesen felszámított ÁFÁ-k
+                    részletezését kérjük.</p>
+
+                <p>Az ÁFA Analitika lista végén szerepel egy összesítő is, amely sillabuszként szolgál az ÁFA
+                    bevalláshoz.</p>
             </accordion-group>
 
             <accordion-group is-open="beall.open">
@@ -98,7 +174,17 @@
                            ng-class="{'glyphicon-chevron-down':beall.open,'glyphicon-chevron-right':!beall.open }"></i>
                     </h4>
                 </accordion-heading>
-                <p>Beállítások</p>
+                <h4>Beállítások</h4>
+
+                <p>Ebben a menüben egyes paramétereket lehet megadni vagy módosítani.</p>
+
+                <p>A Cégadatok a vállakozás adatait tartalmazzák, természetesen nem lehet törölni vagy újat létrehozni,
+                    hanem csak módosítani.</p>
+
+                <p>A Partnerek és ÁFA Kulcsok és a Fizetési módok módosíthatók, törölhetők, újak felvihetők.</p>
+
+                <p>A számlatükör ebben a programverzióban fix, nem bővíthető, számlák nem törölhetők. A számlák
+                    megnevezése azonban módosítható.</p>
             </accordion-group>
 
 
